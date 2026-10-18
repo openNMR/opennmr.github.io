@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>openNMR – NMR processing, fitting and simulation</title>
+<meta name="description" content="openNMR is a free, open-source application for processing, fitting, integrating and simulating NMR data.">
+<link rel="icon" href="assets/favicon.png">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#1b1b20;          /* GUI window */
+  --panel:#26262d;       /* GUI panels */
+  --tile:#3f3f48;        /* toolbar button grey */
+  --line:#3a3a44;
+  --text:#ececf1;
+  --muted:#a6a6b3;
+  --blue:#4a8fd4;        /* GUI selected button */
+  --blue-hi:#6aa6e4;
+  --purple:#9a90e0;      /* logo purple, lifted for dark bg */
+  --font:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--bg);color:var(--text);font:1.0625rem/1.6 var(--font)}
+a{color:var(--blue-hi)}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--blue-hi);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1180px,100% - 2.5rem);margin-inline:auto}
+
+/* top bar */
+header{position:sticky;top:0;z-index:5;background:rgba(27,27,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:1.5rem;min-height:3.75rem}
+.brand{display:flex;align-items:center;gap:.7rem;color:var(--text);text-decoration:none;font-weight:700;font-size:1.2rem;margin-right:auto}
+.brand img{width:34px;height:34px}
+nav{display:flex;gap:.25rem;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;padding:.45rem .8rem;border-radius:6px;font-size:.98rem}
+nav a:hover{background:var(--panel);color:var(--text)}
+nav a.gh{background:var(--tile);color:var(--text)}
+nav a.gh:hover{background:#4b4b56}
+
+/* hero */
+.hero{padding:4.5rem 0 3rem}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:3rem;align-items:center}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 1.2rem;font-weight:700}
+.lede{color:var(--muted);font-size:1.2rem;max-width:34rem;margin:0 0 2rem}
+.btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.8rem 1.4rem;border-radius:7px;font-weight:600;text-decoration:none;border:1px solid transparent}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--blue-hi)}
+.btn.ghost{background:var(--tile);color:var(--text)}
+.btn.ghost:hover{background:#4b4b56}
+.window{background:#000;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.window img{width:100%;height:auto}
+
+/* sections */
+section{padding:3.5rem 0}
+h2{font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.2;letter-spacing:-.01em;margin:0 0 .6rem}
+.sub{color:var(--muted);margin:0 0 2.2rem;max-width:40rem}
+
+/* toolbar grid */
+.tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.tools a{display:flex;gap:1rem;align-items:flex-start;height:100%;padding:1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);text-decoration:none;transition:border-color .15s,background .15s}
+.tools a:hover{border-color:var(--blue);background:#2b2b34}
+.tools img{width:68px;height:68px;border-radius:8px;flex:none}
+.tools h3{margin:0 0 .2rem;font-size:1.1rem}
+.tools p{margin:0;color:var(--muted);font-size:.96rem;line-height:1.45}
+
+/* start */
+.start{background:var(--panel);border-block:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.steps a{display:block;padding:1.3rem;background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--purple);border-radius:8px;color:var(--text);text-decoration:none}
+.steps a:hover{border-left-color:var(--blue-hi);background:#202026}
+.steps strong{display:block;font-size:1.1rem;margin-bottom:.25rem}
+.steps span{color:var(--muted);font-size:.97rem}
+
+footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between}
+footer nav a{padding:.3rem .6rem}
+
+@media (max-width:860px){
+  .hero{padding-top:2.5rem}
+  .hero .wrap{grid-template-columns:1fr;gap:2rem}
+  header .wrap{flex-wrap:wrap;padding-block:.5rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/logo.png" alt="">openNMR</a>
+    <nav aria-label="Main">
+      <a href="#tools">Features</a>
+      <a href="#start">Get started</a>
+      <a href="tutorials/">Tutorials</a>
+      <!-- TODO: update to the organisation URL once the repo is transferred -->
+      <a class="gh" href="https://github.com/LeoWGordon/openNMR">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Process, fit and simulate NMR data in one window</h1>
+        <p class="lede">openNMR is a free, open-source app for working with your NMR experiments, from raw Bruker data to fitted spectra and simulations. No scripting needed.</p>
+        <div class="btns">
+          <a class="btn primary" href="#start">Get started</a>
+          <a class="btn ghost" href="tutorials/">Browse tutorials</a>
+        </div>
+      </div>
+      <div class="window">
+        <img src="assets/app.png" width="1917" height="1116" alt="The openNMR window: a toolbar of tools across the top, an experiment browser on the left and a spectrum plot on the right.">
+      </div>
+    </div>
+  </div>
+
+  <section id="tools">
+    <div class="wrap">
+      <h2>Every tool in the toolbar has a guide</h2>
+      <p class="sub">The buttons along the top of openNMR are the steps of a typical workflow. Pick one to see how it works.</p>
+      <ul class="tools">
+        <li><a href="tutorials/open.html"><img src="assets/icons/open.png" alt=""><div><h3>Open</h3><p>Browse a folder of experiments and load one or several spectra.</p></div></a></li>
+        <li><a href="tutorials/process.html"><img src="assets/icons/process.png" alt=""><div><h3>Process</h3><p>Turn raw FIDs into spectra.</p></div></a></li>
+        <li><a href="tutorials/compare.html"><img src="assets/icons/compare.png" alt=""><div><h3>Compare</h3><p>View several spectra side by side.</p></div></a></li>
+        <li><a href="tutorials/fit.html"><img src="assets/icons/fit.png" alt=""><div><h3>Fit</h3><p>Fit your spectra and read off the parameters.</p></div></a></li>
+        <li><a href="tutorials/integrate.html"><img src="assets/icons/integrate.png" alt=""><div><h3>Integrate</h3><p>Measure the area under peaks.</p></div></a></li>
+        <li><a href="tutorials/simulate.html"><img src="assets/icons/simulate.png" alt=""><div><h3>Simulate</h3><p>Generate spectra from your own parameters.</p></div></a></li>
+        <li><a href="tutorials/dynamics.html"><img src="assets/icons/dynamics.png" alt=""><div><h3>Dynamics</h3><p>Explore how motion changes a spectrum.</p></div></a></li>
+        <li><a href="tutorials/advanced-processing.html"><img src="assets/icons/advproc.png" alt=""><div><h3>Advanced processing</h3><p>Specialised processing for more demanding data.</p></div></a></li>
+        <li><a href="tutorials/apply.html"><img src="assets/icons/apply.png" alt=""><div><h3>Apply</h3><p>Reuse your choices across several experiments.</p></div></a></li>
+        <li><a href="tutorials/periodic-table.html"><img src="assets/icons/periodic.png" alt=""><div><h3>Periodic table</h3><p>Look up the properties of each nucleus.</p></div></a></li>
+        <li><a href="tutorials/settings.html"><img src="assets/icons/settings.png" alt=""><div><h3>Settings</h3><p>Adjust openNMR to suit the way you work.</p></div></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="start" class="start">
+    <div class="wrap">
+      <h2>New to openNMR?</h2>
+      <p class="sub">Start here, then work through the tools above in any order.</p>
+      <div class="steps">
+        <a href="tutorials/install.html"><strong>Install openNMR</strong><span>Get the software running on your computer.</span></a>
+        <a href="tutorials/first-spectrum.html"><strong>Open your first spectrum</strong><span>Load an experiment and look at it.</span></a>
+        <a href="tutorials/examples.html"><strong>Follow a worked example</strong><span>Go from raw data to a finished figure.</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>openNMR is free and open source.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LeoWGordon/openNMR">Source code</a>
+      <a href="https://github.com/LeoWGordon/openNMR/issues">Report a problem</a>
+      <a href="tutorials/">Tutorials</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
