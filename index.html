@@ -84,8 +84,17 @@ h1{font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.1;letter-spacing:-.02em;ma
 .btn.primary:hover{background:var(--blue-hi)}
 .btn.ghost{background:var(--tile);color:var(--text)}
 .btn.ghost:hover{background:var(--tile-hover)}
-.window{background:#000;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px var(--shadow)}
+.window{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px var(--shadow)}
 .window img{width:100%;height:auto}
+.shot-light{display:none}
+
+:root[data-theme="light"] .shot-dark{display:none}
+:root[data-theme="light"] .shot-light{display:block}
+
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .shot-dark{display:none}
+  :root:not([data-theme="dark"]) .shot-light{display:block}
+}
 
 /* sections */
 section{padding:3.5rem 0}
@@ -151,7 +160,10 @@ footer nav a{padding:.3rem .6rem}
         </div>
       </div>
       <div class="window">
-        <img src="assets/app.png" width="1917" height="1116" alt="The openNMR window: a toolbar of tools across the top, an experiment browser on the left and a spectrum plot on the right.">
+        <img class="shot-dark" src="assets/app_dark.png" width="1917" height="1116"
+             alt="The openNMR window: a toolbar of tools across the top, an experiment browser on the left and a spectrum plot on the right.">
+        <img class="shot-light" src="assets/app_light.png" width="1917" height="1116" loading="lazy"
+             alt="The openNMR window: a toolbar of tools across the top, an experiment browser on the left and a spectrum plot on the right.">
       </div>
     </div>
   </div>
