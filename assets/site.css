@@ -32,7 +32,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:1.0625rem/1.6 var(--fo
 a{color:var(--blue-hi)}
 img{max-width:100%;display:block}
 :focus-visible{outline:3px solid var(--blue-hi);outline-offset:3px;border-radius:4px}
-.wrap{width:min(1180px,100% - 2.5rem);margin-inline:auto}
+.wrap{width:min(1600px,100% - 3rem);margin-inline:auto}
 
 /* top bar */
 header{position:sticky;top:0;z-index:5;background:var(--header-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -66,8 +66,11 @@ footer nav a{color:var(--muted);padding:.3rem .6rem}
 }
 
 /* documentation layout */
-.doc{display:grid;grid-template-columns:230px minmax(0,1fr);gap:3rem;padding:2.5rem 0 4rem}
-.side{position:sticky;top:5.5rem;align-self:start;max-height:calc(100vh - 7rem);overflow:auto}
+/* three columns: function menu | body (about 3/5 of the width) | spare (room for an "on this page" list later) */
+.docgrid{display:grid;grid-template-columns:minmax(190px,1fr) minmax(0,3fr) minmax(0,1fr);column-gap:3rem}
+.doc{padding:2.5rem 0 4rem}
+.pagehead .docgrid>*{grid-column:2}
+.side{grid-column:1;grid-row:1;position:sticky;top:5.5rem;align-self:start;max-height:calc(100vh - 7rem);overflow:auto}
 .side h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 .6rem .7rem}
 .side ul{list-style:none;margin:0;padding:0}
 .side a{display:block;padding:.4rem .7rem;border-radius:6px;color:var(--muted);text-decoration:none;font-size:.97rem}
@@ -79,8 +82,8 @@ footer nav a{color:var(--muted);padding:.3rem .6rem}
 .pagehead .crumbs a{color:var(--muted)}
 .pagehead h1{display:flex;align-items:center;gap:1rem;font-size:clamp(2.2rem,4.4vw,3rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 1rem}
 .pagehead h1 img{width:60px;height:60px;border-radius:10px;flex:none}
-.pagehead .lead{margin:0;max-width:44rem}
-article{min-width:0;max-width:46rem}
+.pagehead .lead{margin:0;max-width:48rem}
+article{grid-column:2;grid-row:1;min-width:0}
 article h2{font-size:1.5rem;line-height:1.25;margin:2.8rem 0 .7rem}
 .lead{font-size:1.2rem;color:var(--muted)}
 article figure{margin:1.6rem 0}
@@ -102,8 +105,9 @@ mark.todo{background:#f5c542;color:#1d1d24;padding:0 .35em;border-radius:3px;fon
 .pager a:hover{border-color:var(--blue)}
 
 @media (max-width:860px){
-  .doc{grid-template-columns:1fr;gap:2rem}
-  .side{position:static;max-height:none;order:2}
+  .docgrid{grid-template-columns:1fr;row-gap:2rem}
+  .pagehead .docgrid>*,article{grid-column:1}
+  .side{grid-column:1;grid-row:2;position:static;max-height:none}
   header .wrap{flex-wrap:wrap;padding-block:.5rem}
   .controls{grid-template-columns:1fr;gap:.1rem}
   .controls dd{margin-bottom:.7rem}
