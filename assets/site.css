@@ -70,7 +70,7 @@ footer nav a{color:var(--muted);padding:.3rem .6rem}
 .docgrid{display:grid;grid-template-columns:minmax(190px,1fr) minmax(0,3fr) minmax(0,1fr);column-gap:3rem}
 .doc{padding:2.5rem 0 4rem}
 .pagehead .docgrid>*{grid-column:2}
-.side{grid-column:1;grid-row:1;position:sticky;top:5.5rem;align-self:start;max-height:calc(100vh - 7rem);overflow:auto}
+.side{display:block;grid-column:1;grid-row:1;position:sticky;top:5.5rem;align-self:start;max-height:calc(100vh - 7rem);overflow:auto}
 .side h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 .6rem .7rem}
 .side ul{list-style:none;margin:0;padding:0}
 .side a{display:block;padding:.4rem .7rem;border-radius:6px;color:var(--muted);text-decoration:none;font-size:.97rem}
