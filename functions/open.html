@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open – openNMR</title>
+<meta name="description" content="How to browse a folder of NMR experiments and load one or several spectra in openNMR.">
+<link rel="icon" href="../assets/favicon.png">
+<script src="../assets/theme.js"></script>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/logo.png" alt="">openNMR</a>
+    <nav aria-label="Main">
+      <a href="../#tools">Features</a>
+      <a href="../#start">Get started</a>
+      <a href="../tutorials/">Tutorials</a>
+      <a class="gh" href="https://github.com/LeoWGordon/openNMR">GitHub</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" hidden>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap doc">
+  <article>
+    <p class="crumbs"><a href="../">Home</a> / Functions / Open</p>
+    <h1><img src="../assets/launcher_load_save_compare.png" alt="">Open</h1>
+    <p class="lead">Open is where every openNMR session starts. Point it at the folder that holds your experiments, pick the ones you want, and load them into the viewer.</p>
+
+    <h2>The Open screen</h2>
+    <figure>
+      <div class="window">
+        <img class="shot-dark" src="../assets/app_dark.png" width="1917" height="1116" alt="The openNMR window with the Open tool selected: the experiment browser on the left, the list of open experiments below it, and the plot area on the right.">
+        <img class="shot-light" src="../assets/app_light.png" width="1917" height="1116" loading="lazy" alt="The openNMR window with the Open tool selected: the experiment browser on the left, the list of open experiments below it, and the plot area on the right.">
+      </div>
+      <figcaption>The Open tool. Folder browser (top left), open experiments (bottom left) and the viewer (right).</figcaption>
+    </figure>
+    <p>Everything you need is in the left-hand panel. The top half browses your folders, and the bottom half lists the experiments you have loaded. Whatever you load is shown in the viewer on the right.</p>
+
+    <h2>Load a spectrum</h2>
+    <ol>
+      <li>Click <strong>Open</strong> in the toolbar. It is highlighted blue while it is active.</li>
+      <li>Under <strong>Browse a folder</strong>, click <strong>Choose Folder…</strong> and select the folder that contains your experiments. The path is shown underneath, and the experiments found there are listed, with a count at the bottom of the list.</li>
+      <li>To load a single experiment, double-click it. To load several at once, <kbd>Ctrl</kbd>-click or <kbd>Shift</kbd>-click to select them, then click <strong>Open Selected</strong>. That button is greyed out until something is selected.</li>
+      <li>Your experiments appear under <strong>Open experiments</strong>, and the data is drawn in the viewer.</li>
+    </ol>
+    <div class="note"><p>Each entry in the list has a small arrow beside it. <mark class="todo">TODO</mark> Say what it expands to (e.g. individual experiments or processed data sets).</p></div>
+
+    <h2>Supported data</h2>
+    <p><mark class="todo">TODO</mark> List the data formats openNMR can read, and what the folder should look like for each.</p>
+
+    <h2>Manage open experiments</h2>
+    <p>Every experiment you have loaded is listed under <strong>Open experiments</strong>.</p>
+    <dl class="controls">
+      <dt>Remove</dt><dd>Takes the selected experiment out of the list. <mark class="todo">check</mark></dd>
+      <dt>Clear All</dt><dd>Empties the list so you can start again.</dd>
+      <dt>Hide open experiments</dt><dd>Collapses the list to give the folder browser more room. Click it again to bring the list back.</dd>
+      <dt>Selected spectrum</dt><dd><mark class="todo">TODO</mark> Describe what this panel shows and what you can change in it.</dd>
+    </dl>
+
+    <h2>Look at your data</h2>
+    <p>Three tabs above the plot switch the view: <strong>FID</strong>, <strong>Spectrum</strong> and <strong>Spectral Fit</strong>. <mark class="todo">check</mark></p>
+    <p>The buttons above the plot move you around it:</p>
+    <dl class="controls">
+      <dt>Home</dt><dd>Resets the view to show the whole spectrum.</dd>
+      <dt>Back / Forward</dt><dd>Step through your previous views.</dd>
+      <dt>Pan</dt><dd>Drag the spectrum around.</dd>
+      <dt>Zoom</dt><dd>Drag a box around the region you want to look at.</dd>
+      <dt>Save</dt><dd>Save the plot. <mark class="todo">TODO</mark> Say which formats, and whether data can be saved too.</dd>
+    </dl>
+    <p>The three buttons at the top right of the plot change what the cursor does:</p>
+    <dl class="controls">
+      <dt>Crosshair</dt><dd>Shows the position of the cursor on the plot. <mark class="todo">check</mark></dd>
+      <dt>Measure</dt><dd>Measure the distance between two points. <mark class="todo">check</mark></dd>
+      <dt>Width</dt><dd>Measure the width of a peak. <mark class="todo">check</mark></dd>
+    </dl>
+    <p>The <strong>Title / notes</strong> tab at the right edge of the window opens a panel for naming and annotating the spectrum. <mark class="todo">TODO</mark> Describe what the title and notes are used for.</p>
+
+    <div class="pager">
+      <a href="../">← Home</a>
+      <a href="process.html">Next: Process →</a>
+    </div>
+  </article>
+
+  <nav class="side" aria-label="Functions">
+    <h2>Functions</h2>
+    <ul>
+      <li><a href="open.html" aria-current="page">Open</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="compare.html">Compare</a></li>
+      <li><a href="fit.html">Fit</a></li>
+      <li><a href="integrate.html">Integrate</a></li>
+      <li><a href="simulate.html">Simulate</a></li>
+      <li><a href="dynamics.html">Dynamics</a></li>
+      <li><a href="advanced-processing.html">Advanced processing</a></li>
+      <li><a href="apply.html">Apply</a></li>
+      <li><a href="periodic-table.html">Periodic table</a></li>
+      <li><a href="settings.html">Settings</a></li>
+    </ul>
+  </nav>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>openNMR is free and open source.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/LeoWGordon/openNMR">Source code</a>
+      <a href="https://github.com/LeoWGordon/openNMR/issues">Report a problem</a>
+      <a href="../tutorials/">Tutorials</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
