@@ -1,0 +1,105 @@
+/* Shared styles for openNMR sub-pages (functions/, tutorials/). */
+:root{
+  color-scheme:dark;
+  --bg:#1b1b20; --panel:#26262d; --tile:#3f3f48; --line:#3a3a44;
+  --text:#ececf1; --muted:#a6a6b3;
+  --blue:#4a8fd4; --blue-hi:#6aa6e4; --purple:#9a90e0;
+  --panel-hover:#2b2b34; --bg-hover:#202026; --tile-hover:#4b4b56;
+  --header-bg:rgba(27,27,32,.92); --shadow:rgba(0,0,0,.55);
+  --font:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    color-scheme:light;
+    --bg:#f6f6f9; --panel:#ffffff; --tile:#e6e6ee; --line:#d8d8e2;
+    --text:#1d1d24; --muted:#5b5b6a;
+    --blue:#2f6fb5; --blue-hi:#245a97; --purple:#5c53a5;
+    --panel-hover:#f0f0f6; --bg-hover:#ececf3; --tile-hover:#d9d9e4;
+    --header-bg:rgba(246,246,249,.92); --shadow:rgba(30,30,60,.2);
+  }
+}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f6f6f9; --panel:#ffffff; --tile:#e6e6ee; --line:#d8d8e2;
+  --text:#1d1d24; --muted:#5b5b6a;
+  --blue:#2f6fb5; --blue-hi:#245a97; --purple:#5c53a5;
+  --panel-hover:#f0f0f6; --bg-hover:#ececf3; --tile-hover:#d9d9e4;
+  --header-bg:rgba(246,246,249,.92); --shadow:rgba(30,30,60,.2);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--bg);color:var(--text);font:1.0625rem/1.65 var(--font)}
+a{color:var(--blue-hi)}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--blue-hi);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1180px,100% - 2.5rem);margin-inline:auto}
+
+/* top bar */
+header{position:sticky;top:0;z-index:5;background:var(--header-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:1.5rem;min-height:3.75rem}
+.brand{display:flex;align-items:center;gap:.7rem;color:var(--text);text-decoration:none;font-weight:700;font-size:1.2rem;margin-right:auto}
+.brand img{width:34px;height:34px}
+nav{display:flex;gap:.25rem;flex-wrap:wrap}
+header nav a{color:var(--muted);text-decoration:none;padding:.45rem .8rem;border-radius:6px;font-size:.98rem}
+header nav a:hover{background:var(--panel);color:var(--text)}
+header nav a.gh{background:var(--tile);color:var(--text)}
+header nav a.gh:hover{background:var(--tile-hover)}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;margin-left:.25rem;background:transparent;border:1px solid var(--line);border-radius:6px;color:var(--muted);cursor:pointer}
+.theme-toggle:hover{background:var(--panel);color:var(--text)}
+.theme-toggle svg{width:1.2rem;height:1.2rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle[data-mode="dark"] .moon,.theme-toggle[data-mode="light"] .sun{display:none}
+
+footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.95rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between}
+footer nav a{color:var(--muted);padding:.3rem .6rem}
+
+/* app screenshot, light/dark swap */
+.window{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 18px 44px var(--shadow)}
+.window img{width:100%;height:auto}
+.shot-light{display:none}
+:root[data-theme="light"] .shot-dark{display:none}
+:root[data-theme="light"] .shot-light{display:block}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .shot-dark{display:none}
+  :root:not([data-theme="dark"]) .shot-light{display:block}
+}
+
+/* documentation layout */
+.doc{display:grid;grid-template-columns:230px minmax(0,1fr);gap:3rem;padding:2.5rem 0 4rem}
+.side{position:sticky;top:5.5rem;align-self:start;max-height:calc(100vh - 7rem);overflow:auto}
+.side h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 .6rem .7rem}
+.side ul{list-style:none;margin:0;padding:0}
+.side a{display:block;padding:.4rem .7rem;border-radius:6px;color:var(--muted);text-decoration:none;font-size:.97rem}
+.side a:hover{background:var(--panel);color:var(--text)}
+.side a[aria-current="page"]{background:var(--panel);color:var(--text);font-weight:600;box-shadow:inset 3px 0 0 var(--blue)}
+
+article{min-width:0;max-width:46rem}
+.crumbs{font-size:.92rem;color:var(--muted);margin:0 0 1rem}
+.crumbs a{color:var(--muted)}
+article h1{display:flex;align-items:center;gap:1rem;font-size:clamp(2rem,4vw,2.6rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 1rem}
+article h1 img{width:56px;height:56px;border-radius:10px;flex:none}
+article h2{font-size:1.5rem;line-height:1.25;margin:2.8rem 0 .7rem}
+.lead{font-size:1.2rem;color:var(--muted)}
+article figure{margin:1.6rem 0}
+figcaption{color:var(--muted);font-size:.93rem;margin-top:.7rem}
+article ol,article ul{padding-left:1.4rem}
+article li{margin:.5rem 0}
+kbd{font:.9em ui-monospace,Consolas,monospace;background:var(--tile);border:1px solid var(--line);border-radius:4px;padding:.05em .4em}
+.controls{display:grid;grid-template-columns:max-content 1fr;gap:.6rem 1.4rem;margin:1rem 0}
+.controls dt{font-weight:600}
+.controls dd{margin:0;color:var(--muted)}
+.note{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:8px;padding:.9rem 1.1rem;margin:1.5rem 0}
+.note p{margin:0}
+mark.todo{background:#f5c542;color:#1d1d24;padding:0 .35em;border-radius:3px;font-weight:600;font-size:.82em}
+.pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+.pager a{padding:.7rem 1.1rem;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);text-decoration:none;font-weight:600}
+.pager a:hover{border-color:var(--blue)}
+
+@media (max-width:860px){
+  .doc{grid-template-columns:1fr;gap:2rem}
+  .side{position:static;max-height:none;order:2}
+  header .wrap{flex-wrap:wrap;padding-block:.5rem}
+  .controls{grid-template-columns:1fr;gap:.1rem}
+  .controls dd{margin-bottom:.7rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
