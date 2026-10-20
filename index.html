@@ -5,16 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>openNMR – NMR processing, fitting and simulation</title>
 <meta name="description" content="openNMR is a free, open-source application for processing, fitting, integrating and simulating NMR data.">
-<link rel="icon" href="assets/favicon.png">
-<script src="assets/theme.js?v=4"></script>
-<link rel="stylesheet" href="assets/site.css?v=4">
-<link rel="stylesheet" href="assets/home.css?v=4">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="assets/theme.js?v=5"></script>
+<script src="assets/lightbox.js?v=5" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=5">
+<link rel="stylesheet" href="assets/home.css?v=5">
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <a class="brand" href="./"><img src="assets/logo.png" alt="">openNMR</a>
+    <a class="brand" href="./"><img src="assets/logo.png" width="40" height="40" alt="">openNMR</a>
     <nav aria-label="Main">
       <a href="#tools">Features</a>
       <a href="#start">Get started</a>
@@ -40,12 +42,12 @@
           <a class="btn ghost" href="tutorials/">Browse tutorials</a>
         </div>
       </div>
-      <div class="window">
+      <button type="button" class="window" data-zoom data-crop aria-label="Enlarge screenshot">
         <img class="shot-dark" src="assets/app_dark.png" width="1917" height="1116"
              alt="The openNMR window: a toolbar of tools across the top, an experiment browser on the left and a spectrum plot on the right.">
         <img class="shot-light" src="assets/app_light.png" width="1917" height="1116" loading="lazy"
              alt="The openNMR window: a toolbar of tools across the top, an experiment browser on the left and a spectrum plot on the right.">
-      </div>
+      </button>
     </div>
   </div>
 
@@ -64,7 +66,6 @@
         <li><a href="functions/advanced-processing.html"><img src="assets/launcher_advanced_processing.png" alt=""><div><h3>Advanced processing</h3><p>Specialised processing for more demanding data.</p></div></a></li>
         <li><a href="functions/apply.html"><img src="assets/launcher_applications.png" alt=""><div><h3>Apply</h3><p>Delve into advanced methods: eNMR, Imaging and more.</p></div></a></li>
         <li><a href="functions/periodic-table.html"><img src="assets/launcher_periodictable.png" alt=""><div><h3>Periodic table</h3><p>Look up the properties of each nucleus.</p></div></a></li>
-        <li><a href="functions/settings.html"><img src="assets/launcher_settings.png" alt=""><div><h3>Settings</h3><p>Adjust openNMR to suit the way you work.</p></div></a></li>
       </ul>
     </div>
   </section>
