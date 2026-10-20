@@ -14,7 +14,9 @@ section{padding:3.5rem 0}
 h2{font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.2;letter-spacing:-.01em;margin:0 0 .6rem}
 .sub{color:var(--muted);margin:0 0 2.2rem;max-width:40rem}
 
-.tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1rem}
+@media (max-width:1200px){.tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.tools{grid-template-columns:1fr}}
 .tools a{display:flex;gap:1rem;align-items:flex-start;height:100%;padding:1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);text-decoration:none;transition:border-color .15s,background .15s}
 .tools a:hover{border-color:var(--blue);background:var(--panel-hover)}
 .tools img{width:68px;height:68px;border-radius:8px;flex:none}
