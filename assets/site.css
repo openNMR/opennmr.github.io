@@ -28,7 +28,7 @@
   --header-bg:rgba(246,246,249,.92); --shadow:rgba(30,30,60,.2);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:5rem}
+html{scroll-behavior:smooth;scroll-padding-top:5rem;overflow-y:scroll} /* always reserve the scrollbar so short pages do not shift the layout */
 body{margin:0;background:var(--bg);color:var(--text);font:1.0625rem/1.6 var(--font)}
 a{color:var(--blue-hi)}
 img{max-width:100%;display:block}
