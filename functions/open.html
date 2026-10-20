@@ -4,16 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Open – openNMR</title>
-<meta name="description" content="Open allows you to browse a folder of NMR experiments and load one or several spectra.">
-<link rel="icon" href="../assets/favicon.png">
-<script src="../assets/theme.js?v=4"></script>
-<link rel="stylesheet" href="../assets/site.css?v=4">
+<meta name="description" content="How to browse a folder of NMR experiments and load one or several spectra in openNMR.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script src="../assets/theme.js?v=5"></script>
+<script src="../assets/lightbox.js?v=5" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=5">
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <a class="brand" href="../"><img src="../assets/logo.png" alt="">openNMR</a>
+    <a class="brand" href="../"><img src="../assets/logo.png" width="40" height="40" alt="">openNMR</a>
     <nav aria-label="Main">
       <a href="../#tools">Features</a>
       <a href="../#start">Get started</a>
@@ -58,10 +60,10 @@
 
     <h2>The Open screen</h2>
     <figure>
-      <div class="window">
+      <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
         <img class="shot-dark" src="../assets/app_dark.png" width="1917" height="1116" alt="The openNMR window with the Open tool selected: the experiment browser on the left, the list of open experiments below it, and the plot area on the right.">
         <img class="shot-light" src="../assets/app_light.png" width="1917" height="1116" loading="lazy" alt="The openNMR window with the Open tool selected: the experiment browser on the left, the list of open experiments below it, and the plot area on the right.">
-      </div>
+      </button>
       <figcaption>The Open tool. Folder browser (top left), open experiments (bottom left) and the viewer (right).</figcaption>
     </figure>
     <p>Everything you need is in the left-hand panel. The top half browses your folders, and the bottom half lists the experiments you have loaded. Whatever you load is shown in the viewer on the right.</p>
