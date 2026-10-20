@@ -1,0 +1,35 @@
+/* Homepage-only styles. Everything shared (colours, header, footer, container width) is in site.css. */
+.hero{padding:4.5rem 0 3rem}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:3rem;align-items:center}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 1.2rem;font-weight:700}
+.lede{color:var(--muted);font-size:1.2rem;max-width:34rem;margin:0 0 2rem}
+.btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.8rem 1.4rem;border-radius:7px;font-weight:600;text-decoration:none;border:1px solid transparent}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--blue-hi)}
+.btn.ghost{background:var(--tile);color:var(--text)}
+.btn.ghost:hover{background:var(--tile-hover)}
+
+section{padding:3.5rem 0}
+h2{font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.2;letter-spacing:-.01em;margin:0 0 .6rem}
+.sub{color:var(--muted);margin:0 0 2.2rem;max-width:40rem}
+
+.tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.tools a{display:flex;gap:1rem;align-items:flex-start;height:100%;padding:1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);text-decoration:none;transition:border-color .15s,background .15s}
+.tools a:hover{border-color:var(--blue);background:var(--panel-hover)}
+.tools img{width:68px;height:68px;border-radius:8px;flex:none}
+.tools h3{margin:0 0 .2rem;font-size:1.1rem}
+.tools p{margin:0;color:var(--muted);font-size:.96rem;line-height:1.45}
+
+.start{background:var(--panel);border-block:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.steps a{display:block;padding:1.3rem;background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--purple);border-radius:8px;color:var(--text);text-decoration:none}
+.steps a:hover{border-left-color:var(--blue-hi);background:var(--bg-hover)}
+.steps strong{display:block;font-size:1.1rem;margin-bottom:.25rem}
+.steps span{color:var(--muted);font-size:.97rem}
+
+@media (max-width:860px){
+  .hero{padding-top:2.5rem}
+  .hero .wrap{grid-template-columns:1fr;gap:2rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

@@ -6,6 +6,7 @@
   --blue:#4a8fd4; --blue-hi:#6aa6e4; --purple:#9a90e0;
   --panel-hover:#2b2b34; --bg-hover:#202026; --tile-hover:#4b4b56;
   --header-bg:rgba(27,27,32,.92); --shadow:rgba(0,0,0,.55);
+  --wrap:1600px;          /* one container width for every page */
   --font:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:light){
@@ -32,7 +33,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:1.0625rem/1.6 var(--fo
 a{color:var(--blue-hi)}
 img{max-width:100%;display:block}
 :focus-visible{outline:3px solid var(--blue-hi);outline-offset:3px;border-radius:4px}
-.wrap{width:min(1600px,100% - 3rem);margin-inline:auto}
+.wrap{width:min(var(--wrap),100% - 3rem);margin-inline:auto}
 
 /* top bar */
 header{position:sticky;top:0;z-index:5;background:var(--header-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -85,6 +86,7 @@ footer nav a{color:var(--muted);padding:.3rem .6rem}
 .pagehead .lead{margin:0;max-width:48rem}
 article{grid-column:2;grid-row:1;min-width:0}
 article h2{font-size:1.5rem;line-height:1.25;margin:2.8rem 0 .7rem}
+article>h2:first-child{margin-top:0}
 .lead{font-size:1.2rem;color:var(--muted)}
 article figure{margin:1.6rem 0}
 figcaption{color:var(--muted);font-size:.93rem;margin-top:.7rem}
