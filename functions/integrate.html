@@ -7,9 +7,9 @@
 <meta name="description" content="Integrate lets you quantify your spectra.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Integrate</p>
     <h1><img src="../assets/launcher_integrate.png" alt="">Integrate</h1>
-    <p class="lead">Integrate lets you quantify your spectra.</p>
+    <p class="lead">Integrate lets you quantify your spectra: integrate regions, measure signal-to-noise, and analyse DNP, cross-polarisation build-up and offset series.</p>
     </div>
   </div>
 </div>
@@ -53,31 +53,63 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Integrate lets you quantify your spectra. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>Load and <a href="process.html">process</a> an experiment first.</p>
+<h2>What it does</h2>
+<p>Integrate is everything that measures areas. <strong>Integration Regions</strong> is where you select, calculate and store integrals. The other sections build on integrals for particular experiments: <strong>DNP</strong> (enhancement, and field-sweep profiles), <strong>Signal-to-Noise</strong>, <strong>CP Build-up</strong> and the <strong>Offset Tracker</strong> for HMQC and J-resolved series.</p>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Integrate</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Load and <a href="process.html">process</a> the spectrum, and select it in <strong>Open experiments</strong>. Integrals are only as good as the phase and baseline, so check both first.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window panel" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/integrate_dark.png" width="600" height="745" alt="The Integrate tool: the Integration Regions section open in the left panel, with the DNP, Signal-to-Noise, CP Build-up and Offset Tracker sections below.">
+    <img class="shot-light" src="../assets/screens/integrate_light.png" width="600" height="745" loading="lazy" alt="The Integrate tool: the Integration Regions section open in the left panel, with the DNP, Signal-to-Noise, CP Build-up and Offset Tracker sections below.">
+  </button>
+  <figcaption>The Integrate tool with Integration Regions open.</figcaption>
+</figure>
+<ol class="cards">
+  <li>Click <strong>Integrate</strong> in the toolbar and open <strong>Integration Regions</strong>.</li>
+  <li>Define regions. Click <strong>Select and Integrate Regions from Plot</strong> and drag across each peak, or click <strong>Find Automatically</strong> (the threshold is set in multiples of the noise σ, or as a percentage of the maximum). <strong>Add Region</strong> and <strong>Remove Region</strong> edit the list by hand.</li>
+  <li>Choose the <strong>Integration rule</strong> (Trapezoid or Simpson). The areas are calculated and shown.</li>
+  <li>To keep the numbers, tick the <strong>Regions to store</strong> and click <strong>Store integral in “Stored integrals”</strong>. <strong>View Stored Integral Table</strong> shows everything you have stored.</li>
+  <li>For a series (for example a variable-contact-time or relaxation experiment), <strong>Export Integration to Pseudo-2D…</strong> sends the integrals on for curve fitting.</li>
+</ol>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<h3>Signal-to-Noise</h3>
+<dl class="controls">
+  <dt>Spectra</dt><dd>Tick the spectra to measure. By default every spectrum uses the same regions; <strong>Different regions for some spectra</strong> lets one spectrum have its own, marked in the table and the plot.</dd>
+  <dt>Signal (ppm) / Noise (ppm)</dt><dd>Type the signal and noise regions, or click <strong>Drag…</strong> and drag them on the plot. The noise region must contain no signal; a region that overlaps the signal is refused.</dd>
+  <dt>Noise trend removed / Line / Height measured from</dt><dd>How the noise is detrended, whether the line is positive or negative, and where the height is measured from.</dd>
+  <dt>Calculate S/N / Full Report… / Copy Report</dt><dd>Gives S/N with an uncertainty, alongside the TopSpin-style and Ph. Eur. values, the integral S/N and S/N per √scan. Hover a row for its formula. Quote the convention with the number: the conventions differ by fixed factors.</dd>
+</dl>
+<h3>DNP</h3>
+<dl class="controls">
+  <dt>Enhancement (steps 1 to 5)</dt><dd>Work down the steps: tick the spectra (one is the microwaves-off spectrum), pick a reference line so every spectrum is aligned to it, check the alignment, measure the height and/or integral of the line, then <strong>Calculate Enhancement</strong> as ε = ON / OFF, or 1 − ON / OFF. Measure both the height and the integral if you can: they agree only if the line shape is unchanged.</dd>
+  <dt>Field Sweep Profile</dt><dd>Plots signal (absolute, or as enhancement) against B₀ for spectra each recorded at a different field. <strong>Plot Profile</strong> draws it and <strong>Export CSV…</strong> saves it.</dd>
+</dl>
+<h3>CP Build-up</h3>
+<dl class="controls">
+  <dt>Spectra and contact times</dt><dd>Tick a variable-contact-time series and <strong>Read Contact Times</strong> from an acquisition parameter.</dd>
+  <dt>Region and integration</dt><dd>Integrate one region in every spectrum, choosing the baseline treatment and whether to divide by the receiver gain, then <strong>Integrate and Plot</strong>.</dd>
+  <dt>Fit the build-up</dt><dd>Fits the integral against contact time with a choice of models, from the classical I–S model (with T<sub>IS</sub> and T<sub>1ρ</sub>(I)) to two-component and non-classical models. <strong>Starting Values from Data</strong> and <strong>Fit All Regions</strong> help with the set-up.</dd>
+</dl>
+<h3>Offset Tracker</h3>
+<dl class="controls">
+  <dt>Spectra and offsets</dt><dd>For 1D spectra of one nucleus recorded while pulsing on another at a stepped offset (sideband-selective HMQC, J-resolved): integrate the same region of every spectrum and plot it against the offset. <strong>Read Offsets</strong> takes them from the acquisition parameters.</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>Trapezoid or Simpson?</strong> They agree on well-sampled data. If they differ noticeably, your regions contain too few points; zero-fill more in <a href="process.html">Process</a>.</li>
+  <li><strong>The noise region must be signal-free.</strong> Choose one well away from every peak and from any baseline roll at the edges.</li>
+  <li><strong>Comparing S/N between spectra.</strong> Use the same regions for every spectrum, and note that S/N should scale with the square root of the number of scans.</li>
+  <li><strong>Overlapping peaks.</strong> If peaks are too overlapped to integrate separately, fit them in <a href="fit.html">Fit</a> instead and use the fitted areas.</li>
+</ul>
 
     <div class="pager">
       <a href="fit.html">← Fit</a>

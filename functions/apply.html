@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Apply – openNMR</title>
-<meta name="description" content="Apply is where openNMR’s advanced methods live, such as eNMR and imaging, and more.">
+<meta name="description" content="Apply is where openNMR’s advanced methods live, such as eNMR and imaging.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Apply</p>
     <h1><img src="../assets/launcher_applications.png" alt="">Apply</h1>
-    <p class="lead">Apply is where openNMR’s advanced methods live, such as eNMR and imaging, and more.</p>
+    <p class="lead">Apply is where openNMR’s advanced methods live: electrophoretic NMR (eNMR) and imaging, with more to come.</p>
     </div>
   </div>
 </div>
@@ -53,31 +53,57 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html" aria-current="page">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Apply is where openNMR’s advanced methods live, such as eNMR and imaging, and more. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>Load an experiment with <a href="open.html">Open</a> first. <mark class="todo">check</mark></p>
+<h2>What it does</h2>
+<p>Apply holds methods built around a specific kind of experiment rather than a general step in the workflow. At present there are two sections:</p>
+<ul>
+  <li><strong>eNMR</strong> measures electrophoretic mobility by fitting the phase of a resonance against the applied voltage.</li>
+  <li><strong>Imaging</strong> turns the spectrum's frequency axis into a real position axis (in mm) once you tell openNMR the gradient strength, and supports T<sub>2</sub> measurement by integration across an imaging series.</li>
+</ul>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Apply</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Load an experiment with <a href="open.html">Open</a> and select it. For eNMR, <a href="process.html">process</a> the spectrum first. For imaging, you need to know the maximum gradient of your probe.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window panel" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/apply_dark.png" width="600" height="745" alt="The Apply tool: the eNMR section open in the left panel, with the Imaging section below.">
+    <img class="shot-light" src="../assets/screens/apply_light.png" width="600" height="745" loading="lazy" alt="The Apply tool: the eNMR section open in the left panel, with the Imaging section below.">
+  </button>
+  <figcaption>The Apply tool with eNMR open.</figcaption>
+</figure>
+<p><strong>eNMR</strong></p>
+<ol class="cards">
+  <li>Click <strong>Apply</strong> in the toolbar and open <strong>eNMR</strong>. The voltages are read from the experiment's vdlist.</li>
+  <li>Under <strong>Resonance</strong>, give the <strong>From</strong> and <strong>To</strong> shifts that bracket the peak you want to follow.</li>
+  <li>Under <strong>Cell and sequence</strong>, enter the <strong>Electrode gap</strong> and set the <strong>Cell polarity</strong> (which way the positive electrode faces relative to the gradient). The polarity is the one thing no file records, so check it against your cell's wiring.</li>
+  <li>Click <strong>Fit eNMR</strong>. Within one experiment the +V/−V pairs are differenced, which cancels every phase error that is not driven by the field.</li>
+  <li>The experiment is usually run twice with the gradients reversed. Click <strong>Keep as repeat</strong> after each, then <strong>Combine repeats</strong>. The spread across repeats is reported with the result.</li>
+</ol>
+<p><strong>Imaging</strong></p>
+<ol class="cards">
+  <li>Open <strong>Imaging</strong> and enter the <strong>Max gradient</strong> and the <strong>Gradient axis</strong> (z, x or y) the experiment used.</li>
+  <li>Right-click the Spectrum plot and choose <strong>Axis Units ▸ mm</strong>. The frequency axis becomes a position axis.</li>
+  <li>Click <strong>Save as default for this probe</strong> so any other experiment recorded with the same probe uses the same value automatically.</li>
+</ol>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<dl class="controls">
+  <dt>Voltages: Zero at / Scale / Fit up to</dt><dd>How the recorded voltage list is interpreted and how much of it is used in the fit.</dd>
+  <dt>Unfold ±V</dt><dd>A vdlist records each voltage magnitude twice, at opposite polarity, so the recorded axis folds every point onto its partner (0, 0, 8, 8, 16, 16…). Unfolding gives the first of each pair +|V| and the second −|V| and plots the ramp through zero.</dd>
+  <dt>Keep as repeat / Combine repeats / Clear</dt><dd>Set a fit aside as one of the gradient-reversed repeats, average the kept repeats (aligning their signs first, since reversing the gradient flips the slope), or start again.</dd>
+  <dt>Max gradient / Gradient axis / Gradient used</dt><dd>One maximum is kept for each axis of a probe, because the three coils of a triple-axis probe are rarely equally strong. Using one number for all three would quietly scale every position or diffusion coefficient measured on the others.</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>Two repeats should agree.</strong> The result reports their spread. If two runs of one sample disagree by more than the uncertainty, suspect the phase, the polarity or sample movement.</li>
+  <li><strong>The mm axis is greyed out.</strong> Select a spectrum first; the controls need one.</li>
+  <li><strong>Is a section missing?</strong> Sections you do not use can be hidden in the app's settings, and brought back the same way.</li>
+</ul>
 
     <div class="pager">
       <a href="advanced-processing.html">← Advanced processing</a>

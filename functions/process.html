@@ -7,9 +7,9 @@
 <meta name="description" content="Process turns the raw FID from your experiment into a spectrum you are ready to analyse.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Process</p>
     <h1><img src="../assets/launcher_processing.png" alt="">Process</h1>
-    <p class="lead">Process turns the raw FID from your experiment into a spectrum you are ready to analyse.</p>
+    <p class="lead">Process turns the raw FID from your experiment into a spectrum you are ready to analyse: apodise, zero-fill, phase, correct the baseline and reference the shift axis, with a live preview of every choice.</p>
     </div>
   </div>
 </div>
@@ -53,31 +53,87 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Process turns the raw FID from your experiment into a spectrum you are ready to analyse. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>Load an experiment with <a href="open.html">Open</a> first.</p>
+<h2>What it does</h2>
+<p>An experiment is recorded as a free induction decay (FID). Process is where you turn it into the spectrum you will fit, integrate or plot: you choose the window function and zero-filling, fix the phase, remove the baseline and set the ppm reference. Every control is <strong>live</strong>. Change one and the preview redraws, so you see what a choice does before you commit to it.</p>
+<p>Nothing here changes your raw data. <strong>Reset</strong> (in FID Processing) discards every choice and returns the spectrum to exactly how it looked when it was first loaded.</p>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Process</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Load an experiment with <a href="open.html">Open</a> and select it in the <strong>Open experiments</strong> list. If you have loaded several, Process works on the selected one.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window panel" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/process_dark.png" width="600" height="745" alt="The Process tool: its sections (FID Processing, Phase, Baseline, Reference, Field Drift Correction) in the left panel.">
+    <img class="shot-light" src="../assets/screens/process_light.png" width="600" height="745" loading="lazy" alt="The Process tool: its sections (FID Processing, Phase, Baseline, Reference, Field Drift Correction) in the left panel.">
+  </button>
+  <figcaption>The Process tool, before a spectrum is selected. Each heading is a section that opens and closes.</figcaption>
+</figure>
+<ol class="cards">
+  <li>Click <strong>Process</strong> in the toolbar. The plot switches to a live preview of the FID and the spectrum side by side.</li>
+  <li>Open <strong>FID Processing</strong>. Pick a <strong>Window</strong> (and its <strong>Line broadening</strong>), a <strong>Zero-fill to</strong> size, and, if you need them, <strong>Truncate to</strong>, <strong>FID shift</strong> or linear prediction. The defaults are a sensible place to start.</li>
+  <li>Open <strong>Phase</strong>. Click <strong>Autophase</strong> for a first guess, then adjust <strong>Phase 0</strong> and <strong>Phase 1</strong> by dragging or typing until every peak is flat and upright.</li>
+  <li>Open <strong>Baseline</strong>. Choose a <strong>Baseline method</strong>, tick <strong>Show baseline on the plot</strong> to check it runs <em>under</em> the peaks, then click <strong>Baseline Correct</strong>.</li>
+  <li>Open <strong>Reference</strong>. Type the <strong>SR</strong> (spectrometer reference, in Hz) that puts a known peak at its right ppm and click <strong>Apply Reference Shift</strong>.</li>
+</ol>
+<p>The spectrum you see in the <strong>Spectrum</strong> tab is the processed result, ready for <a href="fit.html">Fit</a>, <a href="integrate.html">Integrate</a> or <a href="compare.html">Compare</a>.</p>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<h3>FID Processing</h3>
+<dl class="controls">
+  <dt>Preview / FID x-axis</dt><dd>How the FID is drawn in the preview (Real, Magnitude, or Real + Imaginary; time or points). Display only; it does not change the result.</dd>
+  <dt>Window</dt><dd>The apodisation applied to the FID, with its <strong>Line broadening</strong>, <strong>Gaussian broadening</strong> or <strong>Sine-bell shift (SSB)</strong> where the window uses them.</dd>
+  <dt>Zero-fill to</dt><dd>The FFT size. <strong>None</strong> leaves the FID as acquired; the default is the nearest standard size at or above the acquired points. <strong>Custom size</strong> accepts any value.</dd>
+  <dt>Truncate to</dt><dd>Keeps only the first points of the FID, for example to discard a noisy tail.</dd>
+  <dt>Align Echo / Echo position</dt><dd>For full-echo acquisitions (rising then falling) rather than a one-sided decay: rolls the FID so the echo peak sits at t = 0 before windowing.</dd>
+  <dt>FID shift</dt><dd>Shifts the FID in points before the transform.</dd>
+  <dt>Linear-predict points / LP order / LP direction</dt><dd>Extends the FID forward past its end, or reconstructs points lost before its start (Backward).</dd>
+  <dt>Magnitude Mode</dt><dd>Shows |real + imaginary| so every peak is positive and no phasing is needed. The phase controls switch off while it is on.</dd>
+  <dt>Process Indirect Dimension</dt><dd>For 2D data. A relaxation or diffusion series (pseudo-2D) is the default and needs no transform along F1. Click this only for a genuine 2D correlation experiment (COSY or HSQC style). The <strong>F1</strong> controls (truncate, zero-fill, window, F1 LB, F1 SSB) are set separately from the direct dimension.</dd>
+  <dt>Reset</dt><dd>Discards every live processing choice and returns to the spectrum as first loaded.</dd>
+</dl>
+<h3>Phase</h3>
+<dl class="controls">
+  <dt>Autophase</dt><dd>Searches for the phase that makes the spectrum most absorptive. Zero-order only unless <strong>1st-order</strong> is ticked; the first-order term is kept only if it demonstrably improves the lineshape.</dd>
+  <dt>Revert Autophase</dt><dd>Undoes the last Autophase, in case the automatic result was worse than what you had.</dd>
+  <dt>Phase 0 / Phase 1 / Pivot</dt><dd>The total phase applied right now, in degrees. Drag the handle or type a value. <strong>Pivot</strong> is the position that stays fixed when Phase 1 changes.</dd>
+  <dt>Quick phase (180°, +90°, −90°)</dt><dd>Nudges Phase 0 by a fixed amount. Useful for a spectrum that is upside down.</dd>
+  <dt>Zero Phase 0 / Zero Phase 1 / Reset</dt><dd>Clear one or both terms.</dd>
+  <dt>Slice, ◀ ▶, Apply to every slice, Each slice independently</dt><dd>For a pseudo-2D series. Phase one slice at a time, apply the same phase to all of them, or let Autophase find a separate phase for every slice.</dd>
+  <dt>Dimension</dt><dd>For a 2D, whether the phase is applied along the direct (F2) or indirect (F1) dimension.</dd>
+</dl>
+<h3>Baseline</h3>
+<dl class="controls">
+  <dt>Baseline method</dt><dd>Linear, Polynomial, Sinusoidal, Spline (with automatic points, points chosen on the plot, or a smoothing spline) or Whittaker, plus manual models whose coefficients you can set.</dd>
+  <dt>Baseline regions</dt><dd>Tell the fit where the spectrum really is baseline: type ppm ranges, or tick <strong>Pick on plot</strong> and drag across the preview.</dd>
+  <dt>Pick points on plot / Start from automatic</dt><dd>For the spline: click where the baseline is, or start from the automatic points and move, add or remove them.</dd>
+  <dt>Show baseline on the plot</dt><dd>Draws the baseline that would be subtracted, before you commit to it.</dd>
+  <dt>Baseline Correct</dt><dd>Subtracts the baseline from the spectrum (or from the selected slice, or every slice when <strong>Apply to every slice</strong> is ticked).</dd>
+</dl>
+<h3>Reference</h3>
+<dl class="controls">
+  <dt>SR (direct) / SR (indirect)</dt><dd>The reference offset, in Hz, for each dimension. <strong>Apply Reference Shift</strong> applies it.</dd>
+  <dt>SR from Another Nucleus</dt><dd>A field offset moves every nucleus by the same ppm, so an SR measured on one nucleus gives the SR of another: <em>SR</em><sub>new</sub> = (<em>SR</em><sub>cal</sub> / <em>SFO1</em><sub>cal</sub>) × <em>SFO1</em><sub>new</sub>. Pick the calibrated experiment (or type the values) and click <strong>Apply to This Spectrum</strong>.</dd>
+</dl>
+<h3>Field Drift Correction</h3>
+<dl class="controls">
+  <dt>Measure Start and End Shifts</dt><dd>Using 1D spectra of the same peak recorded just before and just after a long 2D, 3D or 4D experiment, measures how far the field drifted.</dd>
+  <dt>Start shift / End shift</dt><dd>The drift in Hz at the start and end, assumed linear in time. Type them if you already know them.</dd>
+  <dt>Apply to Selected Spectrum / Remove Correction</dt><dd>Reprocesses the selected Bruker 2D or pseudo-2D from its raw FIDs with the correction, or undoes it.</dd>
+  <dt>Write Corrected Bruker Dataset… / Concatenate NUS Blocks…</dt><dd>Write a corrected copy of a Bruker experiment to a new experiment number (the original is untouched), or join NUS blocks into one.</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>Check the baseline before committing.</strong> Every baseline estimator fails the same way: by running through the feet of the peaks instead of under them. <strong>Show baseline on the plot</strong> lets you see that before it is subtracted, and baseline regions that avoid the peaks fix most problems.</li>
+  <li><strong>Spectrum upside down?</strong> Use <strong>180°</strong> in Quick phase rather than hunting with the handle.</li>
+  <li><strong>Phase and baseline for series.</strong> For a relaxation or diffusion series, phase and baseline-correct in absorption mode first. Later analysis depends on it.</li>
+  <li><strong>SR from another nucleus</strong> is only valid for spectra recorded on the same magnet at a similar time, with no re-shim, field or lock change, probe change or quench in between.</li>
+  <li><strong>Fit the raw FIDs of a long 2D?</strong> If the field drifted during the experiment, correct for it here first (Field Drift Correction), against one reference, before adding experiments together.</li>
+</ul>
 
     <div class="pager">
       <a href="open.html">← Open</a>

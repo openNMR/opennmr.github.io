@@ -7,9 +7,9 @@
 <meta name="description" content="Dynamics is for fitting pseudo-2D data and for exploring how mobility changes a spectrum.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Dynamics</p>
     <h1><img src="../assets/launcher_relaxation.png" alt="">Dynamics</h1>
-    <p class="lead">Dynamics is for fitting pseudo-2D data and for exploring how mobility changes a spectrum.</p>
+    <p class="lead">Dynamics is for fitting pseudo-2D data (relaxation and diffusion) and for exploring how mobility changes a spectrum.</p>
     </div>
   </div>
 </div>
@@ -53,31 +53,64 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Dynamics is for fitting pseudo-2D data and for exploring how mobility changes a spectrum. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>Load an experiment with <a href="open.html">Open</a> first. <mark class="todo">check</mark></p>
+<h2>What it does</h2>
+<p>Dynamics is where a series of spectra becomes a rate or a diffusion coefficient. It fits relaxation (T<sub>1</sub>, T<sub>2</sub>, T<sub>1ρ</sub>) and diffusion (PFG) curves from a pseudo-2D series, and its sections go on from there: <strong>Batch</strong> processing of many series (for example T<sub>1</sub> at every temperature), <strong>Relaxation vs Temperature</strong> (BPP and Arrhenius analysis), <strong>Exchange Lineshape</strong> (ion hopping) and <strong>Regularisation</strong> (distributions of T<sub>1</sub>, T<sub>2</sub> or D).</p>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Dynamics</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Select a pseudo-2D series in <strong>Open experiments</strong> (or a stack of separately loaded 1D spectra), and <a href="process.html">phase it</a> first. Then measure each slice in <a href="fit.html">Fit</a> (fit the peaks, or define integration regions in <a href="integrate.html">Integrate</a>). Dynamics fits the curve those values make.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window panel" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/dynamics_dark.png" width="600" height="745" alt="The Dynamics tool: the Fit Curve settings for relaxation and diffusion, with the batch, relaxation-versus-temperature, exchange and regularisation sections below.">
+    <img class="shot-light" src="../assets/screens/dynamics_light.png" width="600" height="745" loading="lazy" alt="The Dynamics tool: the Fit Curve settings for relaxation and diffusion, with the batch, relaxation-versus-temperature, exchange and regularisation sections below.">
+  </button>
+  <figcaption>The Dynamics tool.</figcaption>
+</figure>
+<ol class="cards">
+  <li>Select the pseudo-2D series in <strong>Open experiments</strong>, and phase it in <a href="process.html">Process</a>.</li>
+  <li>In <a href="fit.html">Fit</a>, fit the peaks across the series (or define integration regions). This gives one intensity per peak per slice.</li>
+  <li>In Dynamics, choose the <strong>Fit type</strong> (Relaxation, or Diffusion (PFG)) and the <strong>Model</strong>, for example Inversion recovery (T<sub>1</sub>) or Exponential decay (T<sub>2</sub>).</li>
+  <li>Check where the x-values come from under <strong>Delays</strong> (see below), and that the <strong>Unit</strong> is right.</li>
+  <li>Click <strong>Fit Curve…</strong>. The fitted curve, its parameters and their uncertainties are shown, with <strong>What the curve fit tells you, and what to try next</strong>.</li>
+  <li>Keep a fit with <strong>Keep This Curve Fit…</strong>, or <strong>Export curve fit (CSV)…</strong>.</li>
+</ol>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<h3>Fit Curve settings</h3>
+<dl class="controls">
+  <dt>Fit type</dt><dd><strong>Relaxation</strong> fits against delay (from the experiment's vdlist, or typed). <strong>Diffusion</strong> fits a Stejskal–Tanner model against b-value.</dd>
+  <dt>Model</dt><dd>Inversion or saturation recovery, exponential or biexponential decay, stretched (Kohlrausch–Williams–Watts) forms for a distribution of times, or your own <strong>Equation</strong>. <strong>Components</strong> sets how many.</dd>
+  <dt>Value source</dt><dd>What is fitted from each slice: the <strong>fitted peak area</strong> (the default, and the most robust to a linewidth that changes along the series), the fitted peak amplitude, or an integrated region with no fit.</dd>
+  <dt>Delays</dt><dd>Where the x-values come from: <strong>Auto</strong> (the experiment's own vdlist or diff.xml), <strong>Manual list</strong>, <strong>Start + step</strong>, <strong>List file × factor</strong>, <strong>Relative gradient</strong>, or <strong>b from gradients (δ/Δ/G)</strong>. The line under it always shows what the current source resolves to.</dd>
+  <dt>Diffusion settings (δ, Δ, τ, gradient)</dt><dd>The gradient pulse and diffusion time, the maximum gradient for your probe, the <strong>Gradient shape</strong> and the <strong>Sequence</strong>. <strong>Read δ/Δ from file</strong> fills in what the experiment records. <strong>Save gradient for probe</strong> remembers the maximum gradient for this probe.</dd>
+  <dt>Starting values</dt><dd>Override the automatic starting guess, bounds and fixed/free state for each parameter. <strong>Adopt last fit</strong> restarts from the previous result.</dd>
+  <dt>Fit all peaks together</dt><dd>Fits every peak simultaneously with some parameters shared. Use it when the peaks belong to one species and must share one T<sub>1</sub>, T<sub>2</sub> or D.</dd>
+  <dt>Slices used in fits</dt><dd>Untick a slice to drop it from every fit on this spectrum.</dd>
+  <dt>Resolve Components (SCORE/OUTSCORE)…</dt><dd>Fits the whole data matrix at once as a sum of components, each with its own spectrum and decay constant. This can separate species whose peaks overlap, which no per-peak fit can do.</dd>
+  <dt>Show Parameter Correlations</dt><dd>Shows the correlation matrix of the fitted parameters instead of the curve.</dd>
+</dl>
+<h3>The other sections</h3>
+<dl class="controls">
+  <dt>Batch</dt><dd>Fits a whole set of pseudo-2D series in one go, for example one T<sub>1</sub> measurement per temperature. Set up one series by hand as the reference, process every series the same way, fit them all, then <strong>Send</strong> the results to Relaxation vs Temperature.</dd>
+  <dt>Relaxation vs Temperature</dt><dd>Plots T<sub>1</sub>, T<sub>2</sub>, T<sub>1ρ</sub> or linewidth against temperature (as ln(<em>T</em>) against 1000/<em>T</em>) and fits a BPP model for the activation energy and correlation time (Arrhenius or VFT), dipolar or quadrupolar, with asymmetric (β &lt; 2) forms for correlated hopping. Linewidths are fitted with the Hendrickson–Bray equation.</dd>
+  <dt>Exchange Lineshape (Ion Hopping)</dt><dd>Simulates spectra of nuclei hopping between sites from the Bloch–McConnell equations. You define the sites and the (reversible) hops and the temperatures, and can fit the model to the spectra selected in Open experiments.</dd>
+  <dt>Regularisation</dt><dd>Inverts a series into a <em>distribution</em> of T<sub>1</sub>, T<sub>2</sub> or D (or a 2D map) rather than a few discrete components, using Tikhonov regularisation.</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>Use real b-values for diffusion.</strong> openNMR will not run DOSY or SCORE if the x-axis has fallen back to plain slice numbers, because the resulting diffusion coefficients would carry no physical unit. Read them from a Bruker diff.xml, or supply δ, Δ and the gradient.</li>
+  <li><strong>Get the gradient shape right.</strong> A stock Bruker sequence is almost always the smoothed square (SMSQ10.100). Treating it as a perfect rectangle overestimates b by 23%, which lands directly on D.</li>
+  <li><strong>Sample the whole decay.</strong> A component that loses only 20% of its intensity across the series is nearly constant, and its decay constant is poorly determined however good the fit looks.</li>
+  <li><strong>Fit quality does not validate a multi-component resolution.</strong> Very different answers can reproduce the data equally well. Check the cross-talk and the warnings the report gives, not just R².</li>
+  <li><strong>Overlapping peaks.</strong> If peaks are too overlapped to fit, integrate regions instead and fit those.</li>
+  <li><strong>Notebook.</strong> <code>NMR2D_relaxation_workflow</code> runs the whole relaxation pipeline in one call, reading delays from the experiment's vdlist.</li>
+</ul>
 
     <div class="pager">
       <a href="simulate.html">← Simulate</a>

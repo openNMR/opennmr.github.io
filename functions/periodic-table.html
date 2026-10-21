@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Periodic table – openNMR</title>
-<meta name="description" content="Look up the properties of each nucleus.">
+<meta name="description" content="Look up the properties of each nucleus, and the Larmor frequency at your field.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Periodic table</p>
     <h1><img src="../assets/launcher_periodictable.png" alt="">Periodic table</h1>
-    <p class="lead">Look up the properties of each nucleus.</p>
+    <p class="lead">Look up the NMR properties of any nucleus and its Larmor frequency at your magnetic field.</p>
     </div>
   </div>
 </div>
@@ -53,35 +53,50 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html" aria-current="page">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Look up the properties of each nucleus. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>Nothing. This tool works without any data loaded. <mark class="todo">check</mark></p>
+<h2>What it does</h2>
+<p>The Periodic Table is a quick reference for the nuclei you can observe. Click an element to see its NMR-active isotopes (spin, natural abundance, gyromagnetic ratio, quadrupole moment and receptivity), and read off the <strong>Larmor frequency</strong> of any nucleus at your field. It also lists every nucleus at that field, which helps when you are choosing a reference or checking whether two nuclei can be observed on the same channel.</p>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Periodic Table</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Nothing. It works with no spectrum loaded. If you do have one selected, <strong>From selected spectrum</strong> takes the field from it.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/periodic-table_dark_full.png" width="1917" height="1116" alt="The Periodic Table tool: the table of elements on the right, coloured by spin, with the magnet and nucleus controls and the Larmor frequency on the left.">
+    <img class="shot-light" src="../assets/screens/periodic-table_light_full.png" width="1917" height="1116" loading="lazy" alt="The Periodic Table tool: the table of elements on the right, coloured by spin, with the magnet and nucleus controls and the Larmor frequency on the left.">
+  </button>
+  <figcaption>The Periodic Table tool. The table replaces the plot while it is open.</figcaption>
+</figure>
+<ol class="cards">
+  <li>Click <strong>Periodic Table</strong> in the toolbar.</li>
+  <li>Set the magnet. Pick a <strong>Spectrometer</strong> preset (60 MHz benchtop up to 850 MHz), type the field (<strong>Field B₀</strong>) or the <strong>¹H frequency</strong>, or click <strong>From selected spectrum</strong>.</li>
+  <li>Choose a nucleus by clicking an element on the table, typing in <strong>Find</strong> (a symbol, name, atomic number or a nuclide such as <code>195Pt</code>), or using the <strong>Nucleus</strong> list.</li>
+  <li>Read the <strong>Larmor frequency</strong>, with the working shown. <strong>Copy</strong> copies it.</li>
+  <li>Open <strong>All nuclei at this field</strong> to see every nucleus listed by frequency.</li>
+</ol>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<dl class="controls">
+  <dt>Spin I</dt><dd>The coloured buttons above the table highlight elements whose most abundant NMR isotope has that spin. The bar on each tile is that colour, and the number in its corner is how many NMR isotopes the element has.</dd>
+  <dt>Tiles show</dt><dd>Chooses what the bottom line of each tile displays: atomic weight, Larmor frequency (MHz), receptivity (relative to ¹³C), or the principal isotope and spin.</dd>
+  <dt>Find</dt><dd>Searches by symbol, name, atomic number or nuclide.</dd>
+  <dt>Nucleus panel</dt><dd>Spin, natural abundance, γ/2π, quadrupole moment Q (not defined for I = ½) and receptivity relative to ¹³C and ¹H.</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>These are bare-nucleus frequencies.</strong> The Larmor frequency shown is |γ/2π| × B₀. It is not the IUPAC Ξ reference frequency, so it can differ slightly from the frequency at which your spectrometer observes a referenced signal.</li>
+  <li><strong>The same data are used throughout openNMR.</strong> The nuclear data here are the same table openNMR uses when it references spectra.</li>
+  <li><strong>Radioactive isotopes.</strong> ³H and ⁹⁹Tc are not naturally present; their tabulated abundance is 0%.</li>
+</ul>
 
     <div class="pager">
       <a href="apply.html">← Apply</a>
-      <a href="settings.html">Next: Settings →</a>
+      <a href="../tutorials/">Next: Tutorials →</a>
     </div>
   </article>
 </div>

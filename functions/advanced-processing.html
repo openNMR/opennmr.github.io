@@ -7,9 +7,9 @@
 <meta name="description" content="Advanced processing gives you specialised tools for more demanding data.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Advanced processing</p>
     <h1><img src="../assets/launcher_advanced_processing.png" alt="">Advanced processing</h1>
-    <p class="lead">Advanced processing gives you specialised tools for more demanding data.</p>
+    <p class="lead">Advanced processing gives you specialised tools for more demanding data: wide-line spectra recorded at several offsets, CPMG echo trains, and 2D shearing.</p>
     </div>
   </div>
 </div>
@@ -53,31 +53,68 @@
       <li><a href="advanced-processing.html" aria-current="page">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Advanced processing gives you specialised tools for more demanding data. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>Load an experiment with <a href="open.html">Open</a> first. <mark class="todo">check</mark></p>
+<h2>What it does</h2>
+<p>Advanced processing holds methods that go beyond the usual FID-to-spectrum steps in <a href="process.html">Process</a>. There are three, each in its own section:</p>
+<ul>
+  <li><strong>Variable Offset Cumulative Spectroscopy (VOCS)</strong> corrects and combines spectra recorded at several transmitter offsets, to cover a line broader than one pulse can excite uniformly.</li>
+  <li><strong>CPMG</strong> co-adds the echoes of a CPMG echo train into a single echo and Fourier-transforms it, for a large gain in signal-to-noise on broad lines.</li>
+  <li><strong>Shearing and Scaling (2D)</strong> shears and scales a 2D spectrum so an anisotropic ridge lies along an axis (MQMAS, STMAS, DAS), or tilts a J-resolved or sideband spectrum by 45°.</li>
+</ul>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Adv. Proc.</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Load the data with <a href="open.html">Open</a> and select it. VOCS Sum works on several spectra at once: select a series, or tick them in <a href="compare.html">Compare</a>. CPMG needs a Bruker CPMG experiment. Shearing needs a 2D spectrum.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window panel" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/advanced-processing_dark.png" width="600" height="745" alt="The Advanced processing tool: the VOCS section open, with the CPMG and Shearing and Scaling sections below.">
+    <img class="shot-light" src="../assets/screens/advanced-processing_light.png" width="600" height="745" loading="lazy" alt="The Advanced processing tool: the VOCS section open, with the CPMG and Shearing and Scaling sections below.">
+  </button>
+  <figcaption>The Advanced processing tool with VOCS open.</figcaption>
+</figure>
+<p><strong>VOCS</strong></p>
+<ol class="cards">
+  <li>Process each offset spectrum in <a href="process.html">Process</a>, then click <strong>Adv. Proc.</strong> in the toolbar and open <strong>VOCS</strong>.</li>
+  <li>Enter the <strong>Pulse param</strong> settings for the pulse used. Tick <strong>Limit to VOCS excitation bandwidth</strong> to zero the correction outside the pulse's useful bandwidth, instead of amplifying noise far from the centre.</li>
+  <li>Select the series (or tick it in Compare) and click <strong>VOCS Sum (selected spectra)</strong> or <strong>VOCS Sum (Compare stack)</strong>. The result is a new spectrum on one common ppm axis, with intensities preserved. <strong>Apply VOCS to Selected Spectrum</strong> corrects a single spectrum.</li>
+</ol>
+<p><strong>CPMG</strong></p>
+<ol class="cards">
+  <li>Select a Bruker CPMG experiment and open <strong>CPMG</strong>.</li>
+  <li>Check the <strong>Pulse-program</strong> values (echo length, blanking delay, number of echoes). Then click <strong>Check echo split</strong>: it draws where the echoes will be cut. If the split is wrong, untick <strong>Auto</strong> and give the <strong>First point</strong> yourself.</li>
+  <li>Choose which echoes to co-add (<strong>Skip first echoes</strong>, <strong>Echoes to co-add</strong>), set the apodisation and zero-filling, and click <strong>Process CPMG</strong>.</li>
+</ol>
+<p><strong>Shearing</strong></p>
+<ol class="cards">
+  <li>Select a 2D spectrum and open <strong>Shearing and Scaling (2D)</strong>.</li>
+  <li>Choose the <strong>Experiment</strong> (MQMAS, STMAS, DAS, 2D J-resolved, 2D PASS or MAT) and its settings (spin, MQ order, pathway). Tick <strong>Acquired with split-t1</strong> if the data arrive already sheared.</li>
+  <li>Choose the <strong>F1 scaling</strong>. Click <strong>Check against the data</strong> to measure the shear that gives the sharpest projection and compare it with the standard value, then <strong>Preview</strong>.</li>
+  <li>Click <strong>Shear → New Spectrum</strong>. The result is added to Open experiments with a log of what was done.</li>
+</ol>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<dl class="controls">
+  <dt>VOCS Sum</dt><dd>Corrects and combines every selected (or Compare-ticked) spectrum onto one common ppm axis. No need to apply VOCS to each spectrum first.</dd>
+  <dt>CPMG echo split</dt><dd><strong>First point</strong>, <strong>Auto offset (points)</strong> and <strong>Safety (points)</strong> control where the echoes are cut.</dd>
+  <dt>CPMG processing</dt><dd><strong>Apodise the co-added echo</strong>, <strong>Zeroed edge points</strong>, <strong>Window shape</strong>, <strong>Window alpha</strong>, <strong>Zero-fill to</strong>. Untick <strong>Magnitude mode</strong> to keep the real and imaginary parts and phase the result in Process.</dd>
+  <dt>Shear: Experiment / Spin / MQ order / Pathway / Satellite</dt><dd>Describe the experiment. The spin is set from the selected spectrum's nucleus when it is quadrupolar.</dd>
+  <dt>Shear: F1 scaling</dt><dd><strong>Chemical-shift scale</strong> (δ<sub>F1</sub> = δ<sub>CS</sub> − 10/17 δ<sub>QIS</sub>), <strong>Unified, 1 + |κ|</strong> (Grandinetti), no scaling (sheared Hz), or a custom factor.</dd>
+  <dt>Shear: F1 direction</dt><dd>Whether F1 is displayed with the same sense as the coherence evolving in t1 or reversed. It depends on the quadrature scheme. <strong>Check against the data</strong> sets it.</dd>
+  <dt>Shear: Second shear</dt><dd>Also shears parallel to t1, removing the isotropic part from F2 so each site's anisotropic pattern is centred on zero.</dd>
+  <dt>Shear: Mark expected sideband positions</dt><dd>For PASS and MAT, marks where sidebands should fall in the preview, given the MAS rate.</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>VOCS amplifies noise far from each centre.</strong> Keep <strong>Limit to VOCS excitation bandwidth</strong> on unless you have a reason not to.</li>
+  <li><strong>CPMG echoes cut in the wrong place?</strong> Always use <strong>Check echo split</strong> before processing, and adjust the first point if the echoes are misaligned. Co-adding misaligned echoes blurs the spectrum.</li>
+  <li><strong>Sheared spectrum looks wrong?</strong> The F1 direction is the usual cause. Use <strong>Check against the data</strong>, which measures the shear from your spectrum and sets the direction.</li>
+  <li><strong>Notebook.</strong> <code>CPMGprocess</code> is the notebook equivalent of the CPMG section.</li>
+</ul>
 
     <div class="pager">
       <a href="dynamics.html">← Dynamics</a>

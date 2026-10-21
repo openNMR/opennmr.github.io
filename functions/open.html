@@ -7,9 +7,9 @@
 <meta name="description" content="How to browse a folder of NMR experiments and load one or several spectra in openNMR.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -53,7 +53,6 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
@@ -75,7 +74,7 @@
       <li>To load a single experiment, double-click it. To load several at once, <kbd>Ctrl</kbd>-click or <kbd>Shift</kbd>-click to select them, then click <strong>Open Selected</strong>. That button is greyed out until something is selected.</li>
       <li>Your experiments appear under <strong>Open experiments</strong>, and the data is drawn in the viewer.</li>
     </ol>
-    <div class="note"><p>Each entry in the list has a small arrow beside it. <mark class="todo">TODO</mark> Say what it expands to (e.g. individual experiments or processed data sets).</p></div>
+    <div class="note"><p>Each entry in the list is a sample folder, with a small arrow beside it. Click the arrow to expand it into the numbered experiments it contains. Each experiment is listed with its number, the observed nucleus, whether it is 1D or 2D, the number of points and the pulse programme, for example <em>3 · 1H, 1D, 262144, hahnecho3.enb</em>.</p></div>
 
     <h2 id="supported">Supported data</h2>
     <p>openNMR reads <strong>raw acquisition data</strong> (the FID, or the series of FIDs), never a vendor's own pre-processed spectrum, and turns every format into the same internal spectrum object. Everything after loading therefore works identically whichever instrument the data came from.</p>
@@ -91,29 +90,41 @@
     <h2>Manage open experiments</h2>
     <p>Every experiment you have loaded is listed under <strong>Open experiments</strong>.</p>
     <dl class="controls">
-      <dt>Remove</dt><dd>Takes the selected experiment out of the list. <mark class="todo">check</mark></dd>
+      <dt>Remove</dt><dd>Takes the selected experiment out of the list. Your data on disk are not touched.</dd>
       <dt>Clear All</dt><dd>Empties the list so you can start again.</dd>
       <dt>Hide open experiments</dt><dd>Collapses the list to give the folder browser more room. Click it again to bring the list back.</dd>
-      <dt>Selected spectrum</dt><dd><mark class="todo">TODO</mark> Describe what this panel shows and what you can change in it.</dd>
+      <dt>Selected spectrum</dt><dd>A collapsible summary of the selected spectrum (empty until you select one). For a pseudo-2D series it also has a <strong>View</strong> choice: <strong>Contour</strong>, <strong>Stacked slices</strong> (every slice as an offset 1D stack) or <strong>Heatmap</strong>.</dd>
     </dl>
 
     <h2>Look at your data</h2>
-    <p>Three tabs above the plot switch the view: <strong>FID</strong>, <strong>Spectrum</strong> and <strong>Spectral Fit</strong>. <mark class="todo">check</mark></p>
+    <p>Tabs above the plot switch the view: the <strong>FID</strong>, the <strong>Spectrum</strong> and the <strong>Spectral Fit</strong>. Other tabs, such as the live processing preview, the comparison and the simulation, appear when you use the tool that makes them.</p>
     <p>The buttons above the plot move you around it:</p>
     <dl class="controls">
       <dt>Home</dt><dd>Resets the view to show the whole spectrum.</dd>
       <dt>Back / Forward</dt><dd>Step through your previous views.</dd>
       <dt>Pan</dt><dd>Drag the spectrum around.</dd>
       <dt>Zoom</dt><dd>Drag a box around the region you want to look at.</dd>
-      <dt>Save</dt><dd>Save the plot. <mark class="todo">TODO</mark> Say which formats, and whether data can be saved too.</dd>
+      <dt>Save</dt><dd>Saves the figure; the file dialog lists the image formats available. To save the numbers rather than the picture, use the export buttons in the tool that produced them (for example Fit or Integrate).</dd>
     </dl>
     <p>The three buttons at the top right of the plot change what the cursor does:</p>
     <dl class="controls">
-      <dt>Crosshair</dt><dd>Shows the position of the cursor on the plot. <mark class="todo">check</mark></dd>
-      <dt>Measure</dt><dd>Measure the distance between two points. <mark class="todo">check</mark></dd>
-      <dt>Width</dt><dd>Measure the width of a peak. <mark class="todo">check</mark></dd>
+      <dt>Crosshair</dt><dd>Shows a cross that follows the cursor across the plot (and across both projection strips on a 2D). <kbd>Ctrl</kbd>+<kbd>.</kbd> toggles it. Right-click the button for its colour and line width.</dd>
+      <dt>Measure</dt><dd>Click two points and the distance between them is labelled in ppm and Hz at once. <kbd>Ctrl</kbd>+<kbd>D</kbd> toggles it from anywhere.</dd>
+      <dt>Width</dt><dd>Click a peak and its full width at half maximum is drawn and given in ppm and Hz (along both axes on a 2D). Where peaks overlap the value is marked as an estimate, so fit the peaks for a reliable width. <kbd>Ctrl</kbd>+<kbd>L</kbd> toggles it from anywhere.</dd>
     </dl>
-    <p>The <strong>Title / notes</strong> tab at the right edge of the window opens a panel for naming and annotating the spectrum. <mark class="todo">TODO</mark> Describe what the title and notes are used for.</p>
+    <p>The <strong>Title / notes</strong> tab at the right edge of the window opens a panel for naming and annotating the selected experiment. What you write is saved with the experiment (for Bruker data, in its title file), and the first line appears as a tooltip on the experiment's entry in Open experiments, so you can tell similar experiments apart.</p>
+
+    <h2>Settings</h2>
+    <p>The <strong>Settings</strong> tool, at the right of the toolbar, adjusts openNMR to the way you work. Its sections:</p>
+    <dl class="controls">
+      <dt>Interface</dt><dd>Menu font size, light or dark appearance (or follow the system), the crosshair colour and width, the units used for export size, and what clicking, dragging and double-clicking do on a plot.</dd>
+      <dt>Fitting</dt><dd>The maximum number of fit iterations.</dd>
+      <dt>Sections shown</dt><dd>Hide the sections you never use (for example eNMR or Imaging), and bring them back in the same place whenever you like. Nothing is lost.</dd>
+      <dt>Data</dt><dd>A default data folder, so every Open dialog starts there and the browser lists it at start-up, and whether Bruker data open with TopSpin's own processing parameters.</dd>
+      <dt>Saving</dt><dd>The folder where openNMR saves its states.</dd>
+      <dt>Default plot styles</dt><dd>Save the plot style you have set up as the default for each kind of plot (1D spectrum, 2D contour, pseudo-2D stack, Compare, curves and profiles, tensor pictures).</dd>
+      <dt>Updates</dt><dd>Shows the installed version. <strong>Check for Updates</strong> asks PyPI whether a newer version exists, and can install it and restart openNMR for you. A check at start-up is off unless you turn it on.</dd>
+    </dl>
 
     <div class="pager">
       <a href="../">← Home</a>

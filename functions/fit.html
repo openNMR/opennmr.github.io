@@ -7,9 +7,9 @@
 <meta name="description" content="Fit finds the parameters that best describe your spectrum, reliably and accurately.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Fit</p>
     <h1><img src="../assets/launcher_fitting.png" alt="">Fit</h1>
-    <p class="lead">Fit finds the parameters that best describe your spectrum, reliably and accurately.</p>
+    <p class="lead">Fit finds the parameters that best describe your spectrum, and tells you how far to trust them: peak shapes, anisotropic powder patterns, J-coupled multiplets, disordered sites and more.</p>
     </div>
   </div>
 </div>
@@ -53,31 +53,77 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Fit finds the parameters that best describe your spectrum, reliably and accurately. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>Load and, if needed, <a href="process.html">process</a> an experiment first.</p>
+<h2>What it does</h2>
+<p>Fit works on <strong>spectra</strong>: it adjusts a model until it matches your data, and reports every value with its uncertainty. Each kind of model has its own section: <strong>Isotropic (Gauss/Lor)</strong> peaks; <strong>CSA, Quad &amp; J-coupling</strong> sites built from any mix of interactions; <strong>Quadrupolar (Czjzek distribution)</strong> for disordered sites; <strong>pNMR (CIF bond pathways)</strong> for paramagnetic materials; <strong>Multi-spectrum</strong> fits; and <strong>Kept fit models</strong>, where fits you have saved are compared. (To fit relaxation or diffusion <em>curves</em>, use <a href="dynamics.html">Dynamics</a>.)</p>
+<p>After a fit the panel shows <strong>What the fit tells you, and what to try next</strong>. It warns about parameters sitting on a bound, strongly correlated pairs, a clipped fit window and a poor R², so that a good-looking curve is not mistaken for a good answer.</p>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Fit</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Load and <a href="process.html">process</a> the spectrum first: phase it in absorption mode and correct the baseline. Select it in <strong>Open experiments</strong>. For a pseudo-2D series, Fit works on the slice you choose.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window panel" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/fit_dark.png" width="600" height="745" alt="The Fit tool: the Isotropic (Gauss/Lor) section open, with the peak table, pick buttons and pseudo-2D options.">
+    <img class="shot-light" src="../assets/screens/fit_light.png" width="600" height="745" loading="lazy" alt="The Fit tool: the Isotropic (Gauss/Lor) section open, with the peak table, pick buttons and pseudo-2D options.">
+  </button>
+  <figcaption>The Fit tool with the Isotropic section open.</figcaption>
+</figure>
+<p>For a first fit of peak shapes:</p>
+<ol class="cards">
+  <li>Click <strong>Fit</strong> in the toolbar and open <strong>Isotropic (Gauss/Lor)</strong>.</li>
+  <li>Add peaks: <strong>Auto-Pick Peaks</strong> finds them for you (<strong>Min. prominence</strong> sets how small a peak may be), <strong>Pick from Plot</strong> lets you click them, and <strong>Add Peak</strong> adds one by hand. Edit the <strong>Shift</strong>, <strong>FWHM</strong> and <strong>Eta</strong> (the pseudo-Voigt mixing) in the table; tick <strong>Fixed</strong> to hold a value.</li>
+  <li>To fit only part of the spectrum, define regions in <a href="integrate.html">Integrate</a> and tick <strong>Fit only inside the regions</strong>.</li>
+  <li>Click <strong>Fit Spectrum</strong>. The fit is drawn over the data in the <strong>Spectral Fit</strong> tab and the report appears below, with each parameter and its 1σ error.</li>
+  <li>Read <strong>What the fit tells you, and what to try next</strong>. When you are happy, <strong>Export Fit Report…</strong>, <strong>Save the Fitted Values…</strong> or <strong>Keep This Fit…</strong> to store it with the spectrum.</li>
+</ol>
+<p>For anisotropic or quadrupolar lineshapes, open <strong>CSA, Quad &amp; J-coupling</strong>. Build the model as <strong>peaks</strong> (sites), then <strong>add interactions</strong> to each peak: a chemical-shift anisotropy, a quadrupolar coupling, and any number of J-couplings, in any combination, static or MAS. Use <strong>Estimate Starting Values</strong> to read starting parameters off the data, <strong>Preview Starting Model</strong> to check the model before fitting, and then the section's fit button.</p>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<h3>Isotropic (Gauss/Lor)</h3>
+<dl class="controls">
+  <dt>Add Peak / Remove Peak / Clear All</dt><dd>Edit the peak table.</dd>
+  <dt>Auto-Pick Peaks / Pick from Plot</dt><dd>Find peaks automatically, or click them on the plot. <strong>Pick on slice</strong> chooses which slice of a pseudo-2D to pick from.</dd>
+  <dt>Fit only inside the regions</dt><dd>Restricts the fit to your integration regions.</dd>
+  <dt>Bound peak amplitudes by region integrals</dt><dd>Keeps each peak's amplitude consistent with the integral of its region.</dd>
+  <dt>Across a pseudo-2D series</dt><dd>A relaxation or diffusion series is the same peaks measured repeatedly, so only their intensity should change. <strong>Fix shift &amp; FWHM from one slice</strong> fits one good <strong>Anchor slice</strong> and holds position and width for the rest; the alternatives fit every slice independently or seed each from the previous one.</dd>
+  <dt>Advanced (fit tolerance and S/N)</dt><dd>S/N threshold, noise region, position tolerance and minimum prominence for automatic picking.</dd>
+  <dt>Show Parameter Correlations</dt><dd>Shows the correlation matrix of the fitted parameters. Values near ±1 mean two parameters trade off against each other.</dd>
+</dl>
+<h3>CSA, Quad &amp; J-coupling</h3>
+<dl class="controls">
+  <dt>Peaks (sites) &mdash; Add peak, Duplicate, Remove</dt><dd>One row per site. <strong>Add isotope partner</strong> adds a second isotope of the same chemistry; <strong>Same chemistry as</strong> shares parameters between peaks.</dd>
+  <dt>Add interaction</dt><dd>Adds a CSA, a quadrupolar coupling or a J-coupling to the selected peak. A peak with none is an isotropic peak.</dd>
+  <dt>Observe / Spin I / Larmor frequency or Field B₀</dt><dd>The nucleus and field. The Larmor frequency can be typed, or taken from the spectrum.</dd>
+  <dt>Regime, MAS rate</dt><dd>Static powder, or finite MAS with sidebands. Fit anisotropic interactions with at least 3 to 5 spinning sidebands for accuracy.</dd>
+  <dt>Quadrupolar theory</dt><dd>Second-order perturbation, exact diagonalisation, or first-order only.</dd>
+  <dt>Powder averaging / Orientations</dt><dd>The powder-average scheme (ZCW, rectangular or Lebedev) and its number of orientations, with a coarser setting for fitting and a finer one for the final result.</dd>
+  <dt>Parameters</dt><dd>Start values, <strong>Free</strong> tick boxes, and minimum and maximum bounds for every parameter. A blank bound means the natural limit.</dd>
+  <dt>Fit window</dt><dd>The whole spectrum, a ppm range, several ppm ranges, or your integration regions.</dd>
+  <dt>Estimate Starting Values</dt><dd>Reads starting values from the data in the fit window: peaks by peak picking, a CSA or quadrupolar site from the pattern's centre of mass and shape.</dd>
+  <dt>Strongly coupled peaks</dt><dd>For J-coupled spin systems whose shifts are comparable to their couplings (roofing, AB, ABX), solves the spin system exactly instead of using first-order multiplets.</dd>
+  <dt>Send to Simulate</dt><dd>Sends the fitted model to <a href="simulate.html">Simulate</a> as a starting point.</dd>
+</dl>
+<h3>Other sections</h3>
+<dl class="controls">
+  <dt>Quadrupolar (Czjzek distribution)</dt><dd>Fits Czjzek (or extended Czjzek) distributions of the quadrupolar coupling to the selected 1D spectrum. For disordered sites in glasses and amorphous solids. <strong>Show Distribution Map</strong> draws the fitted (C<sub>Q</sub>, η<sub>Q</sub>) distribution beside the spectrum.</dd>
+  <dt>pNMR (CIF bond pathways)</dt><dd>Fits a paramagnetic spectrum with the environments predicted from a crystal structure (CIF) and its bond-pathway shifts. The structural model is set up in <a href="simulate.html">Simulate</a> ▸ pNMR (CIF). It offers a maximal fit (one peak per group of environments), then <strong>Simplify and refit</strong> to merge crowded peaks.</dd>
+  <dt>Multi-spectrum</dt><dd>Fits one set of sites to several spectra consistently: a series (VT or time), each seeded from the previous fit; isotopes of one material (for example <sup>1</sup>H and <sup>2</sup>H); or one isotope at several fields. You choose what the x value of each spectrum is (temperature, time, an acquisition parameter or the experiment number).</dd>
+  <dt>Kept fit models</dt><dd>Lists the fits you kept with <strong>Keep This Fit…</strong>, so you can compare several models of the same spectrum (for example 2-, 3- and 4-site models).</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>Start simple.</strong> Fit the isotropic peaks first, then use <strong>Use Fitted Values as Start</strong> in the next model. A good start matters more than a long fit.</li>
+  <li><strong>A MAS spectrum does not determine everything.</strong> At fast MAS the central transition fixes δ<sub>iso</sub>, C<sub>Q</sub>, η<sub>Q</sub>, J and the site ratio precisely, but hardly the CSA, because the sidebands hold under 1% of the intensity. Fix the CSA there. A static (or slow-MAS) spectrum determines the CSA once the quadrupolar parameters are held at their MAS values. This two-step route is the standard experimental strategy and the fit should follow it.</li>
+  <li><strong>Static powder lineshapes have several minima.</strong> A fit started from the wrong sign of the anisotropy can settle in a wrong minimum. The panel's <strong>Try starts</strong> option fits from several starting points and keeps the best.</li>
+  <li><strong>The sign of C<sub>Q</sub> is not in a lineshape</strong>: it depends on C<sub>Q</sub>², so |C<sub>Q</sub>| is reported. When a central transition is poorly resolved, δ<sub>iso</sub> and C<sub>Q</sub> are hard to separate. The report gives the centre of gravity and P<sub>Q</sub> = C<sub>Q</sub>√(1 + η<sub>Q</sub>²/3), which are well determined even then; a second field separates the two.</li>
+  <li><strong>A good R² is not proof.</strong> Read the warnings in the report, and check <strong>Show Parameter Correlations</strong> for pairs that trade off.</li>
+  <li><strong>In a notebook.</strong> The same fitters are available as <code>NMRCSAFitWorkflow</code>, <code>NMRQuadFitWorkflow</code>, <code>NMRJCouplingFitWorkflow</code> and <code>fit_czjzek_spectrum</code>. Several panels have a <strong>Copy notebook code</strong> button.</li>
+</ul>
 
     <div class="pager">
       <a href="compare.html">← Compare</a>

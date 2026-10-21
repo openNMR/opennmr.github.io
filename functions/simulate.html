@@ -7,9 +7,9 @@
 <meta name="description" content="Simulate synthesises spectra from parameters you choose yourself.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Simulate</p>
     <h1><img src="../assets/launcher_simulations.png" alt="">Simulate</h1>
-    <p class="lead">Simulate synthesises spectra from parameters you choose yourself.</p>
+    <p class="lead">Simulate synthesises spectra from parameters you choose, so you can see what a model predicts before you fit it, or compare a calculation against your data.</p>
     </div>
   </div>
 </div>
@@ -53,31 +53,60 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Simulate synthesises spectra from parameters you choose yourself. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>You do not need to load an experiment to simulate a spectrum. <mark class="todo">check</mark></p>
+<h2>What it does</h2>
+<p>Simulate is a forward calculator: you give it the physics and it gives you the spectrum. There is a simulator for each situation: <strong>CSA, Quad &amp; J-coupling</strong> (powder patterns and multiplets, static or MAS), <strong>Czjzek distribution</strong> (disordered quadrupolar sites), <strong>DFT tensors</strong> (from CASTEP, VASP, ORCA or Gaussian calculations), <strong>Diffusion (PFG)</strong>, <strong>Shaped pulse (Bloch)</strong> and <strong>pNMR (CIF)</strong>. Results can be kept as spectra and compared directly with real data.</p>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Simulate</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Nothing needs to be loaded: Simulate works on its own. If a spectrum is open, simulations can use its nucleus and field, and you can keep the result next to your data in <strong>Open experiments</strong>.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window panel" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/simulate_dark.png" width="600" height="745" alt="The Simulate tool: the CSA, Quad and J-coupling section open, with its site table and the other simulators listed below.">
+    <img class="shot-light" src="../assets/screens/simulate_light.png" width="600" height="745" loading="lazy" alt="The Simulate tool: the CSA, Quad and J-coupling section open, with its site table and the other simulators listed below.">
+  </button>
+  <figcaption>The Simulate tool with the CSA, Quad &amp; J-coupling section open.</figcaption>
+</figure>
+<ol class="cards">
+  <li>Click <strong>Simulate</strong> in the toolbar and open the simulator you want, for example <strong>CSA, Quad &amp; J-coupling</strong>.</li>
+  <li>Choose the <strong>Nucleus</strong> and the field (<strong>Larmor frequency</strong> or <strong>Field B₀</strong>), and whether the sample is a <strong>Static powder</strong> or under <strong>Finite MAS</strong> (then set the <strong>MAS rate</strong>).</li>
+  <li>Add one or more <strong>sites</strong> and give each its parameters (see below). Add interactions (CSA, quadrupolar coupling, J-couplings) to each site as needed.</li>
+  <li>Click <strong>Simulate</strong>. The pattern is drawn in the <strong>Simulation</strong> tab.</li>
+  <li>Click <strong>Keep in Open Experiments</strong> to turn the simulation into a spectrum you can compare, fit against or export, or <strong>Send to Fit as Starting Values</strong> to start a fit from it.</li>
+</ol>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<h3>CSA, Quad &amp; J-coupling</h3>
+<dl class="controls">
+  <dt>Convention</dt><dd>Haeberlen (Δ, η) or Herzfeld–Berger (span, skew) for the CSA. Each site then has <strong>δiso</strong>, <strong>Span or Δ</strong> and <strong>Skew or η</strong>.</dd>
+  <dt>Sites &mdash; Add, Duplicate, Remove</dt><dd>One row per site, each with a <strong>Label</strong>, an <strong>Amount</strong> (relative population) and its own broadening.</dd>
+  <dt>Broadening</dt><dd>Gaussian, Lorentzian or pseudo-Voigt, with a FWHM for each site.</dd>
+  <dt>Powder averaging / Orientations</dt><dd>ZCW, rectangular (θ/φ) or Lebedev, and how many orientations to use. More orientations are slower but smoother.</dd>
+  <dt>Axis</dt><dd><strong>Auto</strong> frames the pattern (δiso ± 1.5 × |span or Δ|); or set the minimum, maximum and number of points yourself.</dd>
+  <dt>Quadrupolar sites</dt><dd>Choose the <strong>Transitions</strong> (central transition, satellites, or both), the <strong>Method</strong> (first order, second order, or exact diagonalisation), and C<sub>Q</sub> and η<sub>Q</sub>. <strong>Compare orders</strong> overlays first order, second order and exact.</dd>
+  <dt>J-coupled sites</dt><dd>Give each site coupling groups (the number of equivalent partners, their nucleus and J). Lines from partners' other isotopes appear as satellites with the right natural-abundance weights. <strong>Strongly coupled peaks</strong> solves a spin system exactly for strong coupling.</dd>
+  <dt>Tensor picture (3D)</dt><dd><strong>Show Tensors</strong> draws the interaction tensor as a frequency surface or as an ellipsoid with axes.</dd>
+</dl>
+<h3>Other simulators</h3>
+<dl class="controls">
+  <dt>Czjzek distribution</dt><dd>The powder spectrum of a site whose quadrupolar coupling is spread over a Czjzek distribution, with the distribution of (C<sub>Q</sub>, η<sub>Q</sub>) shown beside it. Choose plain Czjzek (a random field gradient centred on zero, set by σ alone) or <strong>Extended Czjzek</strong> (a mean field gradient plus a random part).</dd>
+  <dt>DFT tensors</dt><dd>Reads a CASTEP .magres file, VASP OUTCAR, ORCA output or Gaussian log, plus one or more reference compounds with their experimental shifts. openNMR fits a shift scale from the references, converts calculated shieldings to shifts, and simulates the spectrum.</dd>
+  <dt>Diffusion (PFG)</dt><dd>Simulates a diffusion decay for a chosen D, gradient shape and pulse sequence (spin echo, stimulated echo, bipolar). It can compare gradient shapes or sequence types.</dd>
+  <dt>Shaped pulse (Bloch)</dt><dd>Calculates the excitation profile of a shaped pulse (Gaussian, sinc, BURP, hyperbolic secant, WURST and others) against offset, for a given power.</dd>
+  <dt>pNMR (CIF)</dt><dd>Predicts the spectrum of a paramagnetic material from a crystal structure. Load a CIF, choose the species and sites to include, and define shells of neighbours with a shift contribution for each.</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>Which quadrupolar method?</strong> First order is fast but only right when C<sub>Q</sub> is small compared with the Larmor frequency. Use <strong>Compare orders</strong> to see where first order, second order and exact diagonalisation part company for your parameters.</li>
+  <li><strong>MAS sidebands.</strong> Under MAS, every spinning sideband is included. A fast MAS rate narrows the central transition but does not remove its second-order lineshape.</li>
+  <li><strong>Natural abundance matters.</strong> A coupling to a 1% abundant partner appears as tiny satellites, whereas a coupling to a ~100% abundant partner changes the whole multiplet.</li>
+  <li><strong>Notebook.</strong> Panels have <strong>Copy notebook code</strong> (or <strong>Copy as Python</strong>) buttons, so a simulation set up here can be reproduced in a notebook.</li>
+</ul>
 
     <div class="pager">
       <a href="integrate.html">← Integrate</a>

@@ -7,9 +7,9 @@
 <meta name="description" content="Compare lets you view several spectra side by side.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=6"></script>
-<script src="../assets/lightbox.js?v=6" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=6">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Compare</p>
     <h1><img src="../assets/launcher_comparison.png" alt="">Compare</h1>
-    <p class="lead">Compare lets you view several spectra side by side.</p>
+    <p class="lead">Compare lets you view several spectra together, normalise them fairly, and combine them by addition or subtraction.</p>
     </div>
   </div>
 </div>
@@ -53,31 +53,60 @@
       <li><a href="advanced-processing.html">Advanced processing</a></li>
       <li><a href="apply.html">Apply</a></li>
       <li><a href="periodic-table.html">Periodic table</a></li>
-      <li><a href="settings.html">Settings</a></li>
     </ul>
   </nav>
   <article>
-    <h2>What it does</h2>
-    <p>Compare lets you view several spectra side by side. <mark class="todo">TODO</mark> Describe what this tool is for, and when you would use it.</p>
 
-    <h2>Before you start</h2>
-    <p>Load two or more experiments with <a href="open.html">Open</a> first.</p>
+<h2>What it does</h2>
+<p>Compare puts several spectra in one figure: <strong>stacked</strong> (one panel each), <strong>superimposed</strong> on one axis, or as a <strong>heatmap</strong> with one row per spectrum. It scales them so the comparison is fair, and its <strong>Spectrum Arithmetic</strong> section adds, subtracts, averages or scales spectra to make a new one, for instance a difference spectrum.</p>
 
-    <h2>How to use it</h2>
-    <ol class="cards">
-      <li>Click <strong>Compare</strong> in the toolbar.</li>
-      <li><mark class="todo">TODO</mark> Describe the first thing to do.</li>
-      <li><mark class="todo">TODO</mark> Describe the next step and what the result looks like.</li>
-    </ol>
-    <!-- Add a screenshot here, with a dark and a light version, using the same markup as open.html (shot-dark / shot-light). -->
+<h2>Before you start</h2>
+<p>Load at least two spectra with <a href="open.html">Open</a>. They appear in the <strong>Open experiments</strong> list; <kbd>Ctrl</kbd>-click or <kbd>Shift</kbd>-click several of them to start a comparison. For a pseudo-2D spectrum, its slices are used.</p>
 
-    <h2>Options and controls</h2>
-    <dl class="controls">
-      <dt><mark class="todo">TODO</mark></dt><dd>Name a control here and say what it does.</dd>
-    </dl>
+<h2>How to use it</h2>
+<figure>
+  <button type="button" class="window panel" data-zoom aria-label="Enlarge screenshot">
+    <img class="shot-dark" src="../assets/screens/compare_dark.png" width="600" height="745" alt="The Compare tool: layout and normalisation choices, the 2D options and the Spectrum Arithmetic section in the left panel.">
+    <img class="shot-light" src="../assets/screens/compare_light.png" width="600" height="745" loading="lazy" alt="The Compare tool: layout and normalisation choices, the 2D options and the Spectrum Arithmetic section in the left panel.">
+  </button>
+  <figcaption>The Compare tool with its Spectrum Arithmetic section open.</figcaption>
+</figure>
+<ol class="cards">
+  <li>Click <strong>Compare</strong> in the toolbar and select two or more 1D spectra in <strong>Open experiments</strong>. They are listed in the Compare list with a tick box each.</li>
+  <li>Choose a <strong>Layout</strong>: Stacked, Superimposed or Heatmap. Use <strong>Move Up</strong> and <strong>Move Down</strong> to set the order, and the tick boxes (or <strong>Select All</strong> and <strong>Deselect All</strong>) to choose which spectra are included.</li>
+  <li>Choose how to <strong>Normalize</strong> them so that intensities can be compared (see below). The plot redraws on every change; <strong>Plot</strong> redraws it on demand.</li>
+  <li>To make a new spectrum from the ones ticked, open <strong>Spectrum Arithmetic</strong>, choose an <strong>Operation</strong> and click <strong>Combine → New Spectrum</strong>. The result is added to Open experiments.</li>
+</ol>
 
-    <h2>Tips and troubleshooting</h2>
-    <p><mark class="todo">TODO</mark> Common questions and things that can go wrong.</p>
+<h2>Options and controls</h2>
+<dl class="controls">
+  <dt>Layout</dt><dd><strong>Stacked</strong>: one panel per spectrum. <strong>Superimposed</strong>: all on one axis. <strong>Heatmap</strong>: one row per spectrum, colour showing intensity, in list order.</dd>
+  <dt>Normalize</dt><dd><strong>Per scan</strong> (÷ NS), <strong>Max intensity</strong>, or <strong>Per scan and sample mass</strong>. Bruker, Varian, Spinsolve and X-Pulse data are divided by the number of scans when loaded; JEOL data are not.</dd>
+  <dt>Also divide by receiver gain (RG)</dt><dd>No reader divides by the receiver gain, so spectra recorded with different RG are not comparable in absolute intensity. Tick this to divide each by its RG.</dd>
+  <dt>Fit Curve…</dt><dd>Fits a relaxation or diffusion model across the ticked spectra. See <a href="dynamics.html">Dynamics</a>.</dd>
+</dl>
+<h3>2D spectra</h3>
+<dl class="controls">
+  <dt>Overlay / Side by side</dt><dd>Overlay draws every ticked 2D on one set of axes, one colour each (2 to 6 spectra with the same nuclei). Side by side gives each its own panel in a row, column or grid.</dd>
+  <dt>Link panels</dt><dd>Zooming or panning one panel moves them all.</dd>
+  <dt>Projections on each panel</dt><dd>Adds the F1 and F2 projections beside each side-by-side panel.</dd>
+  <dt>Lowest contour / Contour levels</dt><dd>Set the contour range.</dd>
+  <dt>Insets</dt><dd>Zoom the plot onto a region, then <strong>Add inset from zoom</strong>. Choose the panel, the corner and the size, and whether to draw the box and connectors.</dd>
+</dl>
+<h3>Spectrum Arithmetic</h3>
+<dl class="controls">
+  <dt>Operation</dt><dd><strong>Sum</strong>, <strong>Average</strong>, <strong>Subtract from first</strong>, or <strong>Custom</strong>, where you edit the sign and factor of each spectrum yourself.</dd>
+  <dt>Range</dt><dd><strong>Overlap only</strong> (recommended) uses just the range every spectrum covers, so nothing is invented where a spectrum has no data. <strong>Union, zero-filled</strong> keeps the whole range.</dd>
+  <dt>Align on</dt><dd><strong>ppm</strong> (recommended) is field-independent, so it is right for spectra from different fields or carriers. <strong>Hz</strong> assumes a single SFO1.</dd>
+  <dt>Points / Interpolation</dt><dd>The number of points on the common axis, and how each spectrum is resampled onto it. <strong>Linear</strong> is safest on noisy data; cubic can ring beside sharp peaks.</dd>
+</dl>
+
+<h2>Tips and troubleshooting</h2>
+<ul>
+  <li><strong>Intensities look wrong?</strong> Check Normalize. Spectra recorded with different numbers of scans, receiver gains or sample masses are not comparable until they are scaled.</li>
+  <li><strong>Nothing happens when you select spectra?</strong> Compare needs at least two 1D spectra. The panel says so until you have selected them.</li>
+  <li><strong>Difference spectra.</strong> Align the spectra on ppm and use <strong>Overlap only</strong>, then check that the referencing of the two is consistent. A badly referenced pair leaves derivative-shaped residuals.</li>
+</ul>
 
     <div class="pager">
       <a href="process.html">← Process</a>
