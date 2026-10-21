@@ -132,3 +132,14 @@ mark.todo{background:#f5c542;color:#1d1d24;padding:0 .35em;border-radius:3px;fon
   .lightbox img{width:1300px;max-width:none}
   .lb-scroll{place-items:start}
 }
+
+/* code */
+code{font:.9em ui-monospace,Consolas,"Cascadia Mono",monospace;background:var(--tile);border:1px solid var(--line);border-radius:4px;padding:.05em .35em}
+pre{margin:.8rem 0 0;padding:.9rem 1.1rem;background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:auto;line-height:1.5}
+pre code{background:none;border:0;padding:0;font-size:.95rem}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin:0 0 2rem}
+.steps a{display:block;padding:1.3rem;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--purple);border-radius:8px;color:var(--text);text-decoration:none}
+.steps a:hover{border-left-color:var(--blue-hi);background:var(--panel-hover)}
+.steps strong{display:block;font-size:1.1rem;margin-bottom:.25rem}
+.steps span{color:var(--muted);font-size:.97rem}
+header nav a[aria-current="page"]{background:var(--panel);color:var(--text)}

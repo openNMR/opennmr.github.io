@@ -7,9 +7,9 @@
 <meta name="description" content="How to browse a folder of NMR experiments and load one or several spectra in openNMR.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<script src="../assets/theme.js?v=5"></script>
-<script src="../assets/lightbox.js?v=5" defer></script>
-<link rel="stylesheet" href="../assets/site.css?v=5">
+<script src="../assets/theme.js?v=6"></script>
+<script src="../assets/lightbox.js?v=6" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=6">
 </head>
 <body>
 
@@ -77,8 +77,16 @@
     </ol>
     <div class="note"><p>Each entry in the list has a small arrow beside it. <mark class="todo">TODO</mark> Say what it expands to (e.g. individual experiments or processed data sets).</p></div>
 
-    <h2>Supported data</h2>
-    <p><mark class="todo">TODO</mark> List the data formats openNMR can read, and what the folder should look like for each.</p>
+    <h2 id="supported">Supported data</h2>
+    <p>openNMR reads <strong>raw acquisition data</strong> (the FID, or the series of FIDs), never a vendor's own pre-processed spectrum, and turns every format into the same internal spectrum object. Everything after loading therefore works identically whichever instrument the data came from.</p>
+    <dl class="controls">
+      <dt>Bruker</dt><dd>TopSpin experiments (<code>fid</code> for 1D, <code>ser</code> for 2D and pseudo-2D), including diffusion series.</dd>
+      <dt>X-Pulse</dt><dd>JCAMP-DX FIDs, including arrayed and pulsed-field-gradient experiments.</dd>
+      <dt>Varian / Agilent</dt><dd><code>fid</code> with its <code>procpar</code>.</dd>
+      <dt>JEOL Delta</dt><dd><code>.jdf</code> files. One-dimensional data only so far.</dd>
+      <dt>Magritek Spinsolve</dt><dd>Spinsolve experiment folders.</dd>
+    </dl>
+    <p>Point <strong>Choose Folder…</strong> at the folder that contains your experiments and openNMR lists those it recognises.</p>
 
     <h2>Manage open experiments</h2>
     <p>Every experiment you have loaded is listed under <strong>Open experiments</strong>.</p>
@@ -117,9 +125,10 @@
 
 <footer>
   <div class="wrap">
-    <span>openNMR is free and open source.</span>
+    <span>openNMR is free and open source (MIT licence).</span>
     <nav aria-label="Footer">
       <a href="https://github.com/openNMR/openNMR">Source code</a>
+      <a href="https://pypi.org/project/opennmr/">PyPI</a>
       <a href="https://github.com/openNMR/openNMR/issues">Report a problem</a>
       <a href="../tutorials/">Tutorials</a>
     </nav>

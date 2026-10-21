@@ -35,3 +35,11 @@ h2{font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.2;letter-spacing:-.01em;marg
   .hero .wrap{grid-template-columns:1fr;gap:2rem}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.quick{display:inline-block;margin:1.6rem 0 0;min-width:16rem}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.7rem}
+.chips li{margin:0;padding:.55rem 1rem;background:var(--panel);border:1px solid var(--line);border-radius:999px;font-weight:600}
+.chips small{color:var(--muted);font-weight:400}
+
+.news{margin:0;padding-left:1.2rem;display:grid;gap:.4rem;max-width:52rem}
+.news li{margin:0}

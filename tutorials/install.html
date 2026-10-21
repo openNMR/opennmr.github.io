@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install openNMR – openNMR</title>
+<meta name="description" content="How to install openNMR with pip and start the app.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script src="../assets/theme.js?v=6"></script>
+<script src="../assets/lightbox.js?v=6" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=6">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/logo.png" width="40" height="40" alt="">openNMR</a>
+    <nav aria-label="Main">
+      <a href="../#tools">Features</a>
+      <a href="../#start">Get started</a>
+      <a href="./" aria-current="page">Tutorials</a>
+      <a class="gh" href="https://github.com/openNMR/openNMR">GitHub</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" hidden>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<div class="pagehead">
+  <div class="wrap docgrid">
+    <div>
+    <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / Install</p>
+    <h1>Install openNMR</h1>
+    <p class="lead">Install with one pip command and start the app. This takes a few minutes.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap docgrid doc">
+  <nav class="side" aria-label="Tutorials">
+    <h2>Tutorials</h2>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="install.html" aria-current="page">Install openNMR</a></li>
+      <li><a href="first-spectrum.html">Open your first spectrum</a></li>
+      <li><a href="examples.html">Worked examples</a></li>
+    </ul>
+  </nav>
+  <article>
+    <h2>What you need</h2>
+    <p>openNMR runs on Windows, macOS and Linux. You need <strong>Python 3.12 or newer</strong>. Everything else, including the graphical interface, comes with the package, so there are no extras to choose between.</p>
+
+    <h2>Install</h2>
+    <ol class="cards">
+      <li>Open a terminal (<strong>Command Prompt</strong> or <strong>PowerShell</strong> on Windows, <strong>Terminal</strong> on macOS and Linux).</li>
+      <li>We recommend a separate environment, so openNMR cannot disturb your other Python work. Create and activate one:
+        <pre><code># Windows
+py -3.12 -m venv opennmr-env
+opennmr-env\Scripts\activate
+
+# macOS / Linux
+python3 -m venv opennmr-env
+source opennmr-env/bin/activate</code></pre>
+        If you use conda, <code>conda create -n opennmr python=3.12</code> followed by <code>conda activate opennmr</code> does the same job.</li>
+      <li>Install openNMR from PyPI:
+        <pre><code>pip install opennmr</code></pre></li>
+      <li>Start the app:
+        <pre><code>opennmr-gui</code></pre>
+        The openNMR window opens on the <a href="../functions/open.html">Open</a> tool. Continue with <a href="first-spectrum.html">Open your first spectrum</a>.</li>
+    </ol>
+    <div class="note"><p>You will need to activate the environment again (the <code>activate</code> line above) each time you open a new terminal, before running <code>opennmr-gui</code>.</p></div>
+
+    <h2>Use it in a notebook</h2>
+    <p>The same package works in Jupyter and Google Colab, so everything you do in the app can also be scripted:</p>
+    <pre><code>from opennmr import notebook as nmr</code></pre>
+
+    <h2>Keep it up to date</h2>
+    <p>Open <strong>Settings</strong> and look under <strong>Updates</strong>. It shows the installed version and checks PyPI when you press <strong>Check for Updates</strong>. A check at start-up is off unless you turn it on. If a newer version exists, <strong>Update to X and restart</strong> closes openNMR, upgrades it in the same environment and opens it again. If the new version fails to start, the old one is put back.</p>
+    <p>To update by hand instead: <code>pip install --upgrade opennmr</code>.</p>
+
+    <h2>Add an openNMR button to TopSpin</h2>
+    <p>If you use Bruker TopSpin, one command adds a button that launches openNMR from TopSpin's toolbar:</p>
+    <pre><code>opennmr-topspin-install</code></pre>
+    <p>It finds your TopSpin installations and asks before copying anything. Run it from the same environment you installed openNMR into, because the button remembers that environment's location. If you later move or recreate the environment, run the installer again. Writing into TopSpin's own folder may need administrator rights. <code>opennmr-topspin-install --uninstall</code> removes it again.</p>
+
+    <h2>Troubleshooting</h2>
+    <dl class="controls">
+      <dt><code>pip</code> or <code>py</code> not found</dt><dd>Python is not installed, or is not on your PATH. Install Python 3.12 or newer from python.org (on Windows, tick “Add python.exe to PATH”) and open a new terminal.</dd>
+      <dt>“No matching distribution”</dt><dd>Your Python is older than 3.12. Check with <code>python --version</code>.</dd>
+      <dt><code>opennmr-gui</code> not found</dt><dd>The environment is not active in this terminal. Activate it and try again.</dd>
+      <dt>Anything else</dt><dd><a href="https://github.com/openNMR/openNMR/issues">Report a problem</a> with the output of <code>pip show opennmr</code> and the text of the error.</dd>
+    </dl>
+
+    <div class="pager"><a href="./">← Overview</a><a href="first-spectrum.html">Next: Open your first spectrum →</a></div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>openNMR is free and open source (MIT licence).</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/openNMR/openNMR">Source code</a>
+      <a href="https://pypi.org/project/opennmr/">PyPI</a>
+      <a href="https://github.com/openNMR/openNMR/issues">Report a problem</a>
+      <a href="./">Tutorials</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
