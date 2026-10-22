@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase, baseline and reference a 1D spectrum – openNMR</title>
+<meta name="description" content="Load a raw 1D FID in openNMR, phase it, correct the baseline and set the shift reference.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/logo.png" width="40" height="40" alt="">openNMR</a>
+    <nav aria-label="Main">
+      <a href="../#tools">Features</a>
+      <a href="../#start">Get started</a>
+      <a href="./" aria-current="page">Tutorials</a>
+      <a class="gh" href="https://github.com/openNMR/openNMR">GitHub</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" hidden>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<div class="pagehead">
+  <div class="wrap docgrid">
+    <div>
+    <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / Phase, baseline and reference</p>
+    <h1>Phase, baseline and reference a 1D spectrum</h1>
+    <p class="lead">From a raw FID to a phased, flat, referenced spectrum, using solid KBr.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap docgrid doc">
+  <nav class="side" aria-label="Tutorials">
+    <h2>Tutorials</h2>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="install.html">Install openNMR</a></li>
+      <li><a href="first-spectrum.html">Open your first spectrum</a></li>
+      <li><a href="examples.html">Worked examples</a></li>
+      <li><a href="phase-baseline-reference.html" aria-current="page">Phase, baseline and reference</a></li>
+      <li><a href="csa-fit.html">Fit a CSA under MAS</a></li>
+      <li><a href="t1-fit.html">Measure T₁ from a series</a></li>
+      <li><a href="quadrupolar-fit.html">Fit a quadrupolar spectrum</a></li>
+    </ul>
+  </nav>
+  <article>
+    <div class="note"><p><strong>Data used here:</strong> <sup>79</sup>Br of solid KBr, 500 MHz spectrometer, 1.3 mm rotor under MAS (Bruker, raw FID). Any 1D Bruker, X-Pulse, Varian, JEOL or Spinsolve experiment works the same way.</p></div>
+
+    <h2>Load the raw FID</h2>
+    <p>Follow <a href="first-spectrum.html">Open your first spectrum</a> to load the experiment. openNMR reads the raw FID and does the Fourier transform itself, so you see the spectrum in the <strong>Processing Preview</strong> tab together with its FID, and every step below changes what you see there straight away. A spectrum that was processed in another program (TopSpin’s <code>1r</code> data, say) is a different starting point: its phase and baseline were set there.</p>
+    <p>Select the <strong>Process</strong> tool. Its sections, from top to bottom, are the order of a normal workflow: FID Processing, Phase, Baseline, Reference, Field Drift Correction. For this spectrum we leave FID Processing at its defaults.</p>
+    <figure>
+      <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
+        <img class="shot-dark" src="../assets/screens/tut/kbr-1-loaded_dark.png" width="1917" height="1116" alt="The Process tool with the KBr experiment loaded: the FID above and the unphased spectrum below.">
+        <img class="shot-light" src="../assets/screens/tut/kbr-1-loaded_light.png" width="1917" height="1116" loading="lazy" alt="The Process tool with the KBr experiment loaded: the FID above and the unphased spectrum below.">
+      </button>
+      <figcaption>Process tool, raw KBr FID loaded. The preview shows the FID (top) and the spectrum (bottom).</figcaption>
+    </figure>
+
+    <h2>Phase</h2>
+    <ol class="cards">
+      <li>Open the <strong>Phase</strong> section.</li>
+      <li>Click <strong>Autophase</strong>. It searches for the zero-order phase that maximises the integral of the real part. Phase 1 stays at zero unless you tick <strong>1st-order</strong>.</li>
+      <li>Look at the result. In our run Autophase changed Phase 0 by 16.2°. If a line still has a dispersive foot, adjust <strong>Phase 0</strong> by hand with its handle, or step it with the <strong>±90° / 180°</strong> buttons. <strong>Revert Autophase</strong> puts back what you had before.</li>
+    </ol>
+    <div class="note"><p><strong>Check it by eye.</strong> Autophase maximises an integral, and a rolling baseline also changes that integral. If the baseline is badly distorted, phase first, correct the baseline, then re-check the phase.</p></div>
+    <figure>
+      <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
+        <img class="shot-dark" src="../assets/screens/tut/kbr-2-phased_dark.png" width="1917" height="1116" alt="The Phase section after Autophase, with the KBr line phased to a symmetric absorptive shape.">
+        <img class="shot-light" src="../assets/screens/tut/kbr-2-phased_light.png" width="1917" height="1116" loading="lazy" alt="The Phase section after Autophase, with the KBr line phased to a symmetric absorptive shape.">
+      </button>
+      <figcaption>After Autophase: an absorptive line with a flat base.</figcaption>
+    </figure>
+
+    <h2>Correct the baseline</h2>
+    <p>Open <strong>Baseline</strong> and click <strong>Baseline Correct</strong>. The default method is a straight line fitted to the edges of the spectrum, with a sigma-clip so that real peaks do not bias it. The other methods (polynomial, sinusoidal, spline, automatic-point spline, Whittaker) are in the <strong>Baseline method</strong> menu, and the fitted coefficients can be nudged by hand. The preview draws the baseline as a dashed line, so you can judge it before you rely on it.</p>
+    <p>Spinning sidebands of a quadrupolar nucleus sit far from the centreband. If a signal reaches the spectral edge, the app says so in the status bar. In that case choose a method that does not take its points from the edges (Whittaker, or the automatic-point spline), or name <strong>Baseline regions</strong> yourself.</p>
+    <figure>
+      <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
+        <img class="shot-dark" src="../assets/screens/tut/kbr-3-baseline_dark.png" width="1917" height="1116" alt="The Baseline section after Baseline Correct, with the dashed baseline drawn on the spectrum.">
+        <img class="shot-light" src="../assets/screens/tut/kbr-3-baseline_light.png" width="1917" height="1116" loading="lazy" alt="The Baseline section after Baseline Correct, with the dashed baseline drawn on the spectrum.">
+      </button>
+      <figcaption>After Baseline Correct: the dashed line is the baseline that was removed.</figcaption>
+    </figure>
+
+    <h2>Reference the shift axis</h2>
+    <p>The ppm axis starts out relative to whatever the spectrometer’s zero was. To fix it, find the position of a line whose shift you know and move that line to its value.</p>
+    <ol class="cards">
+      <li>Switch the pointer to <strong>Crosshair</strong> above the plot and read the position of the KBr line. Ours sits at +111.358 ppm.</li>
+      <li>Open <strong>Reference</strong>. The reference shift <strong>SR</strong> is in Hz: SR = −(position in ppm × <var>ν</var><sub>0</sub> in MHz). For this spectrum <var>ν</var><sub>0</sub> = 125.3 MHz, so SR = −13953.43 Hz. Type it into <strong>SR (direct)</strong>.</li>
+      <li>Click <strong>Apply Reference Shift</strong>. The line is now at 0 ppm.</li>
+    </ol>
+    <p>Here the KBr line is set to 0 ppm, which is how solid KBr is commonly used as a <sup>79</sup>Br shift standard. Whatever reference you choose, say so in the figure caption or the methods: a shift without a reference is not a number someone else can use. If you have referenced one nucleus, <strong>SR from Another Nucleus</strong> converts that SR to another nucleus on the same field.</p>
+    <figure>
+      <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
+        <img class="shot-dark" src="../assets/screens/tut/kbr-4-referenced_dark.png" width="1917" height="1116" alt="The Reference section with SR typed in and the KBr line at 0 ppm.">
+        <img class="shot-light" src="../assets/screens/tut/kbr-4-referenced_light.png" width="1917" height="1116" loading="lazy" alt="The Reference section with SR typed in and the KBr line at 0 ppm.">
+      </button>
+      <figcaption>After referencing: the KBr line is at 0 ppm.</figcaption>
+    </figure>
+
+    <h2>If you change your mind</h2>
+    <p>Every processing step can be undone with <strong>Edit ▸ Undo Last Processing Change</strong>, so try things freely.</p>
+
+    <div class="note"><p><strong>Do not fit an anisotropy to this spectrum.</strong> KBr is cubic: its chemical-shift anisotropy is zero by symmetry, and the sideband manifold of <sup>79</sup>Br is used to set the magic angle, not to measure a tensor. A fit of a CSA to it would converge to something (the app will report a poor R² and warn about it), but it would not mean anything. The next tutorial fits a real CSA.</p></div>
+
+    <div class="pager"><a href="examples.html">← Worked examples</a><a href="csa-fit.html">Next: Fit a CSA under MAS →</a></div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>openNMR is free and open source (MIT licence).</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/openNMR/openNMR">Source code</a>
+      <a href="https://pypi.org/project/opennmr/">PyPI</a>
+      <a href="https://github.com/openNMR/openNMR/issues">Report a problem</a>
+      <a href="./">Tutorials</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

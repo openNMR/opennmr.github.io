@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fit a CSA under MAS – openNMR</title>
+<meta name="description" content="Fit a chemical-shift-anisotropy lineshape with spinning sidebands to a 7Li MAS spectrum in openNMR.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script src="../assets/theme.js?v=7"></script>
+<script src="../assets/lightbox.js?v=7" defer></script>
+<link rel="stylesheet" href="../assets/site.css?v=7">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/logo.png" width="40" height="40" alt="">openNMR</a>
+    <nav aria-label="Main">
+      <a href="../#tools">Features</a>
+      <a href="../#start">Get started</a>
+      <a href="./" aria-current="page">Tutorials</a>
+      <a class="gh" href="https://github.com/openNMR/openNMR">GitHub</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" hidden>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<div class="pagehead">
+  <div class="wrap docgrid">
+    <div>
+    <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / CSA fit</p>
+    <h1>Fit a CSA under MAS</h1>
+    <p class="lead">Fit a two-site CSA to a 7Li MAS spectrum, and decide whether to believe the result.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap docgrid doc">
+  <nav class="side" aria-label="Tutorials">
+    <h2>Tutorials</h2>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="install.html">Install openNMR</a></li>
+      <li><a href="first-spectrum.html">Open your first spectrum</a></li>
+      <li><a href="examples.html">Worked examples</a></li>
+      <li><a href="phase-baseline-reference.html">Phase, baseline and reference</a></li>
+      <li><a href="csa-fit.html" aria-current="page">Fit a CSA under MAS</a></li>
+      <li><a href="t1-fit.html">Measure T₁ from a series</a></li>
+      <li><a href="quadrupolar-fit.html">Fit a quadrupolar spectrum</a></li>
+    </ul>
+  </nav>
+  <article>
+    <div class="note"><p><strong>Data used here:</strong> <sup>7</sup>Li Hahn-echo spectrum of a lithiated Nb<sub>2</sub>O<sub>5</sub> sample (discharged to 1.3 V), 500 MHz (194.38 MHz for <sup>7</sup>Li), 1.3 mm rotor at 40 kHz MAS. Two lithium environments, both with a large anisotropy.</p></div>
+    <p>Before this, load the spectrum, then <strong>Autophase</strong> and <strong>Baseline Correct</strong> it exactly as in <a href="phase-baseline-reference.html">the previous tutorial</a>.</p>
+
+    <h2>1. Set up the model</h2>
+    <ol class="cards">
+      <li>Select the <strong>Fit</strong> tool and open <strong>CSA, Quad &amp; J-coupling</strong>. Leave <strong>Model</strong> on “Peaks with interactions”.</li>
+      <li>Check the <strong>Nucleus</strong> (<sup>7</sup>Li) and <strong>Larmor frequency</strong> (read from the data). Set <strong>Regime</strong> to <em>MAS (centreband + sidebands)</em> and the <strong>MAS rate</strong> to 40000 Hz.</li>
+      <li>Set the <strong>fit window</strong> to <em>A ppm range</em> and enter the low and high limits (here −700 and 700 ppm). Keep the spinning sidebands inside it: they carry the anisotropy.</li>
+      <li>Click <strong>Add peak</strong> twice. Give <em>Site 1</em> a shift of −5.7 ppm and a FWHM of 8 ppm, <em>Site 2</em> 0 ppm and 5 ppm. Choose pseudo-Voigt as the line shape, so each site fits its own Lorentzian fraction.</li>
+      <li>With a site selected, click <strong>Add interaction ▾</strong> and choose <strong>CSA</strong>. Start both sites from Δ = −200 ppm and η = 0.8. Euler angles stay fixed: one powder line shape rarely determines them.</li>
+      <li>Tick <strong>Fit the baseline too</strong>, and tick <strong>Free</strong> on the <strong>MAS rate</strong> row of the parameter table (more on this below).</li>
+    </ol>
+    <figure>
+      <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
+        <img class="shot-dark" src="../assets/screens/tut/csa-1-setup_dark.png" width="1917" height="1116" alt="The Fit tool with two sites, each with a CSA, and the MAS rate row of the parameter table set to Free.">
+        <img class="shot-light" src="../assets/screens/tut/csa-1-setup_light.png" width="1917" height="1116" loading="lazy" alt="The Fit tool with two sites, each with a CSA, and the MAS rate row of the parameter table set to Free.">
+      </button>
+      <figcaption>The model before fitting: two sites, each with a CSA, MAS 40 kHz, fit window −700 to 700 ppm.</figcaption>
+    </figure>
+
+    <div class="note"><p><strong>Why the MAS rate is free.</strong> The rate in the acquisition file is often stale, and a few hundred Hz of error moves every sideband. Because the sidebands are what the fit is built on, a wrong rate silently distorts Δ and η. The app warns when the sideband positions suggest the rate is off, and offers to free it. Here the fit settled at 40059 ± 10 Hz. That uncertainty is statistical only and does not include the real drift of the rotor.</p></div>
+
+    <h2>2. Fit</h2>
+    <p>Click <strong>Fit CSA, Quad &amp; J-coupling</strong>. A progress window shows the fit running. When it ends, the plot shows the data, each site’s share of the fit, the baseline and the total.</p>
+    <figure>
+      <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
+        <img class="shot-dark" src="../assets/screens/tut/csa-2-fit_dark.png" width="1917" height="1116" alt="The fitted spectrum with the two CSA sites, the baseline and the total fit drawn over the data, including the spinning sidebands.">
+        <img class="shot-light" src="../assets/screens/tut/csa-2-fit_light.png" width="1917" height="1116" loading="lazy" alt="The fitted spectrum with the two CSA sites, the baseline and the total fit drawn over the data, including the spinning sidebands.">
+      </button>
+      <figcaption>The fit: centreband and sidebands of both sites, total fit dashed.</figcaption>
+    </figure>
+
+    <h2>3. Read the result, critically</h2>
+    <p>The report lists every parameter with its 1σ uncertainty. For our spectrum:</p>
+    <table class="restable">
+      <thead><tr><th></th><th>δ<sub>iso</sub> (ppm)</th><th>Δ (ppm)</th><th>η</th><th>FWHM (ppm)</th><th>share (%)</th></tr></thead>
+      <tbody>
+        <tr><th>Site 1</th><td>−5.922 ± 0.016</td><td>−178.7 ± 3.2</td><td>0.84 ± 0.07</td><td>7.57 ± 0.04</td><td>66.6 ± 0.4</td></tr>
+        <tr><th>Site 2</th><td>−0.245 ± 0.016</td><td>−215.5 ± 4.3</td><td>0.83 ± 0.08</td><td>4.99 ± 0.04</td><td>33.4 ± 0.4</td></tr>
+      </tbody>
+    </table>
+    <p>R² = 0.9987, MAS rate 40059 ± 10 Hz. Δ is the Haeberlen anisotropy, δ<sub>zz</sub> − δ<sub>iso</sub>, and η its asymmetry. Three things to take from the report before you quote any of these numbers:</p>
+    <ul>
+      <li><strong>An R² near 1 is not the test.</strong> The report says the leftover is about three times the noise, so the model misses something real. The sideband intensities are fitted well but the numbers are the best this model can do, not necessarily the right ones.</li>
+      <li><strong>η is weakly determined.</strong> At 40 kHz the pattern spreads over only about two sidebands. The app warns that you want at least 3–5. The proof is in our own runs: with the MAS rate held fixed, Site 1’s η ran to its bound (0.98); once the rate was freed it came to 0.84. Slower spinning, or a static spectrum, pins Δ and η down; a faster rate does not.</li>
+      <li><strong>These are effective values.</strong> A 7Li anisotropy of −180 to −220 ppm (about 35–40 kHz at this field) is far too big for an ordinary diamagnetic lithium. In a reduced, electronically active host it can include paramagnetic and Knight-type contributions as well as the chemical shift tensor, which a single-field fit cannot separate. Report Δ as an effective anisotropy unless you have independent evidence.</li>
+    </ul>
+    <figure>
+      <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
+        <img class="shot-dark" src="../assets/screens/tut/csa-3-report_dark.png" width="1917" height="1116" alt="The results table with fitted parameters and uncertainties and the box “What the fit tells you, and what to try next”.">
+        <img class="shot-light" src="../assets/screens/tut/csa-3-report_light.png" width="1917" height="1116" loading="lazy" alt="The results table with fitted parameters and uncertainties and the box “What the fit tells you, and what to try next”.">
+      </button>
+      <figcaption>The fit report and the app’s advice. Read the warnings before the numbers.</figcaption>
+    </figure>
+
+    <h2>What to try next</h2>
+    <ul>
+      <li><strong>Show Parameter Correlations</strong> displays which parameters trade off. Δ and η of the same site usually do.</li>
+      <li>Change the starting values (or use <strong>Try starts</strong> in the parameter table) and confirm that you land on the same minimum.</li>
+      <li>Test a third site. If it is needed, the leftover will drop sharply; if it is not, it will fit a bump in the noise.</li>
+      <li>Record a second spectrum at a different spinning rate and fit both together (see <strong>Multi-spectrum</strong> in the Fit tool). That is the surest way to a trustworthy η.</li>
+      <li><strong>Keep This Fit…</strong> stores the model under a name; <strong>Open in Simulate</strong> sends it to the simulator.</li>
+    </ul>
+
+    <div class="pager"><a href="phase-baseline-reference.html">← Phase, baseline and reference</a><a href="t1-fit.html">Next: Measure T₁ from a series →</a></div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>openNMR is free and open source (MIT licence).</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/openNMR/openNMR">Source code</a>
+      <a href="https://pypi.org/project/opennmr/">PyPI</a>
+      <a href="https://github.com/openNMR/openNMR/issues">Report a problem</a>
+      <a href="./">Tutorials</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

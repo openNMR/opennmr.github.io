@@ -147,3 +147,8 @@ header nav a[aria-current="page"]{background:var(--panel);color:var(--text)}
 /* a cropped panel from the app (one tool's left-hand controls) */
 .window.panel{width:auto;max-width:min(100%,460px)}
 article h3{font-size:1.15rem;margin:2rem 0 .3rem}
+
+.restable{border-collapse:collapse;margin:1rem 0;font-size:.97rem}
+.restable th,.restable td{border:1px solid var(--line);padding:.45rem .8rem;text-align:right}
+.restable thead th{background:var(--panel)}
+.restable tbody th{text-align:left;background:var(--panel)}
