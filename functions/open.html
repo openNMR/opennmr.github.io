@@ -85,6 +85,7 @@
       <dt>Varian / Agilent</dt><dd><code>fid</code> with its <code>procpar</code>.</dd>
       <dt>JEOL Delta</dt><dd><code>.jdf</code> files. One-dimensional data only so far.</dd>
       <dt>Magritek Spinsolve</dt><dd>Spinsolve experiment folders.</dd>
+      <dt>SIMPSON <small>(simulation output)</small></dt><dd>Text spectra and FIDs written by SIMPSON (<code>.spe</code>, <code>.csdf</code>, <code>.fid</code>) and headerless <code>x re im</code> <code>.dat</code> files. These are recognised from their content, and binary SIMPSON files are refused with a message. They are loaded and plotted from <a href="simulate.html">Simulate ▸ SIMPSON import</a>, and can be fitted to a measured spectrum in <a href="fit.html">Fit ▸ SIMPSON spectrum</a>. They are simulated, not measured, so they carry no field or nucleus until you say which.</dd>
     </dl>
     <p>Point <strong>Choose Folder…</strong> at the folder that contains your experiments and openNMR lists those it recognises.</p>
 
@@ -105,7 +106,7 @@
       <dt>Back / Forward</dt><dd>Step through your previous views.</dd>
       <dt>Pan</dt><dd>Drag the spectrum around.</dd>
       <dt>Zoom</dt><dd>Drag a box around the region you want to look at.</dd>
-      <dt>Save</dt><dd>Saves the figure; the file dialog lists the image formats available. To save the numbers rather than the picture, use the export buttons in the tool that produced them (for example Fit or Integrate).</dd>
+      <dt>Save</dt><dd>Saves the figure; the file dialog lists the image formats available. To save the spectrum itself, use <a href="#export"><strong>File ▸ Export Data…</strong></a>. To save the numbers a tool produced, use the export buttons in that tool (for example Fit or Integrate).</dd>
     </dl>
     <p>The three buttons at the top right of the plot change what the cursor does:</p>
     <dl class="controls">
@@ -115,17 +116,30 @@
     </dl>
     <p>The <strong>Title / notes</strong> tab at the right edge of the window opens a panel for naming and annotating the selected experiment. What you write is saved with the experiment (for Bruker data, in its title file), and the first line appears as a tooltip on the experiment's entry in Open experiments, so you can tell similar experiments apart.</p>
 
-    <h2>Settings</h2>
+    <h2 id="export">Export your data</h2>
+    <p><strong>File ▸ Export Data…</strong> (<kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>) writes any spectrum in Open experiments, whatever instrument it came from, to a plain file that other programs read. Tick the spectra you want and press <strong>Export…</strong>; each is written to its own file.</p>
+    <dl class="controls">
+      <dt>Format</dt><dd><strong>CSV table</strong> (<code>.csv</code>), <strong>plain x y text</strong> (<code>.xy</code>) or <strong>JCAMP-DX</strong> (<code>.jdx</code>).</dd>
+      <dt>Write</dt><dd>The <strong>spectrum</strong>, or the <strong>FID as acquired</strong>: against time in seconds, exactly as read, before any window or zero-fill. The FID is available only for spectra that came from one.</dd>
+      <dt>x axis</dt><dd>The format's default (ppm; Hz for JCAMP-DX), or ppm, or Hz.</dd>
+      <dt>Imaginary part</dt><dd>The format's default (written to CSV only), always included, or the real part only.</dd>
+      <dt>2D row</dt><dd>For a 2D or pseudo-2D spectrum, which row to write. For CSV you can instead tick <strong>2D: write the whole matrix</strong>.</dd>
+      <dt>Lowest x first</dt><dd>Writes the points in ascending order of x, instead of the plot's order.</dd>
+    </dl>
+
+    <h2 id="settings">Settings</h2>
     <p>The <strong>Settings</strong> tool, at the right of the toolbar, adjusts openNMR to the way you work. Its sections:</p>
     <dl class="controls">
       <dt>Interface</dt><dd>Menu font size, light or dark appearance (or follow the system), the crosshair colour and width, the units used for export size, and what clicking, dragging and double-clicking do on a plot.</dd>
       <dt>Fitting</dt><dd>The maximum number of fit iterations.</dd>
-      <dt>Sections shown</dt><dd>Hide the sections you never use (for example eNMR or Imaging), and bring them back in the same place whenever you like. Nothing is lost.</dd>
+      <dt>Sections shown</dt><dd>Hide the sections you never use (for example eNMR, Imaging or SIMPSON import), and bring them back in the same place whenever you like. Nothing is lost.</dd>
       <dt>Data</dt><dd>A default data folder, so every Open dialog starts there and the browser lists it at start-up, and whether Bruker data open with TopSpin's own processing parameters.</dd>
       <dt>Saving</dt><dd>The folder where openNMR saves its states.</dd>
       <dt>Default plot styles</dt><dd>Save the plot style you have set up as the default for each kind of plot (1D spectrum, 2D contour, pseudo-2D stack, Compare, curves and profiles, tensor pictures).</dd>
       <dt>Updates</dt><dd>Shows the installed version. <strong>Check for Updates</strong> asks PyPI whether a newer version exists, and can install it and restart openNMR for you. A check at start-up is off unless you turn it on.</dd>
     </dl>
+
+    <p>The <strong>Welcome to openNMR</strong> tour (<strong>Help ▸ Welcome to openNMR…</strong>) walks through the most useful of these settings once, in six short pages: appearance, mouse and plots, which sections to show, and data and fitting. It sets the same settings as this panel; nothing is stored twice. Since 0.6.0 it also covers the crosshair colour and width, the zoom-box width, using your saved default plot styles automatically, the extra top and right axis lines on curve plots, and whether to check for a newer version at start-up.</p>
 
     <div class="pager">
       <a href="../">← Home</a>

@@ -94,6 +94,13 @@
   <dt>Advanced (fit tolerance and S/N)</dt><dd>S/N threshold, noise region, position tolerance and minimum prominence for automatic picking.</dd>
   <dt>Show Parameter Correlations</dt><dd>Shows the correlation matrix of the fitted parameters. Values near ±1 mean two parameters trade off against each other.</dd>
 </dl>
+<h3>SIMPSON spectrum</h3>
+<p>Fits a measured spectrum as a sum of SIMPSON simulations, used as fixed lineshape templates. Send a spectrum from <a href="simulate.html">Simulate ▸ SIMPSON import</a>, or add one here.</p>
+<dl class="controls">
+  <dt>1. SIMPSON spectra</dt><dd><strong>Add selected experiment</strong> or <strong>Add SIMPSON file…</strong> builds the list of templates; <strong>Remove</strong> takes one out.</dd>
+  <dt>2. Fit</dt><dd>Each template always gets its own amplitude, and a baseline is fitted with them. Tick <strong>Each template may shift</strong> (with a <strong>Shift window ±</strong>) to allow for referencing or isotropic-shift differences, and <strong>Each template may broaden</strong> to add Lorentzian and Gaussian broadening. These two widths are partly degenerate, and the errors say so when they are. <strong>Amplitudes cannot be negative</strong> and <strong>Only inside the Integration regions</strong> restrict the fit. <strong>Fit</strong> runs it, and <strong>Copy notebook code</strong> gives the same call for a notebook.</dd>
+  <dt>3. Result</dt><dd>A table of each template's amplitude, shift, Lorentzian and Gaussian broadening, each with its uncertainty, and its share of the total.</dd>
+</dl>
 <h3>CSA, Quad &amp; J-coupling</h3>
 <dl class="controls">
   <dt>Peaks (sites) &mdash; Add peak, Duplicate, Remove</dt><dd>One row per site. <strong>Add isotope partner</strong> adds a second isotope of the same chemistry; <strong>Same chemistry as</strong> shares parameters between peaks.</dd>
