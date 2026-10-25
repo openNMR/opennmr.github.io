@@ -20,6 +20,7 @@
     <nav aria-label="Main">
       <a href="../#tools">Features</a>
       <a href="../#start">Get started</a>
+      <a href="../download.html">Download</a>
       <a href="../tutorials/">Tutorials</a>
       <a class="gh" href="https://github.com/openNMR/openNMR">GitHub</a>
       <button class="theme-toggle" id="theme-toggle" type="button" hidden>
@@ -92,7 +93,7 @@
 <p><strong>Shearing</strong></p>
 <ol class="cards">
   <li>Select a 2D spectrum and open <strong>Shearing and Scaling (2D)</strong>.</li>
-  <li>Choose the <strong>Experiment</strong> (MQMAS, STMAS, DAS, 2D J-resolved, 2D PASS or MAT) and its settings (spin, MQ order, pathway). Tick <strong>Acquired with split-t1</strong> if the data arrive already sheared.</li>
+  <li>Choose the <strong>Experiment</strong> (MQMAS, STMAS, DAS, 2D J-resolved, 2D PASS, MAT, shifting-p echo or shifting-d echo) and its settings (spin, MQ order, pathway). Tick <strong>Acquired with split-t1</strong> if the data arrive already sheared.</li>
   <li>Choose the <strong>F1 scaling</strong>. Click <strong>Check against the data</strong> to measure the shear that gives the sharpest projection and compare it with the standard value, then <strong>Preview</strong>.</li>
   <li>Click <strong>Shear → New Spectrum</strong>. The result is added to Open experiments with a log of what was done.</li>
 </ol>
@@ -102,6 +103,8 @@
   <dt>VOCS Sum</dt><dd>Corrects and combines every selected (or Compare-ticked) spectrum onto one common ppm axis. No need to apply VOCS to each spectrum first.</dd>
   <dt>CPMG echo split</dt><dd><strong>First point</strong>, <strong>Auto offset (points)</strong> and <strong>Safety (points)</strong> control where the echoes are cut.</dd>
   <dt>CPMG processing</dt><dd><strong>Apodise the co-added echo</strong>, <strong>Zeroed edge points</strong>, <strong>Window shape</strong>, <strong>Window alpha</strong>, <strong>Zero-fill to</strong>. Untick <strong>Magnitude mode</strong> to keep the real and imaginary parts and phase the result in Process.</dd>
+  <dt>Shear: Shifting-p and shifting-d echo</dt><dd>Presets for the p-echo and d-echo (and the adiabatic double and quadruple d-echo, which has the same geometry). One shear parallel to t1 separates the shift from the first-order quadrupolar pattern. In the p-echo F1 holds the shift and F2 the quadrupolar pattern about zero; in the d-echo it is the other way round. The whole echo must be acquired, with t2 starting at the end of the last pulse and no echo alignment. Use <strong>Check against the data</strong> on your own data to confirm the F1 direction.</dd>
+  <dt>Projections: Sum or Max</dt><dd>Right-click the plot and choose <strong>Projections computed as</strong>, or use the selector in the Shear preview. A shear parallel to t1 leaves the F1 sum projection unchanged and alters F2, and the reverse for t2.</dd>
   <dt>Shear: Experiment / Spin / MQ order / Pathway / Satellite</dt><dd>Describe the experiment. The spin is set from the selected spectrum's nucleus when it is quadrupolar.</dd>
   <dt>Shear: F1 scaling</dt><dd><strong>Chemical-shift scale</strong> (δ<sub>F1</sub> = δ<sub>CS</sub> − 10/17 δ<sub>QIS</sub>), <strong>Unified, 1 + |κ|</strong> (Grandinetti), no scaling (sheared Hz), or a custom factor.</dd>
   <dt>Shear: F1 direction</dt><dd>Whether F1 is displayed with the same sense as the coherence evolving in t1 or reversed. It depends on the quadrature scheme. <strong>Check against the data</strong> sets it.</dd>

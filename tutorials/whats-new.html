@@ -20,6 +20,7 @@
     <nav aria-label="Main">
       <a href="../#tools">Features</a>
       <a href="../#start">Get started</a>
+      <a href="../download.html">Download</a>
       <a href="./" aria-current="page">Tutorials</a>
       <a class="gh" href="https://github.com/openNMR/openNMR">GitHub</a>
       <button class="theme-toggle" id="theme-toggle" type="button" hidden>
@@ -35,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / What's new</p>
     <h1>What's new</h1>
-    <p class="lead">The changes in each recent release.</p>
+    <p class="lead">The changes in each recent release, from 0.5 to 0.8.</p>
     </div>
   </div>
 </div>
@@ -56,7 +57,31 @@
     </ul>
   </nav>
   <article>
-    <div class="note"><p>Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
+    <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
+
+    <h2>0.8.0 to 0.8.3 <small>(24 to 25 October 2026)</small></h2>
+    <p><strong>Installers, and a closer look at paramagnetic and shifting-echo data.</strong></p>
+    <ul>
+      <li><strong>Installers for Windows, macOS and Linux.</strong> openNMR can now be installed as an ordinary app, with no Python needed. See <a href="../download.html">Download</a>. The pip package is unchanged and remains the way to use openNMR in a notebook.</li>
+      <li><strong>CRYSTAL calculations</strong> (<em>Simulate ▸ DFT tensors</em>): read CRYSTAL output for the hyperfine (Fermi contact and spin-dipolar) shifts and the electric field gradient of paramagnetic materials. You supply the magnetic scaling as a spin polarisation factor, a susceptibility, or a Curie–Weiss θ with μ<sub>eff</sub>, and openNMR returns shifts, CSA and quadrupolar parameters ready to simulate. See <a href="../functions/simulate.html">Simulate</a>.</li>
+      <li><strong>Shifting-p and shifting-d echo</strong> (<em>Advanced processing ▸ Shearing and Scaling</em>): new presets that shear the data so the shift and the first-order quadrupolar pattern separate into the two dimensions. The projections can be shown as a <strong>sum or a maximum</strong>, and the Shear preview now has projections of its own. See <a href="../functions/advanced-processing.html">Advanced processing</a>.</li>
+      <li><strong>Colour themes:</strong> Gruvbox (light and dark), Dracula and Forest join the existing themes in <strong>Settings ▸ Interface</strong>.</li>
+      <li>The <strong>Install</strong> button in Settings ▸ Updates is no longer offered for a release that has no installer.</li>
+    </ul>
+
+    <h2>0.7.0 to 0.7.4 <small>(23 to 24 October 2026)</small></h2>
+    <p><strong>Solution and solid-state fitting, insets, and field-drift correction.</strong></p>
+    <ul>
+      <li><strong>Fit sections renamed.</strong> The Fit tool now has <strong>Solution NMR</strong> and <strong>Solid-state NMR</strong> sections (the latter is the old CSA, Quad &amp; J-coupling). J-coupling can now be put on isotropic peaks. Strongly coupled spin systems (roofing, AB, ABX) can be fitted exactly from <strong>Solution NMR</strong> as well as from Solid-state NMR, and <strong>Simulate</strong> gains a matching <strong>Solution NMR</strong> section. See <a href="../functions/fit.html">Fit</a> and <a href="../functions/simulate.html">Simulate</a>.</li>
+      <li><strong>Inset on any plot.</strong> Click <strong>Inset</strong> in the plot toolbar (or press <kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Cmd</kbd>+<kbd>I</kbd> on macOS) and drag a box to magnify that region in a corner of the figure, with optional connector lines, frame, font and axis labels. It works on 1D spectra, 2D contour plots, curves and the Compare view, and is kept when you export the figure at full resolution.</li>
+      <li><strong>Integral labels</strong> (<em>Integrate</em>): show “∫ = 1.00” above each integration region, with the smallest integral set to 1, and control the size, colour, font, height and angle. Select-and-integrate-from-plot moved to <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd>.</li>
+      <li><strong>Field drift along the slices</strong> (<em>Process</em>): track a peak through a series of slices, fit the drift with a line, a polynomial, a smoothing spline, a spline through chosen slices or a sinusoid, and apply or remove the correction. It works for data from any instrument. The fitted drift is saved with the spectrum.</li>
+      <li><strong>Better automatic phasing.</strong> A rolling baseline hump no longer pulls the phase 15 to 48 degrees off, and weak slices of a 2D are phased by interpolating between good ones.</li>
+      <li><strong>Import tables.</strong> CSV, plain <code>x y</code> text and JCAMP-DX files written by <em>Export Data</em> (or by hand) can be opened again as spectra or FIDs, 2D matrices included. See <a href="../functions/open.html">Open</a>.</li>
+      <li><strong>Dynamics</strong> was reorganised, with every section folded to start. Start + step series gained a <strong>Step multiplier</strong>, so a start of 0.1, a step of 0.1 and a multiplier of 2 gives 0.1, 0.2, 0.4, 0.8. See <a href="../functions/dynamics.html">Dynamics</a>.</li>
+      <li><strong>Welcome tour:</strong> a new “Type of work” page pre-selects sensible options. The tool order in the toolbar is now Open, Process, Integrate, Fit, Dynamics, Simulate, Compare, Advanced processing, Apply, Settings.</li>
+      <li><strong>DFT:</strong> solid or solution state for calculated tensors, averaging of sites with a clearer layout, and more colour options for plots.</li>
+    </ul>
 
     <h2>0.6.0 <small>(23 October 2026)</small></h2>
     <p><strong>SIMPSON simulations, and exporting your data.</strong></p>

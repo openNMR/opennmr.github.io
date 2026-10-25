@@ -20,6 +20,7 @@
     <nav aria-label="Main">
       <a href="../#tools">Features</a>
       <a href="../#start">Get started</a>
+      <a href="../download.html">Download</a>
       <a href="../tutorials/">Tutorials</a>
       <a class="gh" href="https://github.com/openNMR/openNMR">GitHub</a>
       <button class="theme-toggle" id="theme-toggle" type="button" hidden>
@@ -85,6 +86,7 @@
       <dt>Varian / Agilent</dt><dd><code>fid</code> with its <code>procpar</code>.</dd>
       <dt>JEOL Delta</dt><dd><code>.jdf</code> files. One-dimensional data only so far.</dd>
       <dt>Magritek Spinsolve</dt><dd>Spinsolve experiment folders.</dd>
+      <dt>Tables and JCAMP-DX <small>(CSV, <code>.xy</code>, <code>.jdx</code>)</small></dt><dd>The files written by <em>Export Data</em>, and similar ones made by hand: a spectrum or an FID as columns, with an optional header, a 2D matrix, or JCAMP-DX XYDATA and NTUPLES. A <code>.txt</code> or <code>.dat</code> file is opened as a table when you choose that format.</dd>
       <dt>SIMPSON <small>(simulation output)</small></dt><dd>Text spectra and FIDs written by SIMPSON (<code>.spe</code>, <code>.csdf</code>, <code>.fid</code>) and headerless <code>x re im</code> <code>.dat</code> files. These are recognised from their content, and binary SIMPSON files are refused with a message. They are loaded and plotted from <a href="simulate.html">Simulate ▸ SIMPSON import</a>, and can be fitted to a measured spectrum in <a href="fit.html">Fit ▸ SIMPSON spectrum</a>. They are simulated, not measured, so they carry no field or nucleus until you say which.</dd>
     </dl>
     <p>Point <strong>Choose Folder…</strong> at the folder that contains your experiments and openNMR lists those it recognises.</p>
@@ -130,7 +132,7 @@
     <h2 id="settings">Settings</h2>
     <p>The <strong>Settings</strong> tool, at the right of the toolbar, adjusts openNMR to the way you work. Its sections:</p>
     <dl class="controls">
-      <dt>Interface</dt><dd>Menu font size, light or dark appearance (or follow the system), the crosshair colour and width, the units used for export size, and what clicking, dragging and double-clicking do on a plot.</dd>
+      <dt>Interface</dt><dd>Menu font size, the colour theme (follow the system, light, dark, or Solarized, Nord, Midnight, Sepia, Gruvbox, Dracula, Forest or High contrast), the crosshair colour and width, the units used for export size, and what clicking, dragging and double-clicking do on a plot.</dd>
       <dt>Fitting</dt><dd>The maximum number of fit iterations.</dd>
       <dt>Sections shown</dt><dd>Hide the sections you never use (for example eNMR, Imaging or SIMPSON import), and bring them back in the same place whenever you like. Nothing is lost.</dd>
       <dt>Data</dt><dd>A default data folder, so every Open dialog starts there and the browser lists it at start-up, and whether Bruker data open with TopSpin's own processing parameters.</dd>

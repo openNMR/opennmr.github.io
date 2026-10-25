@@ -20,6 +20,7 @@
     <nav aria-label="Main">
       <a href="../#tools">Features</a>
       <a href="../#start">Get started</a>
+      <a href="../download.html">Download</a>
       <a href="../tutorials/">Tutorials</a>
       <a class="gh" href="https://github.com/openNMR/openNMR">GitHub</a>
       <button class="theme-toggle" id="theme-toggle" type="button" hidden>
@@ -92,6 +93,12 @@
 <dl class="controls">
   <dt>Enhancement (steps 1 to 5)</dt><dd>Work down the steps: tick the spectra (one is the microwaves-off spectrum), pick a reference line so every spectrum is aligned to it, check the alignment, measure the height and/or integral of the line, then <strong>Calculate Enhancement</strong> as ε = ON / OFF, or 1 − ON / OFF. Measure both the height and the integral if you can: they agree only if the line shape is unchanged.</dd>
   <dt>Field Sweep Profile</dt><dd>Plots signal (absolute, or as enhancement) against B₀ for spectra each recorded at a different field. <strong>Plot Profile</strong> draws it and <strong>Export CSV…</strong> saves it.</dd>
+</dl>
+<h3>Integration regions: labels</h3>
+<dl class="controls">
+  <dt>Show ∫ =</dt><dd>Writes “∫ = 1.00” above each region, with the smallest integral set to 1. Untick it to show the number alone.</dd>
+  <dt>Label size / colour / font / bold / italic</dt><dd>A size of 0 matches the axis labels.</dd>
+  <dt>Height / angle</dt><dd>Where the label sits (as a percentage of the plot height) and its rotation. By default it sits just above the bottom of the plot, so with no gap above the baseline, raise the height.</dd>
 </dl>
 <h3>CP Build-up</h3>
 <dl class="controls">

@@ -152,3 +152,15 @@ article h3{font-size:1.15rem;margin:2rem 0 .3rem}
 .restable th,.restable td{border:1px solid var(--line);padding:.45rem .8rem;text-align:right}
 .restable thead th{background:var(--panel)}
 .restable tbody th{text-align:left;background:var(--panel)}
+
+.dls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin:0 0 2rem}
+.dl{padding:1.3rem;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--purple);border-radius:8px}
+.dl h3{margin:0 0 .1rem;font-size:1.25rem}
+.dl-sub{margin:0 0 1rem;color:var(--muted)}
+.dl .btn{display:inline-block;padding:.7rem 1.2rem;border-radius:7px;font-weight:600;text-decoration:none;background:var(--blue);color:#fff}
+.dl .btn:hover{background:var(--blue-hi)}
+.dl .btn small{font-weight:400;opacity:.85}
+.dl-file{margin:.8rem 0 .4rem;font-size:.85rem;overflow-wrap:anywhere}
+.dl details{margin-top:.6rem;font-size:.9rem}
+.dl summary{cursor:pointer;color:var(--muted)}
+.dl .sha{display:block;margin-top:.4rem;font-size:.75rem;overflow-wrap:anywhere}

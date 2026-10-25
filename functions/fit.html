@@ -20,6 +20,7 @@
     <nav aria-label="Main">
       <a href="../#tools">Features</a>
       <a href="../#start">Get started</a>
+      <a href="../download.html">Download</a>
       <a href="../tutorials/">Tutorials</a>
       <a class="gh" href="https://github.com/openNMR/openNMR">GitHub</a>
       <button class="theme-toggle" id="theme-toggle" type="button" hidden>
@@ -59,7 +60,7 @@
   <article>
 
 <h2>What it does</h2>
-<p>Fit works on <strong>spectra</strong>: it adjusts a model until it matches your data, and reports every value with its uncertainty. Each kind of model has its own section: <strong>Isotropic (Gauss/Lor)</strong> peaks; <strong>CSA, Quad &amp; J-coupling</strong> sites built from any mix of interactions; <strong>Quadrupolar (Czjzek distribution)</strong> for disordered sites; <strong>pNMR (CIF bond pathways)</strong> for paramagnetic materials; <strong>Multi-spectrum</strong> fits; and <strong>Kept fit models</strong>, where fits you have saved are compared. (To fit relaxation or diffusion <em>curves</em>, use <a href="dynamics.html">Dynamics</a>.)</p>
+<p>Fit works on <strong>spectra</strong>: it adjusts a model until it matches your data, and reports every value with its uncertainty. Each kind of model has its own section: <strong>Solution NMR</strong> (Gaussian/Lorentzian peaks and first-order multiplets, or an exactly solved strongly coupled spin system); <strong>Solid-state NMR</strong> (CSA, quadrupolar and J-coupling sites built from any mix of interactions); <strong>Quadrupolar (Czjzek distribution)</strong> for disordered sites; <strong>pNMR (CIF bond pathways)</strong> for paramagnetic materials; <strong>Multi-spectrum</strong> fits; and <strong>Kept fit models</strong>, where fits you have saved are compared. (To fit relaxation or diffusion <em>curves</em>, use <a href="dynamics.html">Dynamics</a>.)</p>
 <p>After a fit the panel shows <strong>What the fit tells you, and what to try next</strong>. It warns about parameters sitting on a bound, strongly correlated pairs, a clipped fit window and a poor R², so that a good-looking curve is not mistaken for a good answer.</p>
 
 <h2>Before you start</h2>
@@ -81,7 +82,7 @@
   <li>Click <strong>Fit Spectrum</strong>. The fit is drawn over the data in the <strong>Spectral Fit</strong> tab and the report appears below, with each parameter and its 1σ error.</li>
   <li>Read <strong>What the fit tells you, and what to try next</strong>. When you are happy, <strong>Export Fit Report…</strong>, <strong>Save the Fitted Values…</strong> or <strong>Keep This Fit…</strong> to store it with the spectrum.</li>
 </ol>
-<p>For anisotropic or quadrupolar lineshapes, open <strong>CSA, Quad &amp; J-coupling</strong>. Build the model as <strong>peaks</strong> (sites), then <strong>add interactions</strong> to each peak: a chemical-shift anisotropy, a quadrupolar coupling, and any number of J-couplings, in any combination, static or MAS. Use <strong>Estimate Starting Values</strong> to read starting parameters off the data, <strong>Preview Starting Model</strong> to check the model before fitting, and then the section's fit button.</p>
+<p>For anisotropic or quadrupolar lineshapes, open <strong>Solid-state NMR</strong> (called CSA, Quad &amp; J-coupling before version 0.7). Build the model as <strong>peaks</strong> (sites), then <strong>add interactions</strong> to each peak: a chemical-shift anisotropy, a quadrupolar coupling, and any number of J-couplings, in any combination, static or MAS. Use <strong>Estimate Starting Values</strong> to read starting parameters off the data, <strong>Preview Starting Model</strong> to check the model before fitting, and then the section's fit button.</p>
 
 <h2>Options and controls</h2>
 <h3>Isotropic (Gauss/Lor)</h3>
@@ -101,7 +102,12 @@
   <dt>2. Fit</dt><dd>Each template always gets its own amplitude, and a baseline is fitted with them. Tick <strong>Each template may shift</strong> (with a <strong>Shift window ±</strong>) to allow for referencing or isotropic-shift differences, and <strong>Each template may broaden</strong> to add Lorentzian and Gaussian broadening. These two widths are partly degenerate, and the errors say so when they are. <strong>Amplitudes cannot be negative</strong> and <strong>Only inside the Integration regions</strong> restrict the fit. <strong>Fit</strong> runs it, and <strong>Copy notebook code</strong> gives the same call for a notebook.</dd>
   <dt>3. Result</dt><dd>A table of each template's amplitude, shift, Lorentzian and Gaussian broadening, each with its uncertainty, and its share of the total.</dd>
 </dl>
-<h3>CSA, Quad &amp; J-coupling</h3>
+<h3>Solution NMR</h3>
+<dl class="controls">
+  <dt>Model</dt><dd><strong>Peaks and multiplets (first order)</strong> is the peak table used for ordinary solution spectra, and J-couplings can be put on isotropic peaks. <strong>Strongly coupled spin system</strong> solves the spin system exactly (roofing, AB, ABX and so on) and fits the shifts and J-couplings directly.</dd>
+  <dt>One spin system</dt><dd>There is a single strongly-coupled-spin-system panel. It sits in whichever of Solution NMR or Solid-state NMR you used last, and the other section tells you where it went, with a <strong>Show it here</strong> button.</dd>
+</dl>
+<h3>Solid-state NMR (CSA, Quad &amp; J-coupling)</h3>
 <dl class="controls">
   <dt>Peaks (sites) &mdash; Add peak, Duplicate, Remove</dt><dd>One row per site. <strong>Add isotope partner</strong> adds a second isotope of the same chemistry; <strong>Same chemistry as</strong> shares parameters between peaks.</dd>
   <dt>Add interaction</dt><dd>Adds a CSA, a quadrupolar coupling or a J-coupling to the selected peak. A peak with none is an isotropic peak.</dd>
