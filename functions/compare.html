@@ -75,7 +75,7 @@
 </figure>
 <ol class="cards">
   <li>Click <strong>Compare</strong> in the toolbar and select two or more 1D spectra in <strong>Open experiments</strong>. They are listed in the Compare list with a tick box each.</li>
-  <li>Choose a <strong>Layout</strong>: Stacked, Superimposed or Heatmap. Use <strong>Move Up</strong> and <strong>Move Down</strong> to set the order, and the tick boxes (or <strong>Select All</strong> and <strong>Deselect All</strong>) to choose which spectra are included.</li>
+  <li>Choose a <strong>Layout</strong>: Stacked, Superimposed or Heatmap. Use <strong>Move Up</strong> and <strong>Move Down</strong> to set the order, and the tick boxes (or <strong>Select All</strong> and <strong>Deselect All</strong>) to choose which spectra are included. <strong>Remove</strong> (or the <kbd>Delete</kbd> key) takes a spectrum out of the list altogether, and <strong>Clear</strong> empties it.</li>
   <li>Choose how to <strong>Normalize</strong> them so that intensities can be compared (see below). The plot redraws on every change; <strong>Plot</strong> redraws it on demand.</li>
   <li>To make a new spectrum from the ones ticked, open <strong>Spectrum Arithmetic</strong>, choose an <strong>Operation</strong> and click <strong>Combine → New Spectrum</strong>. The result is added to Open experiments.</li>
 </ol>
@@ -85,6 +85,7 @@
   <dt>Layout</dt><dd><strong>Stacked</strong>: one panel per spectrum. <strong>Superimposed</strong>: all on one axis. <strong>Heatmap</strong>: one row per spectrum, colour showing intensity, in list order.</dd>
   <dt>Normalize</dt><dd><strong>Per scan</strong> (÷ NS), <strong>Max intensity</strong>, or <strong>Per scan and sample mass</strong>. Bruker, Varian, Spinsolve and X-Pulse data are divided by the number of scans when loaded; JEOL data are not.</dd>
   <dt>Also divide by receiver gain (RG)</dt><dd>No reader divides by the receiver gain, so spectra recorded with different RG are not comparable in absolute intensity. Tick this to divide each by its RG.</dd>
+  <dt>Remove / Clear</dt><dd>Take spectra out of the comparison entirely, not just untick them. A removed spectrum stays out when you change the selection in Open experiments; to bring it back, deselect and reselect it there, or drag it back into the list. Right-click ▸ <strong>Remove</strong> does the same. The controls above Spectrum Arithmetic sit in one collapsible <strong>Compare Controls</strong> section.</dd>
   <dt>Fit Curve…</dt><dd>Fits a relaxation or diffusion model across the ticked spectra. See <a href="dynamics.html">Dynamics</a>.</dd>
 </dl>
 <h3>2D spectra</h3>

@@ -36,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / What's new</p>
     <h1>What's new</h1>
-    <p class="lead">The changes in each recent release, from 0.5 to 0.8.</p>
+    <p class="lead">The changes in each recent release, from 0.5 to 0.9.</p>
     </div>
   </div>
 </div>
@@ -58,6 +58,17 @@
   </nav>
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
+
+    <h2>0.9.0 to 0.9.2 <small>(27 October 2026)</small></h2>
+    <p><strong>DFT tensors on the crystal structure, a figure preview before saving, and more control over legends.</strong></p>
+    <ul>
+      <li><strong>Tensors on the structure</strong> (<em>Simulate ▸ DFT tensors</em>): draw the calculated shift, shift-anisotropy or EFG tensors centred on their atoms in the unit cell or molecule, so you can see how each is oriented relative to the bonds. Show one site or every site, all to one scale, with the atoms in a radius around them, or any <strong>fractional range or supercell</strong> (for example a from −0.2 to 1.6, or 2 × 2 × 1). See <a href="../functions/simulate.html">Simulate</a>.</li>
+      <li><strong>A clearer DFT section.</strong> It now runs as six numbered, collapsible steps: the calculation and sites, the shift scale (or paramagnetic scaling), solid or solution and motional averaging, the experiment, simulate, and view the tensors. The nucleus is taken from the sites you chose, so it is no longer typed twice.</li>
+      <li><strong>Tensor Plot Style</strong> (right-click a tensor picture) has new <strong>Axes &amp; Labels</strong> and <strong>Atoms &amp; Bonds</strong> tabs: hide or pad the x, y, z tick labels and axis labels, or hide the box altogether; and set the atoms' size, opacity, outline, depth cueing and colours (element by element), and the bonds' width and colour.</li>
+      <li><strong>Move the legend, and give it columns</strong> (<em>Plot Style ▸ Legend</em>, on every plot): more positions, <strong>outside right</strong> (the plot makes room for it), or a <strong>custom</strong> place, inside or outside the axes; and any number of columns. See <a href="../functions/open.html#plot-style">Plot style</a>.</li>
+      <li><strong>See a figure before you save it.</strong> <strong>Save</strong> (<kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>S</kbd>) first shows the figure exactly as it will be written, at the export size, and lets you change the width, height and DPI and keep them for later exports.</li>
+      <li><strong>Compare:</strong> <strong>Remove</strong>, <strong>Clear</strong> and the <kbd>Delete</kbd> key take spectra out of the comparison entirely, and they stay out when you change the selection in Open experiments. The plot controls are grouped in one collapsible <strong>Compare Controls</strong> section.</li>
+    </ul>
 
     <h2>0.8.0 to 0.8.3 <small>(24 to 25 October 2026)</small></h2>
     <p><strong>Installers, and a closer look at paramagnetic and shifting-echo data.</strong></p>
