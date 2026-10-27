@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Download openNMR – openNMR</title>
-<meta name="description" content="Download the openNMR 0.8.3 installer for Windows, macOS or Linux.">
+<meta name="description" content="Download the openNMR 0.9.2 installer for Windows, macOS or Linux.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script src="assets/theme.js?v=7"></script>
@@ -36,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="./">Home</a> / Download</p>
     <h1>Download openNMR</h1>
-    <p class="lead">Version 0.8.3. A ready-to-run app for Windows, macOS and Linux: no Python needed. Prefer pip, or want to script in a notebook? See <a href="tutorials/install.html">Install with pip</a>.</p>
+    <p class="lead">Version 0.9.2. A ready-to-run app for Windows, macOS and Linux: no Python needed. Prefer pip, or want to script in a notebook? See <a href="tutorials/install.html">Install with pip</a>.</p>
     </div>
   </div>
 </div>
@@ -47,26 +47,26 @@
       <div class="dl">
         <h3>Windows</h3>
         <p class="dl-sub">Windows 10 or 11, 64-bit</p>
-        <a class="btn primary" href="https://github.com/openNMR/opennmr.github.io/releases/download/v0.8.3/openNMR-0.8.3-windows-setup.exe">Download <small>(126 MB)</small></a>
-        <p class="dl-file"><code>openNMR-0.8.3-windows-setup.exe</code></p>
+        <a class="btn primary" href="https://github.com/openNMR/opennmr.github.io/releases/download/v0.9.2/openNMR-0.9.2-windows-setup.exe">Download <small>(126 MB)</small></a>
+        <p class="dl-file"><code>openNMR-0.9.2-windows-setup.exe</code></p>
         <p>Run the installer. It installs for your own account, so no administrator rights are needed, and adds a Start-menu entry.</p>
-        <details><summary>SHA-256 checksum</summary><code class="sha">c83f6ff41e11170a7eae064d36aa3196ef222b6108bee9706f3c9ebb794058b6</code></details>
+        <details><summary>SHA-256 checksum</summary><code class="sha">f21ae91884f397468ac968a4f4ec5cbb26f3056bd7ff61acbffbd36ec88ac336</code></details>
       </div>
       <div class="dl">
         <h3>macOS</h3>
         <p class="dl-sub">Apple silicon (M1 and later)</p>
-        <a class="btn primary" href="https://github.com/openNMR/opennmr.github.io/releases/download/v0.8.3/openNMR-0.8.3-macos-arm64.dmg">Download <small>(145 MB)</small></a>
-        <p class="dl-file"><code>openNMR-0.8.3-macos-arm64.dmg</code></p>
+        <a class="btn primary" href="https://github.com/openNMR/opennmr.github.io/releases/download/v0.9.2/openNMR-0.9.2-macos-arm64.dmg">Download <small>(145 MB)</small></a>
+        <p class="dl-file"><code>openNMR-0.9.2-macos-arm64.dmg</code></p>
         <p>Open the disk image and drag openNMR into Applications. Intel Macs: use the pip install.</p>
-        <details><summary>SHA-256 checksum</summary><code class="sha">f70f131e8e4d7f64c6bf2552115beb0d776f72986355f51bddd4470c4f6387fd</code></details>
+        <details><summary>SHA-256 checksum</summary><code class="sha">3e82d5f530f6ae7ca2bd282d7d6770e058f362cfc6f5011cf9a0d45d8e7c4572</code></details>
       </div>
       <div class="dl">
         <h3>Linux</h3>
         <p class="dl-sub">x86_64 AppImage</p>
-        <a class="btn primary" href="https://github.com/openNMR/opennmr.github.io/releases/download/v0.8.3/openNMR-0.8.3-linux-x86_64.AppImage">Download <small>(181 MB)</small></a>
-        <p class="dl-file"><code>openNMR-0.8.3-linux-x86_64.AppImage</code></p>
+        <a class="btn primary" href="https://github.com/openNMR/opennmr.github.io/releases/download/v0.9.2/openNMR-0.9.2-linux-x86_64.AppImage">Download <small>(181 MB)</small></a>
+        <p class="dl-file"><code>openNMR-0.9.2-linux-x86_64.AppImage</code></p>
         <p>Make the file executable and run it: <code>chmod +x openNMR-*.AppImage</code>, then <code>./openNMR-*.AppImage</code>.</p>
-        <details><summary>SHA-256 checksum</summary><code class="sha">4fcea02caf36c0122e571bb06eba0649b9168d7180268579d2a67e9ed93a4c11</code></details>
+        <details><summary>SHA-256 checksum</summary><code class="sha">7bf995ff536ab827ce11f62af8e3357009cb86ebe320864200721cdf874e554b</code></details>
       </div>
     </div>
 
@@ -81,17 +81,17 @@
     <h2>Check your download</h2>
     <p>Each file's SHA-256 checksum is shown above. To confirm a download is intact, compute it and compare:</p>
     <pre><code># Windows (PowerShell)
-Get-FileHash .\openNMR-0.8.3-windows-setup.exe -Algorithm SHA256
+Get-FileHash .\openNMR-0.9.2-windows-setup.exe -Algorithm SHA256
 
 # macOS
-shasum -a 256 openNMR-0.8.3-macos-arm64.dmg
+shasum -a 256 openNMR-0.9.2-macos-arm64.dmg
 
 # Linux
-sha256sum openNMR-0.8.3-linux-x86_64.AppImage</code></pre>
+sha256sum openNMR-0.9.2-linux-x86_64.AppImage</code></pre>
 
     <h2>App or pip?</h2>
     <p>The app and the Python package are built from the same code and have the same features. The app is the easiest way to start. Choose <a href="tutorials/install.html">pip</a> if you want to use openNMR from a Jupyter or Colab notebook (<code>from opennmr import notebook as nmr</code>), which the app cannot do. The two are separate copies, so updating one does not change the other.</p>
-    <p>New to openNMR? Continue with <a href="tutorials/first-spectrum.html">Open your first spectrum</a>, or see <a href="tutorials/whats-new.html">what's new in 0.8.3</a>.</p>
+    <p>New to openNMR? Continue with <a href="tutorials/first-spectrum.html">Open your first spectrum</a>, or see <a href="tutorials/whats-new.html">what's new in 0.9.2</a>.</p>
   </article>
 </div>
 
