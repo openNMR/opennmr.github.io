@@ -60,7 +60,7 @@
   <article>
 
 <h2>What it does</h2>
-<p>Compare puts several spectra in one figure: <strong>stacked</strong> (one panel each), <strong>superimposed</strong> on one axis, or as a <strong>heatmap</strong> with one row per spectrum. It scales them so the comparison is fair, and its <strong>Spectrum Arithmetic</strong> section adds, subtracts, averages or scales spectra to make a new one, for instance a difference spectrum.</p>
+<p>Compare puts several spectra in one figure: <strong>stacked</strong> (one panel each), <strong>superimposed</strong> on one axis, or as a <strong>heatmap</strong> with one row per spectrum. It keeps their intensities comparable (stacked spectra share one scale, or you can leave them exactly as recorded), and its <strong>Spectrum Arithmetic</strong> section adds, subtracts, averages or scales spectra to make a new one, for instance a difference spectrum.</p>
 
 <h2>Before you start</h2>
 <p>Load at least two spectra with <a href="open.html">Open</a>. They appear in the <strong>Open experiments</strong> list; <kbd>Ctrl</kbd>-click or <kbd>Shift</kbd>-click several of them to start a comparison. For a pseudo-2D spectrum, its slices are used.</p>
@@ -83,7 +83,10 @@
 <h2>Options and controls</h2>
 <dl class="controls">
   <dt>Layout</dt><dd><strong>Stacked</strong>: one panel per spectrum. <strong>Superimposed</strong>: all on one axis. <strong>Heatmap</strong>: one row per spectrum, colour showing intensity, in list order.</dd>
-  <dt>Normalize</dt><dd><strong>Per scan</strong> (÷ NS), <strong>Max intensity</strong>, or <strong>Per scan and sample mass</strong>. Bruker, Varian, Spinsolve and X-Pulse data are divided by the number of scans when loaded; JEOL data are not.</dd>
+  <dt>Normalize</dt><dd><strong>Per scan</strong> (÷ NS), <strong>Max intensity</strong>, <strong>Per scan and sample mass</strong>, or <strong>Unscaled (as recorded)</strong>. Bruker, Varian, Spinsolve and X-Pulse data are divided by the number of scans when loaded; JEOL data are not. <em>Unscaled</em> undoes that division, so each spectrum has the intensity it was recorded with, as TopSpin shows it.</dd>
+  <dt>Same intensity scale for all</dt><dd>On by default. Every stacked spectrum is drawn on one vertical scale, so a spectrum that is half as intense looks half as tall. Untick it to scale each spectrum to its own tallest peak, which compares shapes rather than amounts.</dd>
+  <dt>Spacing</dt><dd>Drag the slider to the right to spread stacked spectra apart and to the left to bring them together, down to overlapping. The spacing stays even whatever the heights, and your zoom is kept.</dd>
+  <dt>Panel labels</dt><dd>Tick <strong>Label the panels</strong> to add a), b), c)… (or numbers) to each panel. Choose the style, the order, the first label, the size and the position, or drag a label on the plot. Untick <strong>Dragging moves all labels together</strong> to place one at a time.</dd>
   <dt>Also divide by receiver gain (RG)</dt><dd>No reader divides by the receiver gain, so spectra recorded with different RG are not comparable in absolute intensity. Tick this to divide each by its RG.</dd>
   <dt>Remove / Clear</dt><dd>Take spectra out of the comparison entirely, not just untick them. A removed spectrum stays out when you change the selection in Open experiments; to bring it back, deselect and reselect it there, or drag it back into the list. Right-click ▸ <strong>Remove</strong> does the same. The controls above Spectrum Arithmetic sit in one collapsible <strong>Compare Controls</strong> section.</dd>
   <dt>Fit Curve…</dt><dd>Fits a relaxation or diffusion model across the ticked spectra. See <a href="dynamics.html">Dynamics</a>.</dd>
@@ -96,6 +99,8 @@
   <dt>Lowest contour / Contour levels</dt><dd>Set the contour range.</dd>
   <dt>Insets</dt><dd>Zoom the plot onto a region, then <strong>Add inset from zoom</strong>. Choose the panel, the corner and the size, and whether to draw the box and connectors.</dd>
 </dl>
+<h3>Mixing 1D, 2D and pulse sequences</h3>
+<p>Tick spectra of different kinds, for example a 1D spectrum, a 2D spectrum and a pulse sequence, and Compare draws each in its own panel of one figure. Use the <strong>Panel labels</strong> section to label them a), b), c).</p>
 <h3>Spectrum Arithmetic</h3>
 <dl class="controls">
   <dt>Operation</dt><dd><strong>Sum</strong>, <strong>Average</strong>, <strong>Subtract from first</strong>, or <strong>Custom</strong>, where you edit the sign and factor of each spectrum yourself.</dd>
@@ -106,7 +111,7 @@
 
 <h2>Tips and troubleshooting</h2>
 <ul>
-  <li><strong>Intensities look wrong?</strong> Check Normalize. Spectra recorded with different numbers of scans, receiver gains or sample masses are not comparable until they are scaled.</li>
+  <li><strong>Intensities look wrong?</strong> Check Normalize and <strong>Same intensity scale for all</strong>. For the amounts exactly as recorded, choose <strong>Unscaled (as recorded)</strong>. Spectra recorded with different numbers of scans, receiver gains or sample masses are not comparable until they are scaled.</li>
   <li><strong>Nothing happens when you select spectra?</strong> Compare needs at least two 1D spectra. The panel says so until you have selected them.</li>
   <li><strong>Difference spectra.</strong> Align the spectra on ppm and use <strong>Overlap only</strong>, then check that the referencing of the two is consistent. A badly referenced pair leaves derivative-shaped residuals.</li>
 </ul>

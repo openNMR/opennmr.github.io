@@ -59,6 +59,17 @@
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
 
+    <h2>0.9.3 to 0.9.4 <small>(28 October 2026)</small></h2>
+    <p><strong>Compare shows true intensities, with spacing and mixed panels.</strong></p>
+    <ul>
+      <li><strong>True relative intensity in Compare.</strong> Each stacked spectrum used to be scaled to its own tallest point inside the plotted range, so differences in intensity between spectra were hidden. They now share one scale, as in TopSpin (<strong>Same intensity scale for all</strong>, on by default), and the <strong>Normalize</strong> list has a new <strong>Unscaled (as recorded)</strong> choice that applies no scaling at all. See <a href="../functions/compare.html">Compare</a>.</li>
+      <li><strong>Spacing slider</strong> (<em>Compare ▸ Spacing</em>): drag to move all stacked spectra apart or together at an even spacing, down to overlapping. Zooming and scrolling are kept as you drag.</li>
+      <li><strong>1D, 2D and pulse sequences together.</strong> Tick spectra of different kinds and Compare puts each in its own panel of one figure.</li>
+      <li><strong>Panel labels</strong> (<em>Compare ▸ Panel labels</em>): letters or numbers, with the style, order, start, size and position you choose. Drag any label on the plot to move it, singly or all together.</li>
+      <li><strong>Shaped pulses</strong> in the pulse-sequence viewer can be drawn rounded (as before), as a rectangle crossed by a diagonal arrow, or as a rectangle with a diagonal and one half shaded.</li>
+      <li><strong>Fixed: slices cut off at the top.</strong> In a 2D contour plot with extracted slices, the top slice or slices could be clipped, partly or wholly, when the spacing was tight. The slice panel now always fits every slice.</li>
+    </ul>
+
     <h2>0.9.0 to 0.9.2 <small>(27 October 2026)</small></h2>
     <p><strong>DFT tensors on the crystal structure, a figure preview before saving, and more control over legends.</strong></p>
     <ul>
