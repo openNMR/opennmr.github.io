@@ -90,11 +90,13 @@
   <dt>Window</dt><dd>The apodisation applied to the FID, with its <strong>Line broadening</strong>, <strong>Gaussian broadening</strong> or <strong>Sine-bell shift (SSB)</strong> where the window uses them.</dd>
   <dt>Zero-fill to</dt><dd>The FFT size. <strong>None</strong> leaves the FID as acquired; the default is the nearest standard size at or above the acquired points. <strong>Custom size</strong> accepts any value.</dd>
   <dt>Truncate to</dt><dd>Keeps only the first points of the FID, for example to discard a noisy tail.</dd>
+  <dt>Check for truncation wiggles…</dt><dd>Under <strong>Direct dimension (F2)</strong>. If the FID is cut off before it has decayed, the transform carries wiggles beside strong lines that look like a multiplet in a row of a 2D spectrum and are not in the sample. This measures their size (none, mild, moderate or strong) and spacing, says whether the window TopSpin recorded could be reproduced here, and offers the sine-bell that removes them for the least broadening: click <strong>Apply</strong> to use it. In a notebook, <code>from opennmr.notebook import ringing</code> and <code>ringing.check_f2_ringing(spectrum)</code>.</dd>
   <dt>Align Echo / Echo position</dt><dd>For full-echo acquisitions (rising then falling) rather than a one-sided decay: rolls the FID so the echo peak sits at t = 0 before windowing.</dd>
   <dt>FID shift</dt><dd>Shifts the FID in points before the transform.</dd>
   <dt>Linear-predict points / LP order / LP direction</dt><dd>Extends the FID forward past its end, or reconstructs points lost before its start (Backward).</dd>
   <dt>Magnitude Mode</dt><dd>Shows |real + imaginary| so every peak is positive and no phasing is needed. The phase controls switch off while it is on.</dd>
   <dt>Process Indirect Dimension</dt><dd>For 2D data. A relaxation or diffusion series (pseudo-2D) is the default and needs no transform along F1. Click this only for a genuine 2D correlation experiment (COSY or HSQC style). The <strong>F1</strong> controls (truncate, zero-fill, window, F1 LB, F1 SSB) are set separately from the direct dimension.</dd>
+  <dt>First-point scaling (Bruker)</dt><dd>Nothing to set. When openNMR reads Bruker raw data it multiplies the first point of the FID by TopSpin's <code>FCOR</code> before the window and the transform (in F1 as well as F2), as TopSpin does, so the baseline and the t<sub>1</sub> noise match TopSpin's own spectrum.</dd>
   <dt>Reset</dt><dd>Discards every live processing choice and returns to the spectrum as first loaded.</dd>
 </dl>
 <h3>Phase</h3>

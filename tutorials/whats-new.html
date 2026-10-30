@@ -59,6 +59,15 @@
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
 
+    <h2>0.9.4 to 0.9.5 <small>(30 October 2026)</small></h2>
+    <p><strong>Exact axis limits, a check for truncation wiggles, and Bruker first-point scaling.</strong></p>
+    <ul>
+      <li><strong>Type the axis limits</strong> (<em>Plot Style ▸ Axis limits</em>): frame a 1D spectrum, a Compare stack or overlay, or a 2D contour to an exact range, in the unit the axis shows (ppm, Hz, kHz or mm). The order does not matter, the plot keeps its direction (ppm still runs high to low), and you can leave a box empty, or fill in one end only. The range is used for the saved figure too; <strong>Reset to full view</strong> removes it. See <a href="../functions/open.html#plot-style">Plot style</a>.</li>
+      <li><strong>Check for truncation wiggles</strong> (<em>Process ▸ Direct dimension</em>): if the FID is cut off before it has decayed, the transform carries sinc wiggles beside strong lines that look like a multiplet and are not in the sample. The button measures how large they are and how far apart, says whether the window TopSpin recorded could be reproduced here, and offers the sine-bell that removes them with the least broadening. In a notebook, use <code>check_f2_ringing</code>. See <a href="../functions/process.html">Process</a>.</li>
+      <li><strong>Bruker first-point scaling (FCOR).</strong> TopSpin multiplies the first point of the FID by <code>FCOR</code> before the window and the transform, in both dimensions. openNMR now does the same when it reads Bruker data, so the baseline of a 1D spectrum, and the t<sub>1</sub> noise of a strong 2D spectrum, match TopSpin. Data without an <code>FCOR</code> value are unchanged.</li>
+      <li><strong>Fixed: saving SVG, PDF and EPS from the installed app.</strong> The Windows, macOS and Linux apps could save PNG figures but failed on the vector formats with “No module named matplotlib.backends.backend_svg”. All of them now work, and the installers are checked for this before release.</li>
+    </ul>
+
     <h2>0.9.3 to 0.9.4 <small>(28 October 2026)</small></h2>
     <p><strong>Compare shows true intensities, with spacing and mixed panels.</strong></p>
     <ul>
