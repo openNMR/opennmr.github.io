@@ -59,6 +59,15 @@
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
 
+    <h2>0.9.5 to 0.9.6 <small>(31 October 2026)</small></h2>
+    <p><strong>Find anything with a search, a shortcut sheet, a start-up screen, and a notebook for each experiment.</strong></p>
+    <ul>
+      <li><strong>“Where is…?” search</strong> (<em>Help ▸ Search Commands…</em>, <kbd>Ctrl</kbd>+<kbd>H</kbd>; on a Mac, <kbd>Control</kbd>+<kbd>H</kbd>, because <kbd>Cmd</kbd>+<kbd>H</kbd> is the system's Hide): type a few letters of what you want, such as <em>baseline</em>, <em>export png</em> or <em>T1</em>, and choose from every menu action, panel, section and labelled control. Choosing a control takes you to it: the panel switches, the sections around it open, and the control is outlined for a moment. Choosing a menu action runs it. Notebook functions are listed too; choosing one copies its name. The search is built from the window itself, so new features appear in it automatically. See <a href="../functions/open.html#find">Find a control or a command</a>.</li>
+      <li><strong>Keyboard shortcut sheet</strong> (<em>Help ▸ Keyboard Shortcuts…</em>, <kbd>F1</kbd>): every shortcut in one searchable list, copied as Markdown if you want a cheat sheet. It is generated from the menus, and warns if two actions ever share a key.</li>
+      <li><strong>Export an experiment to a notebook</strong> (<em>File ▸ Export Experiment to Notebook…</em>): writes a Jupyter notebook that re-reads the selected experiment with the same reader settings (window, zero-fill, truncation, linear prediction, phase) and plots it. Baseline correction, referencing, drift correction and fit results are listed in the notebook with their values but <strong>not</strong> re-run, so check that list before comparing the notebook's spectrum with a figure from the app. In a notebook, use <code>export_experiment_notebook</code>. See <a href="../functions/open.html#export-notebook">Export an experiment to a notebook</a>.</li>
+      <li><strong>Start-up screen and one window.</strong> The apps show a splash screen with the version while they load, instead of nothing for several seconds. Starting openNMR again while it is open brings the existing window forward rather than opening a second copy (use <code>--new-instance</code> if you want several).</li>
+    </ul>
+
     <h2>0.9.4 to 0.9.5 <small>(30 October 2026)</small></h2>
     <p><strong>Exact axis limits, a check for truncation wiggles, and Bruker first-point scaling.</strong></p>
     <ul>

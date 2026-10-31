@@ -138,6 +138,22 @@
       <dt>Lowest x first</dt><dd>Writes the points in ascending order of x, instead of the plot's order.</dd>
     </dl>
 
+    <h2 id="export-notebook">Export an experiment to a notebook</h2>
+    <p><strong>File ▸ Export Experiment to Notebook…</strong> writes the selected experiment as a Jupyter notebook (<code>.ipynb</code>). It re-reads the data with the reader settings the app last used (apodization window, zero-fill, truncation, linear prediction, phase and the pseudo-2D choice), re-applies any nucleus and mass you set, and plots the spectrum.</p>
+    <p>The notebook has three lists, and the last two matter:</p>
+    <dl class="controls">
+      <dt>Re-run by this notebook</dt><dd>What the notebook repeats in code.</dd>
+      <dt>Done in the app and not re-run</dt><dd>Baseline correction, referencing, field-drift correction and per-slice phase. They are listed with their values but are not repeated, so a notebook spectrum can differ from the one in the app by exactly these steps.</dd>
+      <dt>Results held by the app</dt><dd>Fits and analyses, shown but not recomputed.</dd>
+    </dl>
+    <p>A simulated or derived spectrum has no file to re-read; save it as an openNMR dataset folder first. In a notebook, <code>from opennmr import notebook as nmr</code> then <code>nmr.export_experiment_notebook(spectrum, "out.ipynb")</code>.</p>
+
+    <h2 id="find">Find a control or a command</h2>
+    <dl class="controls">
+      <dt>Search</dt><dd><strong>Help ▸ Search Commands…</strong> (<kbd>Ctrl</kbd>+<kbd>H</kbd>; <kbd>Control</kbd>+<kbd>H</kbd> on a Mac). Type what you want; every word must match. British and American spellings are treated alike, and common names work (<em>T1</em>, <em>LB</em>, <em>png</em>). Use <kbd>↑</kbd> <kbd>↓</kbd> and <kbd>Enter</kbd>. A control is shown in place and outlined; a menu action is run. A control that the current spectrum does not show says so in the status bar. With nothing typed, your recent choices are listed.</dd>
+      <dt>Shortcuts</dt><dd><strong>Help ▸ Keyboard Shortcuts…</strong> (<kbd>F1</kbd>) lists every shortcut, with a filter box and <strong>Copy as Markdown</strong>.</dd>
+    </dl>
+
     <h2 id="settings">Settings</h2>
     <p>The <strong>Settings</strong> tool, at the right of the toolbar, adjusts openNMR to the way you work. Its sections:</p>
     <dl class="controls">
