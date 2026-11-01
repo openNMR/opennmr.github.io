@@ -114,7 +114,8 @@
   <dt>Observe / Spin I / Larmor frequency or Field B₀</dt><dd>The nucleus and field. The Larmor frequency can be typed, or taken from the spectrum.</dd>
   <dt>Regime, MAS rate</dt><dd>Static powder, or finite MAS with sidebands. Fit anisotropic interactions with at least 3 to 5 spinning sidebands for accuracy.</dd>
   <dt>Quadrupolar theory</dt><dd>Second-order perturbation, exact diagonalisation, or first-order only.</dd>
-  <dt>Powder averaging / Orientations</dt><dd>The powder-average scheme (ZCW, rectangular or Lebedev) and its number of orientations, with a coarser setting for fitting and a finer one for the final result.</dd>
+  <dt>Orientations / Powder averaging</dt><dd>The number of orientations, with a coarser setting for fitting and a finer one for the final result, and the powder-average scheme: <strong>Automatic</strong> (the default: ZCW for a static pattern; under MAS, Lebedev for a peak without a quadrupolar interaction and ZCW for one with), <strong>ZCW</strong>, <strong>Lebedev</strong> or <strong>Rectangular (θ/φ)</strong>. The fit log records it.</dd>
+  <dt>Run time</dt><dd>A fit that could take more than a minute asks before it starts, with an estimated range (fits need between a handful and a few dozen iterations, which cannot be known in advance) and what would make it faster: fewer orientations to start with, fixing what you already know, or screening several starts at fewer orientations. The result reports how long it took next to the estimate.</dd>
   <dt>Parameters</dt><dd>Start values, <strong>Free</strong> tick boxes, and minimum and maximum bounds for every parameter. A blank bound means the natural limit.</dd>
   <dt>Fit window</dt><dd>The whole spectrum, a ppm range, several ppm ranges, or your integration regions.</dd>
   <dt>Estimate Starting Values</dt><dd>Reads starting values from the data in the fit window: peaks by peak picking, a CSA or quadrupolar site from the pattern's centre of mass and shape.</dd>

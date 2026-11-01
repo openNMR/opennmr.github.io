@@ -59,6 +59,16 @@
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
 
+    <h2>0.9.6 to 0.9.7 <small>(1 November 2026)</small></h2>
+    <p><strong>Choose the powder average, know how long a run will take, and a steadier app.</strong></p>
+    <ul>
+      <li><strong>Powder averaging is back in Solid-state NMR</strong> (<em>Simulate</em> and <em>Fit ▸ Solid-state NMR</em>, and <em>Multi-spectrum fit</em>, under <strong>Orientations</strong>): <strong>Automatic</strong>, ZCW, Lebedev or Rectangular (θ/φ). Automatic uses ZCW for a static pattern; under MAS it uses Lebedev for a peak without a quadrupolar interaction and ZCW for a peak with one. Measured against a converged average, Lebedev makes MAS sidebands of a CSA about 15 times more accurate with an eighth of the orientations, but makes a second-order quadrupolar MAS lineshape with narrow lines about 40 times less accurate than ZCW: that lineshape still has sharp edges. The log says which scheme each peak used, and <em>Copy as Python</em> includes it (<code>powder_scheme=</code>).</li>
+      <li><strong>How long will it take?</strong> Before a Solid-state NMR simulation or fit starts, openNMR estimates its run time from a quick trial run. A simulation over 10&nbsp;s, or a fit that could take over a minute, asks first, with what would make it faster; quick runs start at once. The report says how long the run took next to the estimate. In a notebook: <code>opennmr.notebook.run_time.estimate_simulation_time</code> and <code>estimate_fit_time</code>.</li>
+      <li><strong>Instant font size and colour scheme</strong> (<em>Settings ▸ Interface</em>): each change now takes a fraction of a second instead of several seconds. What is on screen updates at once; everything else updates when you next see it.</li>
+      <li><strong>Crash log.</strong> If something unexpected goes wrong, openNMR says so and writes the details to <code>crash.log</code> (<em>Help ▸ Open Crash Log Folder</em>). The installed apps have no console, so these errors used to vanish. Please send that file with a note of what you were doing when you report a problem.</li>
+      <li><strong>Settings are saved safely.</strong> Your settings, plot styles, probe settings and DFT calibration library are written to a temporary file first and then swapped in, so a crash or power cut while saving can no longer leave a half-written file that resets everything to the defaults.</li>
+    </ul>
+
     <h2>0.9.5 to 0.9.6 <small>(31 October 2026)</small></h2>
     <p><strong>Find anything with a search, a shortcut sheet, a start-up screen, and a notebook for each experiment.</strong></p>
     <ul>
