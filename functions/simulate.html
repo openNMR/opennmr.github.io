@@ -60,7 +60,7 @@
   <article>
 
 <h2>What it does</h2>
-<p>Simulate is a forward calculator: you give it the physics and it gives you the spectrum. There is a simulator for each situation: <strong>Solution NMR</strong> (strongly coupled spin systems, solved exactly), <strong>Solid-state NMR</strong>, formerly CSA, Quad &amp; J-coupling (powder patterns and multiplets, static or MAS), <strong>Czjzek distribution</strong> (disordered quadrupolar sites), <strong>DFT tensors</strong> (from CASTEP, VASP, ORCA, Gaussian or CRYSTAL calculations), <strong>Diffusion (PFG)</strong>, <strong>Shaped pulse (Bloch)</strong> and <strong>pNMR (CIF)</strong>. Results can be kept as spectra and compared directly with real data.</p>
+<p>Simulate is a forward calculator: you give it the physics and it gives you the spectrum. There is a simulator for each situation: <strong>Solution NMR</strong> (first-order multiplets, strongly coupled spin systems solved exactly, or both on one spectrum), <strong>Solid-state NMR</strong>, formerly CSA, Quad &amp; J-coupling (powder patterns and multiplets, static or MAS), <strong>Czjzek distribution</strong> (disordered quadrupolar sites), <strong>DFT tensors</strong> (from CASTEP, VASP, ORCA, Gaussian or CRYSTAL calculations), <strong>Diffusion (PFG)</strong>, <strong>Shaped pulse (Bloch)</strong> and <strong>pNMR (CIF)</strong>. Results can be kept as spectra and compared directly with real data.</p>
 
 <h2>Before you start</h2>
 <p>Nothing needs to be loaded: Simulate works on its own. If a spectrum is open, simulations can use its nucleus and field, and you can keep the result next to your data in <strong>Open experiments</strong>.</p>
@@ -82,6 +82,11 @@
 </ol>
 
 <h2>Options and controls</h2>
+<h3>Solution NMR</h3>
+<dl class="controls">
+  <dt>Model</dt><dd><strong>First order: sites and coupling groups</strong> builds each multiplet from its coupling groups. It is exact when every shift difference is much larger than J. <strong>Spin system: exact, with strong coupling</strong> solves every spin's shift and the J between them exactly (roofing, AB, ABX, AA′BB′; up to about 12 spins). <strong>Mixed: weak and strong sets together</strong> adds both on one spectrum, for example an ethyl group beside an aromatic AB pair.</dd>
+  <dt>Mixed: weak sites and strong spins</dt><dd>Enter the weak sites (shift, coupling groups, relative intensity) in one table, and the strongly coupled spins and the J between them in the other, with one linewidth in Hz for the strong lines. Both parts use the same area scale (each observed nucleus counts 1), so relative integrals are the numbers of nuclei. Spins joined by no J are solved as separate sets, which is exact and quicker than one large system; sets without the observed nucleus are skipped. Switching model keeps what you typed. <strong>Copy notebook code</strong> gives the same calculation as <code>mixed_j_spectrum</code>.</dd>
+</dl>
 <h3>CSA, Quad &amp; J-coupling</h3>
 <dl class="controls">
   <dt>Convention</dt><dd>Haeberlen (Δ, η) or Herzfeld–Berger (span, skew) for the CSA. Each site then has <strong>δiso</strong>, <strong>Span or Δ</strong> and <strong>Skew or η</strong>.</dd>

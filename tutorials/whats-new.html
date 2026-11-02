@@ -59,6 +59,16 @@
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
 
+    <h2>0.9.7 to 0.9.8 <small>(2 November 2026)</small></h2>
+    <p><strong>Weak and strong J-coupling on one spectrum, relaxation integrals from a series of slices, and fixes.</strong></p>
+    <ul>
+      <li><strong>Weak, strong or both in Simulate ▸ Solution NMR.</strong> The <strong>Model</strong> box now offers <strong>First order: sites and coupling groups</strong>, <strong>Spin system: exact, with strong coupling</strong> and <strong>Mixed: weak and strong sets together</strong>. In Mixed you enter the weak sites (shift, coupling groups, relative intensity) and the strongly coupled spins with the J between them, and both are drawn on one spectrum with the same area scale, so integrals are the numbers of nuclei. Spins with no coupling between them are solved as separate sets, which is exact and much faster than one large system, so an AB pair and an ABX can sit beside an ethyl group. In a notebook: <code>opennmr.notebook.mixed_j_spectrum</code>. See <a href="../functions/simulate.html">Simulate</a>.</li>
+      <li><strong>T<sub>1</sub> or T<sub>2</sub> from a series of extracted slices.</strong> After you extract a slice from a pseudo-2D spectrum and keep it, <strong>Integrate ▸ Integration Regions</strong> shows <strong>Integrate all N slices of … with these regions</strong>. It integrates every slice of the series with the regions you set on this one, so <strong>Export Integration to Pseudo-2D…</strong> is available for curve fitting. Previously it stayed greyed out. See <a href="../functions/integrate.html">Integrate</a>.</li>
+      <li><strong>Changing the nucleus now updates pseudo-2D spectra.</strong> Right-clicking a spectrum to set the nucleus (for example from 500 MHz to 100 MHz) changed the 1D spectra but left pseudo-2D spectra on the old axis; both now follow. The right-click menu also offers the nucleus suggested by the acquisition parameters directly.</li>
+      <li><strong>Czjzek distribution works in the installed apps.</strong> A data file that scipy needs was missing from the installers, so the module failed on opening. The installers now include it, and the built-in self-test checks it.</li>
+      <li><strong>Fonts.</strong> The font lists in Plot Style no longer offer novelty typefaces (Jokerman and the like); a font you saved earlier is still used. Axis labels with ∥ and ⊥ no longer warn about a missing glyph, and a subscript such as T<sub>1</sub> in a regularisation plot title is drawn correctly.</li>
+    </ul>
+
     <h2>0.9.6 to 0.9.7 <small>(1 November 2026)</small></h2>
     <p><strong>Choose the powder average, know how long a run will take, and a steadier app.</strong></p>
     <ul>
