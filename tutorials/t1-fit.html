@@ -76,17 +76,17 @@
     </figure>
 
     <h2>2. Fit the peaks in every slice</h2>
-    <p>Open <strong>Fit ▸ Isotropic (Gauss/Lor)</strong>. In a relaxation series the peaks do not move or change width, only their intensity changes, so the sensible way to fit it is to fit one good slice freely and hold its shift and width for all the others.</p>
+    <p>Open <strong>Fit ▸ Solution NMR</strong> and choose the model <strong>Peaks and multiplets (first order: d, t, q …)</strong>: pseudo-Voigt peaks, which suit any spectrum of resolved lines, solid-state MAS included. In a relaxation series the peaks do not move or change width, only their intensity changes, so the sensible way to fit it is to fit one good slice freely and hold its shift and width for all the others.</p>
     <ol class="cards">
-      <li>Under <strong>Peaks</strong>, add one row per line: here −5.9 ppm (FWHM 8) and −0.25 ppm (FWHM 5). <strong>Auto-Pick Peaks</strong> (on slice 16) or <strong>Pick from Plot</strong> also work.</li>
+      <li>Under <strong>Peaks (pseudo-Voigt)</strong>, add one row per line (<strong>Add Peak</strong>): here −5.9 ppm (FWHM 8) and −0.25 ppm (FWHM 5). <strong>Auto-Pick Peaks</strong> (on slice 16) or <strong>Pick from Plot</strong> also work.</li>
       <li>Under <strong>Across a pseudo-2D series</strong> click <strong>Last</strong> to anchor on slice 16 (for a T<sub>2</sub> decay or a diffusion series you would click <strong>First</strong>). Leave <strong>Across slices</strong> on <em>Fix shift &amp; FWHM from one slice</em>. Amplitudes are always free.</li>
       <li>Click <strong>Fit Spectrum</strong>.</li>
     </ol>
     <p>The anchor slice fixed the positions at −5.631 and −0.002 ppm, with widths of 7.49 and 4.99 ppm. Use the slice selector (“Spectrum fit (slice #)”) to look at other slices and confirm that the fit still follows the data where the signal is small.</p>
     <figure>
       <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
-        <img class="shot-dark" src="../assets/screens/tut/t1-2-fit-peaks_dark.png" width="1917" height="1116" alt="The Fit tool, Isotropic section, with two peaks, the anchor slice set to the last slice, and the fit of slice 16 drawn over the data.">
-        <img class="shot-light" src="../assets/screens/tut/t1-2-fit-peaks_light.png" width="1917" height="1116" loading="lazy" alt="The Fit tool, Isotropic section, with two peaks, the anchor slice set to the last slice, and the fit of slice 16 drawn over the data.">
+        <img class="shot-dark" src="../assets/screens/tut/t1-2-fit-peaks_dark.png" width="1917" height="1116" alt="The Fit tool, Solution NMR peak table, with two peaks, the anchor slice set to the last slice, and the fit of slice 16 drawn over the data.">
+        <img class="shot-light" src="../assets/screens/tut/t1-2-fit-peaks_light.png" width="1917" height="1116" loading="lazy" alt="The Fit tool, Solution NMR peak table, with two peaks, the anchor slice set to the last slice, and the fit of slice 16 drawn over the data.">
       </button>
       <figcaption>Peaks fitted in the anchor slice (16); the same shifts and widths are used for every slice.</figcaption>
     </figure>

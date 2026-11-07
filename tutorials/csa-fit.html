@@ -66,7 +66,7 @@
       <li>Check the <strong>Nucleus</strong> (<sup>7</sup>Li) and <strong>Larmor frequency</strong> (read from the data). Set <strong>Regime</strong> to <em>MAS (centreband + sidebands)</em> and the <strong>MAS rate</strong> to 40000 Hz.</li>
       <li>Set the <strong>fit window</strong> to <em>A ppm range</em> and enter the low and high limits (here −700 and 700 ppm). Keep the spinning sidebands inside it: they carry the anisotropy.</li>
       <li>Click <strong>Add peak</strong> twice. Give <em>Site 1</em> a shift of −5.7 ppm and a FWHM of 8 ppm, <em>Site 2</em> 0 ppm and 5 ppm. Choose pseudo-Voigt as the line shape, so each site fits its own Lorentzian fraction.</li>
-      <li>With a site selected, click <strong>Add interaction ▾</strong> and choose <strong>CSA</strong>. Start both sites from Δ = −200 ppm and η = 0.8. Euler angles stay fixed: one powder line shape rarely determines them.</li>
+      <li>With a site selected, click <strong>Add interaction ▾</strong> and choose <strong>Chemical-shift anisotropy (CSA)</strong>. Start both sites from Δ = −200 ppm and η = 0.8. Euler angles stay fixed: one powder line shape rarely determines them.</li>
       <li>Tick <strong>Fit the baseline too</strong>, and tick <strong>Free</strong> on the <strong>MAS rate</strong> row of the parameter table (more on this below).</li>
     </ol>
     <figure>
@@ -80,7 +80,7 @@
     <div class="note"><p><strong>Why the MAS rate is free.</strong> The rate in the acquisition file is often stale, and a few hundred Hz of error moves every sideband. Because the sidebands are what the fit is built on, a wrong rate silently distorts Δ and η. The app warns when the sideband positions suggest the rate is off, and offers to free it. Here the fit settled at 40059 ± 10 Hz. That uncertainty is statistical only and does not include the real drift of the rotor.</p></div>
 
     <h2>2. Fit</h2>
-    <p>Click <strong>Fit CSA, Quad &amp; J-coupling</strong>. A progress window shows the fit running. When it ends, the plot shows the data, each site’s share of the fit, the baseline and the total.</p>
+    <p>Click <strong>Fit Solid-state NMR</strong>. A progress window shows the fit running. When it ends, the plot shows the data, each site’s share of the fit, the baseline and the total.</p>
     <figure>
       <button type="button" class="window" data-zoom aria-label="Enlarge screenshot">
         <img class="shot-dark" src="../assets/screens/tut/csa-2-fit_dark.png" width="1917" height="1116" alt="The fitted spectrum with the two CSA sites, the baseline and the total fit drawn over the data, including the spinning sidebands.">
