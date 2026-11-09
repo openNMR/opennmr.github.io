@@ -95,7 +95,7 @@
   <dt>FID shift</dt><dd>Shifts the FID in points before the transform.</dd>
   <dt>Linear-predict points / LP order / LP direction</dt><dd>Extends the FID forward past its end, or reconstructs points lost before its start (Backward).</dd>
   <dt>Magnitude Mode</dt><dd>Shows |real + imaginary| so every peak is positive and no phasing is needed. The phase controls switch off while it is on.</dd>
-  <dt>Process Indirect Dimension</dt><dd>For 2D data. A relaxation or diffusion series (pseudo-2D) is the default and needs no transform along F1. Click this only for a genuine 2D correlation experiment (COSY or HSQC style). The <strong>F1</strong> controls (truncate, zero-fill, window, F1 LB, F1 SSB) are set separately from the direct dimension.</dd>
+  <dt>Process Indirect Dimension</dt><dd>For 2D data: whether F1 is Fourier transformed (a genuine 2D correlation experiment, COSY or HSQC style) or left as a relaxation or diffusion series (pseudo-2D), which needs no transform along F1. A 2D opens the way its own files say: Bruker data as TopSpin processed them (genuine 2D if TopSpin transformed F1), X-Pulse and JEOL data as recorded. Varian data open as a series. Click the button to switch; your choice is kept for that experiment. The <strong>F1</strong> controls (truncate, zero-fill, window, F1 LB, F1 SSB) are set separately from the direct dimension.</dd>
   <dt>First-point scaling (Bruker)</dt><dd>Nothing to set. When openNMR reads Bruker raw data it multiplies the first point of the FID by TopSpin's <code>FCOR</code> before the window and the transform (in F1 as well as F2), as TopSpin does, so the baseline and the t<sub>1</sub> noise match TopSpin's own spectrum.</dd>
   <dt>Reset</dt><dd>Discards every live processing choice and returns to the spectrum as first loaded.</dd>
 </dl>
@@ -126,7 +126,7 @@
 <dl class="controls">
   <dt>Measure Start and End Shifts</dt><dd>Using 1D spectra of the same peak recorded just before and just after a long 2D, 3D or 4D experiment, measures how far the field drifted.</dd>
   <dt>Start shift / End shift</dt><dd>The drift in Hz at the start and end, assumed linear in time. Type them if you already know them.</dd>
-  <dt>Apply to Selected Spectrum / Remove Correction</dt><dd>Reprocesses the selected Bruker 2D or pseudo-2D from its raw FIDs with the correction, or undoes it.</dd>
+  <dt>Apply to Selected Spectrum / Remove Correction</dt><dd>Reprocesses the selected spectrum from its raw FIDs with the correction, or undoes it: a Bruker 2D or pseudo-2D, or a pseudo-2D series from X-Pulse, Varian, Spinsolve or JEOL.</dd>
   <dt>Write Corrected Bruker Dataset… / Concatenate NUS Blocks…</dt><dd>Write a corrected copy of a Bruker experiment to a new experiment number (the original is untouched), or join NUS blocks into one.</dd>
 </dl>
 

@@ -80,7 +80,7 @@ opennmr-gui</code></pre>
       <h2>Reads your data as it comes off the spectrometer</h2>
       <p class="sub">openNMR reads raw acquisition data, not a vendor's own processed output, so every spectrum is treated the same way whichever instrument it came from.</p>
       <ul class="chips">
-        <li>Bruker TopSpin</li><li>X-Pulse</li><li>Varian / Agilent</li><li>JEOL Delta <small>(1D)</small></li><li>Magritek Spinsolve</li><li>SIMPSON <small>(simulations)</small></li>
+        <li>Bruker TopSpin</li><li>X-Pulse</li><li>Varian / Agilent</li><li>JEOL Delta <small>(1D and 2D)</small></li><li>Magritek Spinsolve</li><li>SIMPSON <small>(simulations)</small></li>
       </ul>
     </div>
   </section>
@@ -89,6 +89,8 @@ opennmr-gui</code></pre>
     <div class="wrap">
       <h2>What’s new in 0.9</h2>
       <ul class="news">
+        <li><strong>JEOL 2D data.</strong> Open genuine 2D spectra (HSQC, HMQC and the like) and pseudo-2D series from JEOL Delta, with a series' own delays read from the file.</li>
+        <li><strong>Curve-fit reports you can read at a glance.</strong> Dynamics now shows the fitted T<sub>1</sub>, T<sub>2</sub> or D as a headline, with a parameter table and the fit quality underneath.</li>
         <li><strong>Search & Help functions.</strong> You can now search for shortcuts and for functions inside the GUI.
         <li><strong>Compare shows true intensity.</strong> Stacked spectra share one intensity scale, as in TopSpin, so a weaker spectrum looks weaker. A new <em>Unscaled (as recorded)</em> option leaves the data exactly as measured.</li>
         <li><strong>Control the spacing</strong> between stacked spectra with one slider, from overlapping to widely spaced, without losing your zoom.</li>

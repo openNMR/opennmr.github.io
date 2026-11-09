@@ -59,6 +59,13 @@
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
 
+    <h2>0.9.10 to 0.9.11 <small>(9 November 2026)</small></h2>
+    <p><strong>JEOL 2D data, and curve-fit reports that are easier to read.</strong></p>
+    <ul>
+      <li><strong>JEOL 2D and pseudo-2D.</strong> openNMR now opens 2D JEOL Delta <code>.jdf</code> files as well as 1D ones. A genuine 2D (HSQC, HMQC, COSY style) is transformed in both dimensions; a pseudo-2D series (saturation or inversion recovery and the like) opens as one spectrum per delay, and <strong>Dynamics ▸ Delays ▸ Auto</strong> uses the delays the file records, saying where they came from. The file says which kind a 2D is, so it opens that way, and <strong>Process Indirect Dimension</strong> still switches between the two. Every direct-dimension processing option applies; in F1 you get window, zero-fill and truncation. Field drift correction works on JEOL series. Checked on a <sup>14</sup>N–<sup>1</sup>H HMQC and a <sup>1</sup>H saturation recovery recorded at 70&nbsp;kHz MAS, against the same HMQC processed independently. In a notebook: <code>opennmr.io.load("file.jdf")</code>. See <a href="../functions/open.html#supported">Supported data</a>.</li>
+      <li><strong>Dynamics: a readable curve-fit report.</strong> The report under the fitted curve used to be a block of fixed-width text. It now leads with the fitted T<sub>1</sub>, T<sub>2</sub> or D in large type, with the peak or region as its title and the model beneath. Every parameter follows in a table, with italic symbols, units, uncertainties and, for several components, each amplitude's share of the total. The fit-quality numbers form one row, and what the ± means is spelt out underneath. Several peaks are summarised in one table, and a global fit leads with the shared parameter. Copying, CSV export and kept fits still use the plain-text report. See <a href="../functions/dynamics.html">Dynamics</a>.</li>
+    </ul>
+
     <h2>0.9.9 to 0.9.10 <small>(7 November 2026)</small></h2>
     <p><strong>Paramagnetic NMR tools: bulk magnetic susceptibility shifts, shifts against temperature and bond pathways.</strong></p>
     <ul>

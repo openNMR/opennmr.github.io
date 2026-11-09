@@ -78,17 +78,17 @@
   <li>In <a href="fit.html">Fit</a>, fit the peaks across the series (or define integration regions). This gives one intensity per peak per slice.</li>
   <li>In Dynamics, choose the <strong>Fit type</strong> (Relaxation, or Diffusion (PFG)) and the <strong>Model</strong>, for example Inversion recovery (T<sub>1</sub>) or Exponential decay (T<sub>2</sub>).</li>
   <li>Check where the x-values come from under <strong>Delays</strong> (see below), and that the <strong>Unit</strong> is right.</li>
-  <li>Click <strong>Fit Curve…</strong>. The fitted curve, its parameters and their uncertainties are shown, with <strong>What the curve fit tells you, and what to try next</strong>.</li>
+  <li>Click <strong>Fit Curve…</strong>. The fitted curve is drawn, and the report beside it gives the fitted T<sub>1</sub>, T<sub>2</sub> or D as a headline, a table of every parameter with its unit and uncertainty (amplitudes also as a share of the total), and a row of fit-quality numbers: R², RMSE, reduced χ², points and degrees of freedom, and how far the signal decayed (final I/I<sub>0</sub>). Under it, <strong>What the curve fit tells you, and what to try next</strong>.</li>
   <li>Keep a fit with <strong>Keep This Curve Fit…</strong>, or <strong>Export curve fit (CSV)…</strong>.</li>
 </ol>
 
 <h2>Options and controls</h2>
 <h3>Fit Curve settings</h3>
 <dl class="controls">
-  <dt>Fit type</dt><dd><strong>Relaxation</strong> fits against delay (from the experiment's vdlist, or typed). <strong>Diffusion</strong> fits a Stejskal–Tanner model against b-value.</dd>
+  <dt>Fit type</dt><dd><strong>Relaxation</strong> fits against delay (from the experiment's own delay list, or typed). <strong>Diffusion</strong> fits a Stejskal–Tanner model against b-value.</dd>
   <dt>Model</dt><dd>Inversion or saturation recovery, exponential or biexponential decay, stretched (Kohlrausch–Williams–Watts) forms for a distribution of times, or your own <strong>Equation</strong>. <strong>Components</strong> sets how many.</dd>
   <dt>Value source</dt><dd>What is fitted from each slice: the <strong>fitted peak area</strong> (the default, and the most robust to a linewidth that changes along the series), the fitted peak amplitude, or an integrated region with no fit.</dd>
-  <dt>Delays</dt><dd>Where the x-values come from: <strong>Auto</strong> (the experiment's own vdlist or diff.xml), <strong>Manual list</strong>, <strong>Start + step</strong>, <strong>List file × factor</strong>, <strong>Relative gradient</strong>, or <strong>b from gradients (δ/Δ/G)</strong>. The line under it always shows what the current source resolves to.</dd>
+  <dt>Delays</dt><dd>Where the x-values come from: <strong>Auto</strong> (the experiment's own vdlist or diff.xml, or the delays a JEOL <code>.jdf</code> series records), <strong>Manual list</strong>, <strong>Start + step</strong>, <strong>List file × factor</strong>, <strong>Relative gradient</strong>, or <strong>b from gradients (δ/Δ/G)</strong>. The line under it always shows what the current source resolves to.</dd>
   <dt>Diffusion settings (δ, Δ, τ, gradient)</dt><dd>The gradient pulse and diffusion time, the maximum gradient for your probe, the <strong>Gradient shape</strong> and the <strong>Sequence</strong>. <strong>Read δ/Δ from file</strong> fills in what the experiment records. <strong>Save gradient for probe</strong> remembers the maximum gradient for this probe.</dd>
   <dt>Starting values</dt><dd>Override the automatic starting guess, bounds and fixed/free state for each parameter. <strong>Adopt last fit</strong> restarts from the previous result.</dd>
   <dt>Fit all peaks together</dt><dd>Fits every peak simultaneously with some parameters shared. Use it when the peaks belong to one species and must share one T<sub>1</sub>, T<sub>2</sub> or D.</dd>
@@ -111,7 +111,7 @@
   <li><strong>Sample the whole decay.</strong> A component that loses only 20% of its intensity across the series is nearly constant, and its decay constant is poorly determined however good the fit looks.</li>
   <li><strong>Fit quality does not validate a multi-component resolution.</strong> Very different answers can reproduce the data equally well. Check the cross-talk and the warnings the report gives, not just R².</li>
   <li><strong>Overlapping peaks.</strong> If peaks are too overlapped to fit, integrate regions instead and fit those.</li>
-  <li><strong>Notebook.</strong> <code>NMR2D_relaxation_workflow</code> runs the whole relaxation pipeline in one call, reading delays from the experiment's vdlist.</li>
+  <li><strong>Notebook.</strong> <code>NMR2D_relaxation_workflow</code> runs the whole relaxation pipeline in one call, reading delays from the experiment's vdlist. <code>format_relaxation_report(fit)</code> gives the report as plain text; for the laid-out version, <code>IPython.display.HTML(relaxation_report_html(fit))</code> (from <code>opennmr.gui.report_format</code>).</li>
 </ul>
 
     <div class="pager">
