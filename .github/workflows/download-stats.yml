@@ -1,0 +1,51 @@
+# Once a day, record the download count of every release file in
+# downloads.csv on the `stats` branch. GitHub itself only keeps running
+# totals, so this snapshot history is what gives downloads per day.
+# Kept on its own branch so the daily commit doesn't touch `main` or
+# redeploy the website.
+name: Download stats
+
+on:
+  schedule:
+    - cron: "17 3 * * *"   # 03:17 UTC daily
+  workflow_dispatch:       # Actions tab > Download stats > Run workflow
+
+permissions:
+  contents: write
+
+concurrency:
+  group: download-stats
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test the script
+        run: python -m unittest discover tools -v
+      - name: Take today's snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp tools/download_stats.py "$RUNNER_TEMP/"
+          git show origin/stats:downloads.csv > "$RUNNER_TEMP/downloads.csv" 2>/dev/null || true
+          python "$RUNNER_TEMP/download_stats.py" "$RUNNER_TEMP/downloads.csv" --repo "${{ github.repository }}"
+      - name: Commit to the stats branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          if git rev-parse --verify -q origin/stats >/dev/null; then
+            git switch stats
+          else
+            git switch --orphan stats
+          fi
+          cp "$RUNNER_TEMP/downloads.csv" downloads.csv
+          git add downloads.csv
+          git diff --cached --quiet && { echo "No change"; exit 0; }
+          git commit -m "Download stats $(date -u +%F)"
+          git push origin stats
