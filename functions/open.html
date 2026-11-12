@@ -77,6 +77,9 @@
       <li>Your experiments appear under <strong>Open experiments</strong>, and the data is drawn in the viewer.</li>
     </ol>
     <div class="note"><p>Each entry in the list is a sample folder, with a small arrow beside it. Click the arrow to expand it into the numbered experiments it contains. Each experiment is listed with its number, the observed nucleus, whether it is 1D or 2D, the number of points and the pulse programme, for example <em>3 · 1H, 1D, 262144, hahnecho3.enb</em>.</p></div>
+    <p>Right-click the list ▸ <strong>Sort by</strong> to order it by <strong>name</strong> (A to Z, the default, or Z to A) or by <strong>date</strong> (newest or oldest first). Names sort with their numbers in order, so experiment 2 comes before 10. An experiment's date is when its data were written (its <code>fid</code> or <code>ser</code>), not when the folder last changed, which happens whenever you reprocess; a sample folder sorts by the newest (or oldest) experiment inside it. Expanded folders and your selection stay as they were, and the order you choose is remembered next time.</p>
+    <h3 id="states">Save and reopen a group of spectra</h3>
+    <p><strong>File ▸ Save openNMR State…</strong> (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd>) saves a chosen group of open spectra, and slices of any 2D, under a name, with their processing, fits and kept fit models. <strong>File ▸ Open openNMR State…</strong> (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>O</kbd>) reopens all of them together: each experiment is read again from its own data and given the saved processing, and anything else comes from the copy in the state. A window then lists what was opened, grouped by how: re-read and reprocessed, opened from the saved copy, or not opened (with the reason). It scrolls however many spectra there are, and <strong>Copy</strong> copies the list.</p>
 
     <h2 id="supported">Supported data</h2>
     <p>openNMR reads <strong>raw acquisition data</strong> (the FID, or the series of FIDs), never a vendor's own pre-processed spectrum, and turns every format into the same internal spectrum object. Everything after loading therefore works identically whichever instrument the data came from.</p>
@@ -112,8 +115,8 @@
     </dl>
     <p>The three buttons at the top right of the plot change what the cursor does:</p>
     <dl class="controls">
-      <dt>Crosshair</dt><dd>Shows a cross that follows the cursor across the plot (and across both projection strips on a 2D). <kbd>Ctrl</kbd>+<kbd>.</kbd> toggles it. Right-click the button for its colour and line width.</dd>
-      <dt>Measure</dt><dd>Click two points and the distance between them is labelled in ppm and Hz at once. <kbd>Ctrl</kbd>+<kbd>D</kbd> toggles it from anywhere.</dd>
+      <dt>Crosshair</dt><dd>Shows a cross that follows the cursor across the plot (and across both projection strips on a 2D). On a stack of plots sharing one x axis, a Compare stack or a SIMPSON pulse shape, the vertical line runs through every row. <kbd>Ctrl</kbd>+<kbd>.</kbd> toggles it. Right-click the button for its colour and line width.</dd>
+      <dt>Measure</dt><dd>Click two points and the distance between them is labelled in ppm and Hz at once, whatever unit the axis shows: on a 1D spectrum, a Compare stack, overlay or panels, a heatmap, a DOSY map, and on both axes of a 2D. On a Compare stack the two points can be on different spectra. An axis that is not a chemical shift gives the distance in the unit on its label (a delay in s, a pulse time in µs, <em>D</em> in m² s⁻¹, with the ratio of the two values on a log axis). The y axis of a 1D spectrum is an intensity and is not quoted. <kbd>Ctrl</kbd>+<kbd>D</kbd> toggles it from anywhere.</dd>
       <dt>Width</dt><dd>Click a peak and its full width at half maximum is drawn and given in ppm and Hz (along both axes on a 2D). Where peaks overlap the value is marked as an estimate, so fit the peaks for a reliable width. <kbd>Ctrl</kbd>+<kbd>L</kbd> toggles it from anywhere.</dd>
     </dl>
     <h3 id="plot-style">Plot style</h3>

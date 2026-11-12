@@ -59,6 +59,16 @@
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
 
+    <h2>0.9.12 to 0.9.13 <small>(12 November 2026)</small></h2>
+    <p><strong>Measure in ppm and Hz on every plot, a crosshair through every row of Simulate's stacked plots, easier-to-read DOSY and BMS reports, a scrolling message when a state opens, and a sortable folder list.</strong></p>
+    <ul>
+      <li><strong>Measure everywhere.</strong> On Compare ▸ Superimposed, Measure gave a bare number with no unit; it now gives ppm and Hz, as it already did on a stack. The same holds on Compare's panels (1D and 2D), the heatmap, the DOSY map and the processing preview, for x and for y on a 2D. Where an axis is not a chemical shift, the distance takes the unit on its label instead (for example a delay in s, a pulse time in µs, or <em>D</em> in m² s⁻¹ with the ratio between the two points on its log axis). A Compare drawn after you switched a 1D to Hz is measured correctly too (the unit was carried over wrongly before), and a stack keeps your unit. See <a href="../functions/open.html">Open ▸ the plot toolbar</a>.</li>
+      <li><strong>Crosshair on Simulate's stacked plots.</strong> On a SIMPSON pulse shape (amplitude, phase and offset against time) the vertical line runs through every row, as in a stacked Compare, so you can read the same moment off each. On a Bloch simulation, the pulse and its excitation profile each get their own crosshair, since their x axes differ. Before, only the first plot had one. See <a href="../functions/simulate.html">Simulate</a>.</li>
+      <li><strong>DOSY and BMS reports laid out like the curve fit.</strong> The DOSY map's report has a title, the regularisation α, and a table of each peak's shift, <em>D</em> and spread, in place of the fixed-width block. The BMS simulation's report gives the shift's mean, standard deviation and FWHM as one row, then the susceptibility, local interactions, run time and any warnings, each in its own section.</li>
+      <li><strong>Opening a state with many spectra.</strong> <em>File ▸ Open openNMR State…</em> said what it had done in a message that ran off the bottom of the screen for a large state. It is now a scrolling window that groups the spectra by outcome, gives their shared folder once, and has a <strong>Copy</strong> button.</li>
+      <li><strong>Sort the experiments in Browse a folder.</strong> Right-click the list ▸ <strong>Sort by</strong>: name, A to Z or Z to A (numbers in order, so 2 comes before 10), or date, newest or oldest first. The date is when the data were acquired, not when the folder last changed. Your choice is remembered.</li>
+    </ul>
+
     <h2>0.9.11 to 0.9.12 <small>(10 November 2026)</small></h2>
     <p><strong>Removing points from a curve fit, the log PFG plot, SCORE residuals, a single list of insets, integral calibration, TopSpin's TDeff and cubic particles.</strong></p>
     <ul>
