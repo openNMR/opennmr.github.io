@@ -36,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / What's new</p>
     <h1>What's new</h1>
-    <p class="lead">The changes in each recent release, from 0.5 to 0.9.</p>
+    <p class="lead">The changes in each recent release, from 0.5 to 0.10.</p>
     </div>
   </div>
 </div>
@@ -58,6 +58,18 @@
   </nav>
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
+
+    <h2>0.10.1 to 0.10.2 <small>(13 November 2026)</small></h2>
+    <p><strong>A new dataset starts with a blank fit, units in Compare, a choice of fitting algorithm, a pulse calculator, and peak positions kept exactly.</strong></p>
+    <ul>
+      <li><strong>A new dataset starts with a blank fit.</strong> Open a different spectrum later in the session and Fit and Dynamics no longer show the last one's fit. Each spectrum shows its own saved fit; otherwise the inputs you set up for it earlier but have not fitted yet; otherwise a blank fit, filled in from that spectrum (nucleus, field, MAS rate). Reopening the same file brings its fit back. This also fixes a bug: after you removed a spectrum, its peaks and fit could be saved onto the next spectrum opened. See <a href="../functions/fit.html">Fit</a>.</li>
+      <li><strong>Units in Compare.</strong> <em>Compare ▸ Units</em> switches the shift axis between ppm, Hz and kHz for stacked, superimposed and panel layouts (the right-click <strong>Axis Units</strong> menu now works on all three, too). Each spectrum is converted with its own spectrometer frequency and your zoom is kept. Spectra from different fields, superimposed in Hz, are each on their own frequency scale, so the same position is not the same shift; the status bar says so. See <a href="../functions/compare.html">Compare</a>.</li>
+      <li><strong>Choose the fitting algorithm.</strong> <strong>Settings ▸ Fitting ▸ Fitting algorithm</strong>, for every fit in Fit and Dynamics: <strong>Automatic</strong> (as before, and the default), <strong>Trust Region Reflective</strong>, <strong>Dogbox</strong>, <strong>Levenberg–Marquardt</strong>, or the global searches <strong>Differential evolution</strong> and <strong>Dual annealing</strong> for a poor starting point or a misfit with several minima. Levenberg–Marquardt cannot apply bounds, so a fit with bounds uses TRF instead. The global searches need a lower and upper bound on every free parameter, are much slower, give the same answer every time, and finish with a TRF fit so the uncertainties are reported as usual. The fit pop-up names the algorithm in use. In a notebook: <code>nmr.set_fit_method("dogbox")</code>, or <code>with nmr.fitting_method(...)</code> for some fits only. See <a href="../functions/open.html#settings">Settings</a>.</li>
+      <li><strong>Pulse calculator.</strong> <em>Simulate ▸ Pulse calculator</em>: from one calibrated pulse (length, flip angle and power), the pulse lengths at another power, or the power for a nutation frequency or a pulse length. Powers in W, dB (as TopSpin uses it: higher dB is less power, 0&nbsp;dB = 1&nbsp;W unless you change it) or scaled units (W times a factor you give, or relative values when you leave it blank). It gives ν<sub>1</sub>, the 90°, 180° and any other pulse length, the bandwidth (from the exact excitation profile, with 1/τ beside it), B<sub>1</sub> for a nucleus, and the central-transition pulse lengths for a quadrupolar nucleus, shows its working step by step, and plots the excitation profile. In a notebook: <code>nmr.calculate_pulse(...)</code>. See <a href="../functions/simulate.html">Simulate</a>.</li>
+      <li><strong>Peak positions kept exactly.</strong> <em>Fit ▸ Solution NMR</em>'s peak table showed 4 significant figures, one decimal place for a shift of 100 or more, and the fit started from that rounded value, so a narrow peak began off its line and could take many fits to get back. The table now keeps every value as picked, typed or fitted, and shows 7 significant figures; what you type still wins.</li>
+      <li><strong>Settings in the File menu</strong> (<strong>File ▸ Settings…</strong>, <kbd>Ctrl</kbd>+<kbd>,</kbd>), as well as in the Window menu and the toolbar.</li>
+      <li><strong>Double-click a section</strong> to open or close it. A double-click on a section's title used to open it and close it again at once.</li>
+    </ul>
 
     <h2>0.10.0 to 0.10.1 <small>(13 November 2026)</small></h2>
     <p><strong>ORCA's orca_pnmr files and .xyz structures in DFT tensors, an aMAT spectral filter, and vector figures that stay inside their axes in Illustrator.</strong></p>
