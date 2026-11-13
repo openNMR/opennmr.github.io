@@ -36,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Advanced processing</p>
     <h1><img src="../assets/launcher_advanced_processing.png" alt="">Advanced processing</h1>
-    <p class="lead">Advanced processing gives you specialised tools for more demanding data: wide-line spectra recorded at several offsets, CPMG echo trains, and 2D shearing.</p>
+    <p class="lead">Advanced processing gives you specialised tools for more demanding data: wide-line spectra recorded at several offsets, CPMG echo trains, 2D shearing, and the aMAT spectral filter.</p>
     </div>
   </div>
 </div>
@@ -60,15 +60,16 @@
   <article>
 
 <h2>What it does</h2>
-<p>Advanced processing holds methods that go beyond the usual FID-to-spectrum steps in <a href="process.html">Process</a>. There are three, each in its own section:</p>
+<p>Advanced processing holds methods that go beyond the usual FID-to-spectrum steps in <a href="process.html">Process</a>. There are four, each in its own section:</p>
 <ul>
   <li><strong>Variable Offset Cumulative Spectroscopy (VOCS)</strong> corrects and combines spectra recorded at several transmitter offsets, to cover a line broader than one pulse can excite uniformly.</li>
   <li><strong>CPMG</strong> co-adds the echoes of a CPMG echo train into a single echo and Fourier-transforms it, for a large gain in signal-to-noise on broad lines.</li>
   <li><strong>Shearing and Scaling (2D)</strong> shears and scales a 2D spectrum so an anisotropic ridge lies along an axis (MQMAS, STMAS, DAS), or tilts a J-resolved or sideband spectrum by 45°.</li>
+  <li><strong>aMAT Spectral Filter (2D)</strong> removes, from an aMAT spectrum, the artefacts of intense signals that hide weak ones at fast MAS, by keeping each F1 row only at its own isotropic shift plus whole multiples of the spinning rate.</li>
 </ul>
 
 <h2>Before you start</h2>
-<p>Load the data with <a href="open.html">Open</a> and select it. VOCS Sum works on several spectra at once: select a series, or tick them in <a href="compare.html">Compare</a>. CPMG needs a Bruker CPMG experiment. Shearing needs a 2D spectrum.</p>
+<p>Load the data with <a href="open.html">Open</a> and select it. VOCS Sum works on several spectra at once: select a series, or tick them in <a href="compare.html">Compare</a>. CPMG needs a Bruker CPMG experiment. Shearing needs a 2D spectrum. The aMAT filter needs a processed aMAT 2D whose F1 is the isotropic shift on the same ppm scale as F2.</p>
 
 <h2>How to use it</h2>
 <figure>
@@ -97,6 +98,13 @@
   <li>Choose the <strong>F1 scaling</strong>. Click <strong>Check against the data</strong> to measure the shear that gives the sharpest projection and compare it with the standard value, then <strong>Preview</strong>.</li>
   <li>Click <strong>Shear → New Spectrum</strong>. The result is added to Open experiments with a log of what was done.</li>
 </ol>
+<p><strong>aMAT spectral filter</strong></p>
+<ol class="cards">
+  <li>Select a processed aMAT 2D and open <strong>aMAT Spectral Filter (2D)</strong>. The <strong>MAS rate</strong> is read from the experiment when it was recorded.</li>
+  <li>Set the <strong>Pulse width</strong> (a fraction of ν<sub>rot</sub>, ν<sub>rot</sub>/3 by default, or in kHz) and the <strong>Pulse shape</strong>. To have the width checked, give <strong>T2′</strong>.</li>
+  <li>Click <strong>Show Filter</strong> to see the 2D filter: the red ridge of centre pulses should lie on the diagonal. Set <strong>Trace at F1</strong> to a weak site and click <strong>Show Trace</strong> to see its row before and after, with the pulse train above it.</li>
+  <li>Click <strong>Filter → New Spectrum</strong>. The filtered 2D is added to Open experiments with a log of the settings and how much was removed. <strong>Copy as Python</strong> gives the same filter for a notebook.</li>
+</ol>
 
 <h2>Options and controls</h2>
 <dl class="controls">
@@ -110,6 +118,9 @@
   <dt>Shear: F1 direction</dt><dd>Whether F1 is displayed with the same sense as the coherence evolving in t1 or reversed. It depends on the quadrature scheme. <strong>Check against the data</strong> sets it.</dd>
   <dt>Shear: Second shear</dt><dd>Also shears parallel to t1, removing the isotropic part from F2 so each site's anisotropic pattern is centred on zero.</dd>
   <dt>Shear: Mark expected sideband positions</dt><dd>For PASS and MAT, marks where sidebands should fall in the preview, given the MAS rate.</dd>
+  <dt>aMAT: how the filter works</dt><dd>In aMAT the indirect dimension is modulated by the isotropic shift only, so the row at an isotropic shift ν<sub>1</sub> can carry real signal only at ν<sub>2</sub> = ν<sub>1</sub> + nν<sub>rot</sub>: its centreband and spinning sidebands. Each row is multiplied by a train of pulses, one at each of those positions; together they form a 2D filter whose centre pulses lie on the diagonal ν<sub>1</sub> = ν<sub>2</sub>. Real and imaginary parts are filtered alike, so the phase is untouched. After the Supporting Information, section S7, of <em>Angew. Chem. Int. Ed.</em> 2024, e202408704.</dd>
+  <dt>aMAT: Pulse width and shape</dt><dd>Narrower pulses remove more artefacts and noise, but they must stay broader than the homogeneous linewidth 1/(π<em>T</em><sub>2</sub>′), or real signal is cut away. <strong>Hann-shaped</strong> pulses (the default, as in the reference) taper to zero at their edges and emphasise the signal at their centre; their half-height width, half the pulse width, is what is checked against the linewidth. <strong>Flat</strong> pulses keep everything inside them unchanged.</dd>
+  <dt>aMAT: F1 offset</dt><dd>Moves every pulse train relative to its row, for an F1 axis referenced or scaled a little differently from F2. Use it if the ridge in <strong>Show Filter</strong> is off the diagonal of your data.</dd>
 </dl>
 
 <h2>Tips and troubleshooting</h2>
@@ -117,7 +128,8 @@
   <li><strong>VOCS amplifies noise far from each centre.</strong> Keep <strong>Limit to VOCS excitation bandwidth</strong> on unless you have a reason not to.</li>
   <li><strong>CPMG echoes cut in the wrong place?</strong> Always use <strong>Check echo split</strong> before processing, and adjust the first point if the echoes are misaligned. Co-adding misaligned echoes blurs the spectrum.</li>
   <li><strong>Sheared spectrum looks wrong?</strong> The F1 direction is the usual cause. Use <strong>Check against the data</strong>, which measures the shear from your spectrum and sets the direction.</li>
-  <li><strong>Notebook.</strong> <code>CPMGprocess</code> is the notebook equivalent of the CPMG section.</li>
+  <li><strong>aMAT filter cutting a real peak?</strong> Widen the pulses, or check with <strong>Show Filter</strong> that the ridge lies on your data's diagonal; if not, set the <strong>F1 offset</strong>. The filter cannot remove distortions that fall at a site's own positions.</li>
+  <li><strong>Notebook.</strong> <code>CPMGprocess</code> is the notebook equivalent of the CPMG section; <code>nmr.apply_amat_filter</code>, <code>nmr.plot_amat_trace</code> and <code>nmr.plot_amat_filter_map</code> are those of the aMAT filter.</li>
 </ul>
 
     <div class="pager">
