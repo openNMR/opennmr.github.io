@@ -78,6 +78,9 @@
     </ol>
     <div class="note"><p>Each entry in the list is a sample folder, with a small arrow beside it. Click the arrow to expand it into the numbered experiments it contains. Each experiment is listed with its number, the observed nucleus, whether it is 1D or 2D, the number of points and the pulse programme, for example <em>3 · 1H, 1D, 262144, hahnecho3.enb</em>.</p></div>
     <p>Right-click the list ▸ <strong>Sort by</strong> to order it by <strong>name</strong> (A to Z, the default, or Z to A) or by <strong>date</strong> (newest or oldest first). Names sort with their numbers in order, so experiment 2 comes before 10. An experiment's date is when its data were written (its <code>fid</code> or <code>ser</code>), not when the folder last changed, which happens whenever you reprocess; a sample folder sorts by the newest (or oldest) experiment inside it. Expanded folders and your selection stay as they were, and the order you choose is remembered next time.</p>
+    <h3 id="scan">Large folders: the scan runs in the background</h3>
+    <p>When you choose a folder, the list from the last time you looked at it appears at once, and openNMR then looks through the folder in the background. Experiments are added as they are found, and any that have gone are removed when the scan ends, with a note in the status bar of how many were new and how many removed. A row above the list says how far it has got and has <strong>Stop</strong> (what is listed stays); right-click the list ▸ <strong>Refresh</strong> looks again. The window stays usable throughout, so you can load an experiment while the rest of the folder is still being listed.</p>
+    <p>To be quick on large folders, openNMR only hands a folder to a reader if it holds the files that reader needs, and a file only if its extension is one openNMR reads. Files that OneDrive, Dropbox or a similar service keeps online-only are recognised by their names and <strong>are not downloaded to be listed</strong>; opening one downloads it, as before. A SIMPSON file is listed only if it is named <code>.spe</code>, <code>.fid</code>, <code>.csdf</code> or <code>.dat</code>; <em>File ▸ Open</em> still opens any file. In a notebook: <code>nmr.find_experiments(folder)</code>.</p>
     <h3 id="states">Save and reopen a group of spectra</h3>
     <p><strong>File ▸ Save openNMR State…</strong> (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd>) saves a chosen group of open spectra, and slices of any 2D, under a name, with their processing, fits and kept fit models. <strong>File ▸ Open openNMR State…</strong> (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>O</kbd>) reopens all of them together: each experiment is read again from its own data and given the saved processing, and anything else comes from the copy in the state. A window then lists what was opened, grouped by how: re-read and reprocessed, opened from the saved copy, or not opened (with the reason). It scrolls however many spectra there are, and <strong>Copy</strong> copies the list.</p>
     <p><strong>After a crash.</strong> The open session is autosaved every few minutes (Settings ▸ Saving). If openNMR did not close normally, it offers to restore that session when it next starts; decline, and <strong>File ▸ Recover Autosaved Session…</strong> reopens it later (the last three are kept). It reopens exactly as a saved state does.</p>
@@ -103,6 +106,32 @@
       <dt>Hide open experiments</dt><dd>Collapses the list to give the folder browser more room. Click it again to bring the list back.</dd>
       <dt>Selected spectrum</dt><dd>A collapsible summary of the selected spectrum (empty until you select one). For a pseudo-2D series it also has a <strong>View</strong> choice: <strong>Contour</strong>, <strong>Stacked slices</strong> (every slice as an offset 1D stack) or <strong>Heatmap</strong>.</dd>
     </dl>
+
+    <h3 id="tree">Experiments and their fits</h3>
+    <p>Open experiments is a tree with two columns, <strong>Experiment</strong> and <strong>Type</strong>. A spectrum's fits are listed beneath it, in italics:</p>
+    <dl class="controls">
+      <dt>Fit</dt><dd>A fit of the spectrum's lineshape: the peak table's fit, or the last fit made by any of the Fit panels (CSA, J-coupling, Quadrupolar, Czjzek, Solid-state NMR, pNMR, SIMPSON), and the fits you kept with <strong>Keep This Fit…</strong>. A kept fit is listed once, under its spectrum.</dd>
+      <dt>Profile fit</dt><dd>A fit of values against a series (<strong>Fit Curve</strong>: relaxation, diffusion or your own curve).</dd>
+      <dt>Multi-fit</dt><dd>A bold group at the end of the list for each multi-spectrum fit, with the spectra it used inside it.</dd>
+      <dt>Simulation</dt><dd>A simulation you kept in Open experiments.</dd>
+    </dl>
+    <p><strong>Double-click a fit</strong> (or right-click ▸ <strong>Show</strong>) to select its spectrum and draw the fit again. Spectra keep their right-click menu, Ctrl- and Shift-selection for Compare, and drag to the plot; groups you collapse stay collapsed.</p>
+    <p>Right-click a fit for its numbers:</p>
+    <dl class="controls">
+      <dt>Parameters and Errors…</dt><dd>A table with one row per parameter: site, parameter, value, error (1σ) and whether it was fixed, under the fit's name, its spectrum, when it was made and its quality. <strong>Copy Table</strong> copies it with its header; <strong>Export CSV…</strong> writes a file that Excel reads correctly, including δ and σ; <strong>Save as JSON…</strong> writes the fitted-values record; <strong>Show Fit</strong> and <strong>Restore</strong> bring the fit back. Several tables can be open together.</dd>
+      <dt>Copy Parameters, Export Parameters to CSV…</dt><dd>The same table, copied or written without opening it.</dd>
+      <dt>Restore</dt><dd>Puts a kept fit back in the panel that made it as its current fit; for a spectral fit, puts the fitted values in the peak table. A panel's own last fit comes back when its spectrum is selected.</dd>
+    </dl>
+    <p>Values are at full precision for the Solid-state NMR, Czjzek, multi-spectrum, spectral and curve fits. For fits from the CSA, J-coupling, Quadrupolar, pNMR and SIMPSON panels, the table has the values as they were shown when the fit was made, rounded to the digits the uncertainty supports. In a notebook: <code>nmr.fit_values.values_to_csv(record, path)</code>.</p>
+
+    <h2 id="background">Fits and simulations in the background</h2>
+    <p>A fit in Fit or Dynamics, and a simulation in Simulate, runs in the background, so the window stays usable. A small indicator in the status bar shows the running job. Click it, or choose <strong>Window ▸ Background Jobs…</strong> (<kbd>Ctrl</kbd>+<kbd>R</kbd>, <kbd>Cmd</kbd>+<kbd>R</kbd> on macOS), to see its progress.</p>
+    <dl class="controls">
+      <dt>One at a time</dt><dd>One job runs and the others wait their turn, in the order you started them. You are told when a job is queued, and <strong>Remove from Queue</strong> takes a waiting job out.</dd>
+      <dt>Stop and Keep Best, Discard</dt><dd>The same two choices as on the fit pop-up: keep the best parameters reached (without uncertainties, since it had not converged), or end the job and change nothing.</dd>
+      <dt>Where the result goes</dt><dd>A result belongs to the spectrum it was run on. If you selected another spectrum while it ran, the result waits (the window lists it, with <strong>Show</strong>) and appears when you return. If you removed the spectrum, the result is discarded and you are told. If you changed the processing meanwhile, it is shown with a note. If you edited the panel's inputs while it ran, they are put back as they were, with a note.</dd>
+    </dl>
+    <p>Some steps still run in the foreground, for example the packing step of a BMS simulation. Notebook functions run as before.</p>
 
     <h2>Look at your data</h2>
     <p>Tabs above the plot switch the view: the <strong>FID</strong>, the <strong>Spectrum</strong> and the <strong>Spectral Fit</strong>. Other tabs, such as the live processing preview, the comparison and the simulation, appear when you use the tool that makes them.</p>
