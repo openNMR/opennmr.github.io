@@ -80,8 +80,10 @@
   <li>Check where the x-values come from under <strong>Delays</strong> (see below), and that the <strong>Unit</strong> is right.</li>
   <li>Click <strong>Fit Curve…</strong>. The fitted curve is drawn, and the report beside it gives the fitted T<sub>1</sub>, T<sub>2</sub> or D as a headline, a table of every parameter with its unit and uncertainty (amplitudes also as a share of the total), and a row of fit-quality numbers: R², RMSE, reduced χ², points and degrees of freedom, and how far the signal decayed (final I/I<sub>0</sub>). Under it, <strong>What the curve fit tells you, and what to try next</strong>.</li>
   <li>A bad point? Right-click it on the plot ▸ <strong>Remove Point</strong> (that peak only) or <strong>Remove Slice from Every Fit</strong>. The fit is redone at once.</li>
-  <li>Keep a fit with <strong>Keep This Curve Fit…</strong>, or <strong>Export curve fit (CSV)…</strong>.</li>
+  <li>Keep a fit with <strong>Keep This Curve Fit…</strong>, or <strong>Export curve fit (CSV)…</strong>. These and <strong>Copy Curve Fit To…</strong> are together in the <strong>This curve fit</strong> group.</li>
+  <li>Have a second series (another temperature, say)? <strong>Copy Curve Fit To…</strong> sets up the same model on it, with this fit's values, bounds and fixed parameters as the guesses, and can fit it straight away. That series must already have measured slices (integrated or fitted), and its own delays and values are used. Set its <strong>Unit</strong> before you copy: the Guess table is in the unit shown.</li>
 </ol>
+<p>The panel reads top to bottom as steps: <strong>1 Choose what to fit</strong>, <strong>2 Fit</strong>, <strong>3 Read the result</strong>, and <strong>More</strong> for the slices used, the kept fits and the less common methods.</p>
 
 <h2>Options and controls</h2>
 <h3>Fit Curve settings</h3>
