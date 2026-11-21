@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Apply – openNMR</title>
-<meta name="description" content="Apply is where openNMR’s advanced methods live, such as eNMR and imaging.">
+<meta name="description" content="Apply is where openNMR’s advanced methods live, such as eNMR, imaging and electrochemistry beside your spectra.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <script src="../assets/theme.js?v=7"></script>
@@ -36,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / Functions / Apply</p>
     <h1><img src="../assets/launcher_applications.png" alt="">Apply</h1>
-    <p class="lead">Apply is where openNMR’s advanced methods live: electrophoretic NMR (eNMR) and imaging, with more to come.</p>
+    <p class="lead">Apply is where openNMR’s advanced methods live: electrophoretic NMR (eNMR), imaging and electrochemistry beside your spectra, with more to come.</p>
     </div>
   </div>
 </div>
@@ -60,10 +60,11 @@
   <article>
 
 <h2>What it does</h2>
-<p>Apply holds methods built around a specific kind of experiment rather than a general step in the workflow. At present there are two sections:</p>
+<p>Apply holds methods built around a specific kind of experiment rather than a general step in the workflow. At present there are three sections:</p>
 <ul>
   <li><strong>eNMR</strong> measures electrophoretic mobility by fitting the phase of a resonance against the applied voltage.</li>
   <li><strong>Imaging</strong> turns the spectrum's frequency axis into a real position axis (in mm) once you tell openNMR the gradient strength, and supports T<sub>2</sub> measurement by integration across an imaging series.</li>
+  <li><strong>Electrochemistry</strong> draws a battery's voltage curve beside the spectra recorded during cycling (operando), spectra of samples stopped at chosen voltages (ex situ), or values fitted from your spectra, with a crosshair that follows between the two.</li>
 </ul>
 
 <h2>Before you start</h2>
@@ -92,11 +93,30 @@
   <li>Click <strong>Save as default for this probe</strong> so any other experiment recorded with the same probe uses the same value automatically.</li>
 </ol>
 
+<p><strong>Electrochemistry</strong></p>
+<ol class="cards">
+  <li>Open <strong>Electrochemistry</strong>. Under <strong>1. Electrochemistry file</strong>, browse to your cycler file: a Biologic <code>.mpr</code> or <code>.mpt</code>, or a <code>.csv</code>/<code>.txt</code> table with a header row. For any other cycler software, export the data from it as a <code>.csv</code>. Enter the <strong>Mass</strong> of active material, the electrode <strong>Area</strong>, and either the <strong>Formula</strong> or the <strong>Molar mass</strong>, then click <strong>Load</strong>. Positive current is charge.</li>
+  <li>For the composition axis, give the <strong>Starting x</strong> and tick <strong>Charging removes the ion</strong> if x falls on charge (Na<sub>x</sub>MnO<sub>2</sub>, for example). x is then worked out from the charge passed, by Faraday's law.</li>
+  <li>Under <strong>2. What goes beside it</strong>, choose <strong>Operando</strong>, <strong>Ex situ</strong> or <strong>Fitted values</strong> (from a csv or txt file).
+    <ul>
+      <li><strong>Operando.</strong> Choose the spectra from the rows you selected in Open experiments, or by <strong>experiment numbers</strong> (start, stop, step). openNMR does not need the spectrometer and cycler clocks to agree: you say when the first spectrum started and how long each takes (and any dead time between), or type each start time, in seconds, minutes or hours of the cell's time.</li>
+      <li><strong>Ex situ.</strong> Give one row per sample: the voltage (or another quantity) it was stopped at, and, when the curve passes that value more than once, the cycle, the half cycle and which crossing to use. Each row can carry its own mass and a multiplying factor.</li>
+      <li><strong>Fitted values.</strong> Choose the file, the column for x, whether x is a time or a spectrum number, and the columns to plot.</li>
+    </ul></li>
+  <li>Under <strong>3. Layout</strong>, put the cell on the left, right, above or below the spectra, and show the spectra <strong>Stacked</strong>, <strong>Superimposed</strong> or as a <strong>Heat map</strong>, optionally as differences (each minus the one before, the first or the last). Choose any column of the file for the cell's x and y axes, which cycles and which half cycles to draw, and what places each spectrum on the curve.</li>
+  <li>Click <strong>Plot</strong>. <strong>Export Link Table…</strong> saves which spectrum sits where on the curve, and <strong>Copy Notebook Code</strong> gives the same plot as Python.</li>
+</ol>
+<p>Fonts, colours, tick labels, axis names, markers, the space between the plots, and which lines (spines) each plot has are all in <strong>Plot Style ▸ Electrochemistry</strong>. Each spectrum's colour, and its point's, is in the usual series list. <strong>Measure</strong> works on the spectra and gives both ppm and Hz.</p>
+
 <h2>Options and controls</h2>
 <dl class="controls">
   <dt>Voltages: Zero at / Scale / Fit up to</dt><dd>How the recorded voltage list is interpreted and how much of it is used in the fit.</dd>
   <dt>Unfold ±V</dt><dd>A vdlist records each voltage magnitude twice, at opposite polarity, so the recorded axis folds every point onto its partner (0, 0, 8, 8, 16, 16…). Unfolding gives the first of each pair +|V| and the second −|V| and plots the ramp through zero.</dd>
   <dt>Keep as repeat / Combine repeats / Clear</dt><dd>Set a fit aside as one of the gradient-reversed repeats, average the kept repeats (aligning their signs first, since reversing the gradient flips the slope), or start again.</dd>
+  <dt>Mass / Area / Formula / Molar mass / Starting x</dt><dd>Turn the cell's capacity into mAh g<sup>-1</sup> or mAh cm<sup>-2</sup>, and the charge passed into the composition x. The mass is also used to divide the spectra by the sample mass if you ask for it.</dd>
+  <dt>Divide by the number of scans / receiver gain / sample mass</dt><dd>Put spectra recorded with different settings on one intensity scale. The mass is the one in each row of the ex situ table, or the mass you set by right-clicking the spectrum in Open experiments.</dd>
+  <dt>Evenly spaced / Spaced by maximum intensity</dt><dd>By default each spectrum sits at its position on the curve. For ex situ samples, which may be close together on the curve, you can instead space the spectra evenly in the order listed, or give each room in proportion to its tallest peak.</dd>
+  <dt>Automatic colours / A spectrum and its point share one colour</dt><dd>Spectra take colours from a colour map, and a sample's marker on the curve takes the colour of its spectrum. Change either in the series list of Plot Style.</dd>
   <dt>Max gradient / Gradient axis / Gradient used</dt><dd>One maximum is kept for each axis of a probe, because the three coils of a triple-axis probe are rarely equally strong. Using one number for all three would quietly scale every position or diffusion coefficient measured on the others.</dd>
 </dl>
 
@@ -104,6 +124,8 @@
 <ul>
   <li><strong>Two repeats should agree.</strong> The result reports their spread. If two runs of one sample disagree by more than the uncertainty, suspect the phase, the polarity or sample movement.</li>
   <li><strong>The mm axis is greyed out.</strong> Select a spectrum first; the controls need one.</li>
+  <li><strong>The spectra do not line up with the curve.</strong> Check the first start time and the time each spectrum takes (or type the start times). <strong>Export Link Table…</strong> shows where each spectrum was placed.</li>
+  <li><strong>A range of experiment numbers finds nothing.</strong> The range picks experiments you have opened from their folder numbers, so it cannot pick extracted slices or spectra made by arithmetic. Select those rows in Open experiments instead.</li>
   <li><strong>Is a section missing?</strong> Sections you do not use can be hidden in the app's settings, and brought back the same way.</li>
 </ul>
 

@@ -36,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / What's new</p>
     <h1>What's new</h1>
-    <p class="lead">The changes in each recent release, from 0.5 to 0.11.</p>
+    <p class="lead">The changes in each recent release, from 0.5 to 0.12.</p>
     </div>
   </div>
 </div>
@@ -58,6 +58,18 @@
   </nav>
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
+
+    <h2>0.11.3 to 0.12.1 <small>(21 November 2026)</small></h2>
+    <p><strong>Electrochemistry beside your spectra, DNP polarisation, re-labelling extracted slices, editable text in SVG figures, and a supported Python range.</strong></p>
+    <ul>
+      <li><strong>Electrochemistry.</strong> <em>Apply ▸ Electrochemistry</em> draws a voltage (or capacity, or composition) curve beside spectra recorded during cycling, spectra of samples stopped at chosen voltages, or values fitted from your spectra. The cell can sit left, right, above or below; the spectra can be stacked, superimposed or a heat map, and optionally shown as differences. You choose the spectra from the rows selected in Open experiments or by a range of experiment numbers, and say when each started, so the instruments' clocks need not agree. Positive current is charge. Capacity per gram or per cm², and the composition x from Faraday's law, come from the mass, area and formula you give. Spectra can be divided by the number of scans, the receiver gain and the sample mass, multiplied by a factor, evenly spaced or spaced by their intensity. The crosshair is linked between the two plots, <strong>Measure</strong> reports ppm and Hz, and fonts, colours, markers, spacing, ticks and lines are in <em>Plot Style ▸ Electrochemistry</em>. In a notebook: <code>from opennmr.notebook import echem, echem_plot</code>, or press <strong>Copy Notebook Code</strong>. See <a href="../functions/apply.html">Apply</a>.</li>
+      <li><strong>Cycler files.</strong> Biologic <code>.mpr</code> and <code>.mpt</code> files and plain <code>.csv</code>/<code>.txt</code> tables open the same way in the pip package and in the installed apps, with nothing extra to install. For other cycler software, export the data as a <code>.csv</code>.</li>
+      <li><strong>Supported Python versions.</strong> openNMR now declares Python 3.12, 3.13 and 3.14. See <a href="install.html">Install openNMR</a>.</li>
+      <li><strong>DNP polarisation.</strong> An optional section in Dynamics compares two series of spectra, A and B, slice by slice: the difference, the ratio, the enhancement or the sum, with the uncertainties carried through. The quantity is a region integral or a peak height, or a stored per-slice fit, and the delays come from the experiment's list or from a start, stop and step. The result can be exported as a CSV or copied as notebook code.</li>
+      <li><strong>Re-label extracted slices.</strong> Right-click a 2D contour plot ▸ <strong>Rename Extracted Slice</strong> and give each slice its own label; a blank label puts back &ldquo;Slice n&rdquo;. In a notebook: <code>nmr.relabel_slice(spectrum, which, label)</code>.</li>
+      <li><strong>Text in SVG figures stays text.</strong> SVG files now keep their text as editable text, so it can be changed in Illustrator or Inkscape. To write the letters as outlines instead (so the figure looks the same on a computer without the font), use <code>nmr.set_svg_text("path")</code>.</li>
+      <li><strong>Changed: amplitude bounds are in the spectrum's own units.</strong> Bounds on peak amplitudes in a fit, including <strong>Bound peak amplitudes by region integrals</strong>, are now read in the units of the spectrum rather than of the normalised data the fit works on. A saved state with amplitude bounds you typed by hand may fit differently; check them.</li>
+    </ul>
 
     <h2>0.11.2 to 0.11.3 <small>(18 November 2026)</small></h2>
     <p><strong>The raw fitted amplitude in Dynamics, a warning when a series is fitted to a slice that is not the strongest, a CP build-up fit that opens again, Compare colours saved in a state, and typed axis limits that stay with their experiment.</strong></p>

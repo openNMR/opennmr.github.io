@@ -60,7 +60,7 @@
     <div class="note"><p><strong>Prefer an app?</strong> Windows, macOS and Linux installers need no Python at all: see <a href="../download.html">Download</a>. This page is for installing with pip, which is also the route for using openNMR in a notebook.</p></div>
 
     <h2>What you need</h2>
-    <p>openNMR runs on Windows, macOS and Linux. You need <strong>Python 3.12 or newer</strong>. Everything else, including the graphical interface, comes with the package, so there are no extras to choose between.</p>
+    <p>openNMR runs on Windows, macOS and Linux. You need <strong>Python 3.12, 3.13 or 3.14</strong>. Everything else, including the graphical interface, comes with the package, so there are no extras to choose between.</p>
 
     <h2>Install</h2>
     <ol class="cards">
@@ -97,8 +97,8 @@ source opennmr-env/bin/activate</code></pre>
 
     <h2>Troubleshooting</h2>
     <dl class="controls">
-      <dt><code>pip</code> or <code>py</code> not found</dt><dd>Python is not installed, or is not on your PATH. Install Python 3.12 or newer from python.org (on Windows, tick “Add python.exe to PATH”) and open a new terminal.</dd>
-      <dt>“No matching distribution”</dt><dd>Your Python is older than 3.12. Check with <code>python --version</code>.</dd>
+      <dt><code>pip</code> or <code>py</code> not found</dt><dd>Python is not installed, or is not on your PATH. Install Python 3.12, 3.13 or 3.14 from python.org (on Windows, tick “Add python.exe to PATH”) and open a new terminal.</dd>
+      <dt>“No matching distribution”</dt><dd>Your Python is older than 3.12 or newer than 3.14. Check with <code>python --version</code>.</dd>
       <dt><code>opennmr-gui</code> not found</dt><dd>The environment is not active in this terminal. Activate it and try again.</dd>
       <dt>Anything else</dt><dd><a href="https://github.com/openNMR/openNMR/issues">Report a problem</a> with the output of <code>pip show opennmr</code> and the text of the error.</dd>
     </dl>
