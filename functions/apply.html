@@ -60,11 +60,12 @@
   <article>
 
 <h2>What it does</h2>
-<p>Apply holds methods built around a specific kind of experiment rather than a general step in the workflow. At present there are three sections:</p>
+<p>Apply holds methods built around a specific kind of experiment rather than a general step in the workflow. At present there are four sections:</p>
 <ul>
   <li><strong>eNMR</strong> measures electrophoretic mobility by fitting the phase of a resonance against the applied voltage.</li>
   <li><strong>Imaging</strong> turns the spectrum's frequency axis into a real position axis (in mm) once you tell openNMR the gradient strength, and supports T<sub>2</sub> measurement by integration across an imaging series.</li>
   <li><strong>Electrochemistry</strong> draws a battery's voltage curve beside the spectra recorded during cycling (operando), spectra of samples stopped at chosen voltages (ex situ), or values fitted from your spectra, with a crosshair that follows between the two.</li>
+  <li><strong>Plot other data</strong> draws any table of numbers as a 2D or 3D scatter, line or bar chart.</li>
 </ul>
 
 <h2>Before you start</h2>
@@ -97,8 +98,9 @@
 <ol class="cards">
   <li>Open <strong>Electrochemistry</strong>. Under <strong>1. Electrochemistry file</strong>, browse to your cycler file: a Biologic <code>.mpr</code> or <code>.mpt</code>, or a <code>.csv</code>/<code>.txt</code> table with a header row. For any other cycler software, export the data from it as a <code>.csv</code>. Enter the <strong>Mass</strong> of active material, the electrode <strong>Area</strong>, and either the <strong>Formula</strong> or the <strong>Molar mass</strong>, then click <strong>Load</strong>. Positive current is charge.</li>
   <li>For the composition axis, give the <strong>Starting x</strong> and tick <strong>Charging removes the ion</strong> if x falls on charge (Na<sub>x</sub>MnO<sub>2</sub>, for example). x is then worked out from the charge passed, by Faraday's law.</li>
-  <li>Under <strong>2. What goes beside it</strong>, choose <strong>Operando</strong>, <strong>Ex situ</strong> or <strong>Fitted values</strong> (from a csv or txt file).
+  <li>Under <strong>2. Type of data to plot</strong>, choose <strong>Operando</strong>, <strong>Ex situ</strong> or <strong>Fitted values</strong> (from a csv or txt file).
     <ul>
+      <li><strong>Spectrum list (Operando and Ex situ).</strong> The list starts as every 1D spectrum open in Open experiments, including ones you opened after loading the cycler file. Use <strong>Add</strong> to bring in more from Open experiments and <strong>Remove</strong> to take spectra out of the plot without closing them.</li>
       <li><strong>Operando.</strong> Choose the spectra from the rows you selected in Open experiments, or by <strong>experiment numbers</strong> (start, stop, step). openNMR does not need the spectrometer and cycler clocks to agree: you say when the first spectrum started and how long each takes (and any dead time between), or type each start time, in seconds, minutes or hours of the cell's time.</li>
       <li><strong>Ex situ.</strong> Give one row per sample: the voltage (or another quantity) it was stopped at, and, when the curve passes that value more than once, the cycle, the half cycle and which crossing to use. Each row can carry its own mass and a multiplying factor.</li>
       <li><strong>Fitted values.</strong> Choose the file, the column for x, whether x is a time or a spectrum number, and the columns to plot.</li>
@@ -107,6 +109,13 @@
   <li>Click <strong>Plot</strong>. <strong>Export Link Table…</strong> saves which spectrum sits where on the curve, and <strong>Copy Notebook Code</strong> gives the same plot as Python.</li>
 </ol>
 <p>Fonts, colours, tick labels, axis names, markers, the space between the plots, and which lines (spines) each plot has are all in <strong>Plot Style ▸ Electrochemistry</strong>. Each spectrum's colour, and its point's, is in the usual series list. <strong>Measure</strong> works on the spectra and gives both ppm and Hz.</p>
+
+<p><strong>Plot other data</strong></p>
+<ol class="cards">
+  <li>Open <strong>Plot other data</strong>. Browse to a <code>.csv</code> or <code>.txt</code> table, or enter the columns directly.</li>
+  <li>Choose the <strong>Chart</strong> (scatter, line or bar), whether it is <strong>2D</strong> or <strong>3D</strong>, and the columns for x, y and (for 3D) z.</li>
+  <li>Click <strong>Plot</strong>. Fonts, colours, markers and axes are in Plot Style, as for every other plot. In a notebook the same plot is <code>nmr.other_plot.plot_other_data(data, x, y, kind="scatter")</code>, and <strong>Copy Notebook Code</strong> gives you the call.</li>
+</ol>
 
 <h2>Options and controls</h2>
 <dl class="controls">

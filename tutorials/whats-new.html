@@ -36,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / What's new</p>
     <h1>What's new</h1>
-    <p class="lead">The changes in each recent release, from 0.5 to 0.12.</p>
+    <p class="lead">The changes in each recent release, from 0.5 to 0.12.2.</p>
     </div>
   </div>
 </div>
@@ -58,6 +58,17 @@
   </nav>
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
+
+    <h2>0.12.1 to 0.12.2 <small>(22 November 2026)</small></h2>
+    <p><strong>Every open experiment available to the electrochemistry plots, drag and drop onto a plot, a new &ldquo;Plot other data&rdquo; section, and pulse powers and shaped-pulse styles in the sequence viewer.</strong></p>
+    <ul>
+      <li><strong>All open experiments in Electrochemistry.</strong> Fixes a bug where Ex situ and Operando offered only the most recently opened experiment if you had loaded the cycler file first and opened your spectra afterwards. Every open 1D spectrum is now available, with <strong>Add</strong> and <strong>Remove</strong> buttons to move spectra between Open experiments and the electrochemistry spectrum list. The old &ldquo;What goes beside it&rdquo; heading is now <strong>Type of data to plot</strong>.</li>
+      <li><strong>Drag and drop onto the plot.</strong> Drag an experiment from the Open list, or a folder or file from your file explorer or Finder, onto the Spectrum or Compare plot to open or add it.</li>
+      <li><strong>Plot other data.</strong> A new optional section in Apply plots any table of numbers as a 2D or 3D <strong>scatter</strong>, <strong>line</strong> or <strong>bar</strong> chart, from a csv or txt file or from columns you choose. In a notebook: <code>nmr.other_plot.plot_other_data(...)</code>. It has the same publication-quality style controls as the other plots.</li>
+      <li><strong>Pulse powers in the sequence viewer.</strong> Show each pulse's power in watts, in dB or both, read from the experiment's parameters, so you can check what was actually used. Where a power is not recorded, openNMR leaves it out rather than guessing. dB is taken relative to 1&nbsp;W.</li>
+      <li><strong>Adiabatic and ramp pulses look different.</strong> Hard, shaped, adiabatic and ramp pulses are drawn in their own styles. openNMR classifies each pulse from its shape name, and the new <strong>Pulse types</strong> table lets you override any of them.</li>
+      <li><strong>Ramp pulses.</strong> A new pulse type drawn as a quadrilateral with three square edges and a top edge that rises (<em>ramp up</em>) or falls (<em>ramp down</em>) linearly. Names such as <code>ramp70100.100</code> are read as a 70% to 100% ramp.</li>
+    </ul>
 
     <h2>0.11.3 to 0.12.1 <small>(21 November 2026)</small></h2>
     <p><strong>Electrochemistry beside your spectra, DNP polarisation, re-labelling extracted slices, editable text in SVG figures, and a supported Python range.</strong></p>
