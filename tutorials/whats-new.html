@@ -36,7 +36,7 @@
     <div>
     <p class="crumbs"><a href="../">Home</a> / <a href="./">Tutorials</a> / What's new</p>
     <h1>What's new</h1>
-    <p class="lead">The changes in each recent release, from 0.5 to 0.12.2.</p>
+    <p class="lead">The changes in each recent release, from 0.5 to 0.12.4.</p>
     </div>
   </div>
 </div>
@@ -58,6 +58,25 @@
   </nav>
   <article>
     <div class="note"><p>New: installers for Windows, macOS and Linux on the <a href="../download.html">Download</a> page. Update with <code>pip install --upgrade opennmr</code>, or from <strong>Settings ▸ Updates</strong> inside the app (see <a href="../functions/open.html#settings">Open ▸ Settings</a>).</p></div>
+
+    <h2>0.12.3 to 0.12.4 <small>(23 November 2026)</small></h2>
+    <p><strong>A shear that agrees with TopSpin, clearer Compare overlays of 2D spectra, a more prominent integration button, rescaling in Plot other data, and a CSV reader that copes with Dynamics exports.</strong></p>
+    <ul>
+      <li><strong>Shearing: the default F1 direction now matches TopSpin.</strong> For Bruker MQMAS and STMAS data the default <strong>F1 direction</strong> was the wrong way round, so a sheared spectrum could come out with the ridge tilted the wrong way. It now defaults to the direction that reproduces TopSpin's <code>xfshear</code>, and follows the experiment when you change it. It was checked against <code>xfshear</code> on a real <sup>27</sup>Al triple-quantum MQMAS (States-TPPI, I&nbsp;=&nbsp;5/2); other acquisition schemes and spins have not been checked this way, so keep using <strong>Check against the data</strong> on them. In a notebook, <code>make_shear_plan(..., f1_sign=None)</code> picks the same default. See <a href="../functions/advanced-processing.html">Advanced processing</a>.</li>
+      <li><strong>Compare, 2D overlays.</strong> The legend names the right spectra, <strong>Projections</strong> now work on an overlay (one strip per spectrum, each scaled to its own maximum), and the mouse wheel over a panel scrolls the contour floor and redraws. <strong>Lock Aspect Ratio</strong> no longer squashes side-by-side panels.</li>
+      <li><strong>Integrate.</strong> <strong>Select and Integrate Regions from Plot</strong> is now a large button at the top of Integration Regions, highlighted while it is active, and the integral-labels checkbox no longer wraps.</li>
+      <li><strong>Multiply by a constant in Plot other data.</strong> Each dataset can be scaled in x, y and z (a fit's curve and points too), and <strong>Copy Notebook Code</strong> includes the factors (<code>xscale=</code>, <code>yscale=</code>, <code>nmr.other_plot.rescaled</code>).</li>
+      <li><strong>Dynamics CSV exports read back.</strong> A file with several blocks (a header section, then the series) is read as its series block, and files written on Windows with doubled line endings are read correctly.</li>
+    </ul>
+
+    <h2>0.12.2 to 0.12.3 <small>(23 November 2026)</small></h2>
+    <p><strong>Pseudo-2D fits survive saving a state, DMFit and TecMag files open, and Plot other data gets many more options.</strong></p>
+    <ul>
+      <li><strong>Saved states keep pseudo-2D fits.</strong> Slice-by-slice fits, &ldquo;model applied to every slice&rdquo; fits and Dynamics curve fits (T<sub>1</sub>, T<sub>2</sub>, D) used to say &ldquo;could not be shown again&rdquo; after a state was saved and reopened. They are now stored with the state and come back.</li>
+      <li><strong>DMFit files.</strong> The <code>.asc</code> export (spectrum and model) and the <code>.fxml</code> fit file open, with each line's parameters and errors.</li>
+      <li><strong>TecMag files.</strong> TNMR <code>.tnt</code> files and its Data Point Listing text files open, a series of FIDs as a pseudo-2D. Give the delays in Dynamics.</li>
+      <li><strong>Plot other data.</strong> Several datasets on one plot, from files, pasted tables or typed lists; error bars; colouring points by a column; a Dynamics curve fit added as points and curve; lines to skip at the top of a file; and top and right axis lines on or off.</li>
+    </ul>
 
     <h2>0.12.1 to 0.12.2 <small>(22 November 2026)</small></h2>
     <p><strong>Every open experiment available to the electrochemistry plots, drag and drop onto a plot, a new &ldquo;Plot other data&rdquo; section, and pulse powers and shaped-pulse styles in the sequence viewer.</strong></p>
